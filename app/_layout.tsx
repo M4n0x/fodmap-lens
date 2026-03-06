@@ -1,0 +1,88 @@
+import { useEffect } from 'react';
+import { Stack } from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen';
+import { PaperProvider, MD3LightTheme } from 'react-native-paper';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { SQLiteProvider } from 'expo-sqlite';
+import { initializeDatabase } from '@/src/db/migrations';
+import { colors } from '@/src/theme/design';
+import { useAppStore } from '@/src/store/appStore';
+import '@/src/i18n';
+
+export { ErrorBoundary } from 'expo-router';
+
+export const unstable_settings = {
+  initialRouteName: '(tabs)',
+};
+
+SplashScreen.preventAutoHideAsync();
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 60 * 24, // 24 hours
+      retry: 2,
+    },
+  },
+});
+
+const theme = {
+  ...MD3LightTheme,
+  colors: {
+    ...MD3LightTheme.colors,
+    primary: colors.sage,
+    secondary: colors.amber,
+    error: colors.coral,
+    background: colors.cream,
+    surface: colors.cardBg,
+    surfaceVariant: colors.warmWhite,
+    outline: colors.border,
+    onSurface: colors.textPrimary,
+    onSurfaceVariant: colors.textSecondary,
+  },
+};
+
+function AppContent() {
+  return (
+    <Stack
+      screenOptions={{
+        headerStyle: { backgroundColor: colors.cream },
+        headerTintColor: colors.textPrimary,
+        headerShadowVisible: false,
+        contentStyle: { backgroundColor: colors.cream },
+      }}
+    >
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="product/[barcode]"
+        options={{ title: '', headerBackTitle: 'Back' }}
+      />
+      <Stack.Screen
+        name="ocr-scan"
+        options={{ title: '', headerBackTitle: 'Back', presentation: 'modal' }}
+      />
+      <Stack.Screen
+        name="onboarding"
+        options={{ headerShown: false, presentation: 'modal' }}
+      />
+    </Stack>
+  );
+}
+
+export default function RootLayout() {
+  const restoreLanguage = useAppStore((s) => s.restoreLanguage);
+
+  useEffect(() => {
+    restoreLanguage().finally(() => SplashScreen.hideAsync());
+  }, [restoreLanguage]);
+
+  return (
+    <SQLiteProvider databaseName="fodmap.db" onInit={initializeDatabase}>
+      <QueryClientProvider client={queryClient}>
+        <PaperProvider theme={theme}>
+          <AppContent />
+        </PaperProvider>
+      </QueryClientProvider>
+    </SQLiteProvider>
+  );
+}

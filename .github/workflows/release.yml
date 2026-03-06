@@ -1,0 +1,78 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    name: Release Please
+    runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+      upload_url: ${{ steps.release.outputs.upload_url }}
+
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          release-type: node
+
+  build-apk:
+    name: Build APK
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_created }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: zulu
+          java-version: 17
+
+      - run: npm ci
+
+      - name: Expo prebuild
+        run: npx expo prebuild --platform android
+
+      - name: Decode keystore
+        env:
+          KEYSTORE_BASE64: ${{ secrets.RELEASE_KEYSTORE_BASE64 }}
+        run: echo "$KEYSTORE_BASE64" | base64 -d > android/app/release.keystore
+
+      - name: Configure signing
+        env:
+          STORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
+        run: |
+          cat > android/keystore.properties <<EOF
+          storeFile=release.keystore
+          storePassword=$STORE_PASSWORD
+          keyAlias=$KEY_ALIAS
+          keyPassword=$KEY_PASSWORD
+          EOF
+
+      - name: Build release APK
+        working-directory: android
+        run: ./gradlew assembleRelease
+
+      - name: Upload APK to release
+        env:
+          TAG_NAME: ${{ needs.release-please.outputs.tag_name }}
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.release-please.outputs.tag_name }}
+          files: android/app/build/outputs/apk/release/app-release.apk

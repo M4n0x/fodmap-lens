@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:wiki.openfoodfacts.org)",
+      "WebFetch(domain:world.openfoodfacts.org)",
+      "WebFetch(domain:world.openfoodfacts.net)",
+      "WebFetch(domain:openfoodfacts.github.io)",
+      "WebFetch(domain:docs.expo.dev)",
+      "WebFetch(domain:www.npmjs.com)",
+      "Bash(npx create-expo-app@latest:*)",
+      "Bash(npm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx expo:*)",
+      "Bash($ANDROID_HOME/emulator/emulator:*)",
+      "Bash(./gradlew assembleRelease:*)",
+      "Bash(export:*)",
+      "Bash(~/Library/Android/sdk/platform-tools/adb:*)",
+      "WebSearch",
+      "WebFetch(domain:search-api.migros.ch)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:us.openfoodfacts.org)",
+      "mcp__plugin_context7_context7__query-docs",
+      "mcp__plugin_context7_context7__resolve-library-id",
+      "Bash(npx jest:*)",
+      "Bash(./gradlew assembleDebug:*)",
+      "Bash(adb install:*)"
+    ]
+  }
+}
