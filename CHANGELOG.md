@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/M4n0x/fodmap-lens/compare/v1.0.1...v1.0.2) (2026-03-07)
+
+
+### Bug Fixes
+
+* **ci:** use sed append for AsyncStorage repo patch ([f2342bb](https://github.com/M4n0x/fodmap-lens/commit/f2342bbfcb44249651f07b8033ed98b2787dfe94))
+
 ## [1.0.1](https://github.com/M4n0x/fodmap-lens/compare/v1.0.0...v1.0.1) (2026-03-07)
 
 
