@@ -60,7 +60,17 @@ export function calculateAnalysis(
   }
 
   const stackingPenalty = Math.max(0, (redCount - 1) * 5);
-  const riskScore = Math.min(100, Math.round(weightedSum + stackingPenalty));
+
+  // Determine worst category rating — any red category means the product is high risk
+  let hasYellow = false;
+  for (const cat of FODMAP_CATEGORIES) {
+    if (categories[cat].rating === 'yellow') hasYellow = true;
+  }
+
+  // Minimum risk floor: a single red must produce a red overall, yellow → yellow
+  // Stacking penalty applied on top of the floor so multi-red always scores worse
+  const riskFloor = redCount > 0 ? 65 : hasYellow ? 30 : 0;
+  const riskScore = Math.min(100, riskFloor + Math.round(weightedSum * 0.35) + stackingPenalty);
 
   // Invert: 100 = best (safe), 0 = worst (high risk)
   const overallScore = 100 - riskScore;

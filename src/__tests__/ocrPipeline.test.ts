@@ -402,6 +402,121 @@ describe('calculateAnalysis', () => {
     expect(multiRed.overallScore).toBeLessThan(singleRedResult.overallScore);
   });
 
+  it('more FODMAP triggers produce a worse score than fewer triggers', () => {
+    // Barilla-like: single red category (fructans from wheat)
+    const barilla: MatchedIngredient[] = [
+      {
+        name: 'durum wheat semolina',
+        position: 0,
+        fodmapIngredient: {
+          id: 10,
+          canonical_key: 'semolina',
+          category: 'grains',
+          fructans: 'red',
+          gos: 'green',
+          lactose: 'green',
+          excess_fructose: 'green',
+          sorbitol: 'green',
+          mannitol: 'green',
+          overall_rating: 'red',
+          safe_serving_g: null,
+          moderate_serving_g: null,
+          notes: null,
+          source: 'monash',
+          confidence: 1,
+          updated_at: '2024-01-01',
+        },
+        matchType: 'exact',
+        confidence: 1,
+      },
+    ];
+
+    // Nutella-like: red lactose (milk) + yellow fructans (hazelnuts)
+    const nutella: MatchedIngredient[] = [
+      {
+        name: 'sugar',
+        position: 0,
+        fodmapIngredient: {
+          id: 11,
+          canonical_key: 'sugar',
+          category: 'sweetener',
+          fructans: 'green',
+          gos: 'green',
+          lactose: 'green',
+          excess_fructose: 'green',
+          sorbitol: 'green',
+          mannitol: 'green',
+          overall_rating: 'green',
+          safe_serving_g: null,
+          moderate_serving_g: null,
+          notes: null,
+          source: 'monash',
+          confidence: 1,
+          updated_at: '2024-01-01',
+        },
+        matchType: 'exact',
+        confidence: 1,
+      },
+      {
+        name: 'hazelnuts',
+        position: 2,
+        fodmapIngredient: {
+          id: 12,
+          canonical_key: 'hazelnuts',
+          category: 'nuts',
+          fructans: 'yellow',
+          gos: 'green',
+          lactose: 'green',
+          excess_fructose: 'green',
+          sorbitol: 'green',
+          mannitol: 'green',
+          overall_rating: 'yellow',
+          safe_serving_g: 10,
+          moderate_serving_g: 20,
+          notes: null,
+          source: 'monash',
+          confidence: 1,
+          updated_at: '2024-01-01',
+        },
+        matchType: 'exact',
+        confidence: 1,
+      },
+      {
+        name: 'skimmed milk powder',
+        position: 3,
+        fodmapIngredient: {
+          id: 13,
+          canonical_key: 'milk',
+          category: 'dairy',
+          fructans: 'green',
+          gos: 'green',
+          lactose: 'red',
+          excess_fructose: 'green',
+          sorbitol: 'green',
+          mannitol: 'green',
+          overall_rating: 'red',
+          safe_serving_g: null,
+          moderate_serving_g: null,
+          notes: null,
+          source: 'monash',
+          confidence: 1,
+          updated_at: '2024-01-01',
+        },
+        matchType: 'exact',
+        confidence: 1,
+      },
+    ];
+
+    const barillaResult = calculateAnalysis(barilla);
+    const nutellaResult = calculateAnalysis(nutella);
+
+    // Both should be red
+    expect(barillaResult.overallRating).toBe('red');
+    expect(nutellaResult.overallRating).toBe('red');
+    // Nutella should score strictly worse (more triggers)
+    expect(nutellaResult.overallScore).toBeLessThan(barillaResult.overallScore);
+  });
+
   it('position weighting: later ingredients have less impact', () => {
     const makeIngredient = (pos: number): MatchedIngredient => ({
       name: 'garlic',
