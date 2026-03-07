@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/M4n0x/fodmap-lens/compare/v1.0.2...v1.0.3) (2026-03-07)
+
+
+### Bug Fixes
+
+* **ci:** also patch settings.gradle for AsyncStorage repo ([d7885c3](https://github.com/M4n0x/fodmap-lens/commit/d7885c36ac08e9b9c166533aec3b1a9f49f0d9e3))
+
 ## [1.0.2](https://github.com/M4n0x/fodmap-lens/compare/v1.0.1...v1.0.2) (2026-03-07)
 
 
