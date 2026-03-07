@@ -21,6 +21,16 @@
 
 ---
 
+<p align="center">
+  <img src="screenshots/01-scan.png" alt="Scan" width="160" />
+  <img src="screenshots/02-history.png" alt="History" width="160" />
+  <img src="screenshots/05-product-detail.png" alt="Product Detail" width="160" />
+  <img src="screenshots/06-product-breakdown.png" alt="FODMAP Breakdown" width="160" />
+  <img src="screenshots/03-search.png" alt="Search" width="160" />
+</p>
+
+---
+
 ## What it does
 
 Fodmap Lens helps people following a low FODMAP diet by scanning product barcodes and analysing the ingredient list against a curated FODMAP database. For each product you get:
