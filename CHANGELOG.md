@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/M4n0x/fodmap-lens/compare/v1.0.3...v1.0.4) (2026-03-07)
+
+
+### Bug Fixes
+
+* **ci:** insert AsyncStorage Maven repo before jitpack ([88d1378](https://github.com/M4n0x/fodmap-lens/commit/88d13784368e10fd75d49097061f40bfc49747a4))
+
 ## [1.0.3](https://github.com/M4n0x/fodmap-lens/compare/v1.0.2...v1.0.3) (2026-03-07)
 
 
