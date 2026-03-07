@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5](https://github.com/M4n0x/fodmap-lens/compare/v1.0.4...v1.0.5) (2026-03-07)
+
+
+### Bug Fixes
+
+* **ci:** increase Gradle memory to avoid OOM during Kotlin compilation ([fbff50a](https://github.com/M4n0x/fodmap-lens/commit/fbff50a658e8617d334b42f0fd7e376905dab8bc))
+
 ## [1.0.4](https://github.com/M4n0x/fodmap-lens/compare/v1.0.3...v1.0.4) (2026-03-07)
 
 
