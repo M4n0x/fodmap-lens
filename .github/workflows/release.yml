@@ -47,12 +47,15 @@ jobs:
       - name: Expo prebuild
         run: npx expo prebuild --platform android
 
-      - name: Patch Gradle for AsyncStorage local repo
+      - name: Patch Android build for CI
         run: |
-          sed -i "s|maven { url 'https://www.jitpack.io' }|maven { url 'https://www.jitpack.io' }\n    maven { url \"\$rootDir/../node_modules/@react-native-async-storage/async-storage/android/local_repo\" }|" android/build.gradle
-
-      - name: Downgrade Gradle to 8.13
-        run: sed -i 's|gradle-.*-bin.zip|gradle-8.13-bin.zip|' android/gradle/wrapper/gradle-wrapper.properties
+          # Add AsyncStorage local Maven repo
+          sed -i '/jitpack.io/a\        maven { url "$rootDir/../node_modules/@react-native-async-storage/async-storage/android/local_repo" }' android/build.gradle
+          # Downgrade Gradle to 8.13 (Expo generates 9.x which is incompatible)
+          sed -i 's|gradle-.*-bin.zip|gradle-8.13-bin.zip|' android/gradle/wrapper/gradle-wrapper.properties
+          # Verify patches applied
+          grep -q "local_repo" android/build.gradle && echo "AsyncStorage repo: OK" || exit 1
+          grep -q "8.13" android/gradle/wrapper/gradle-wrapper.properties && echo "Gradle 8.13: OK" || exit 1
 
       - name: Decode keystore
         env:
