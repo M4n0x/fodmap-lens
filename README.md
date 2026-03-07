@@ -22,11 +22,11 @@
 ---
 
 <p align="center">
-  <img src="screenshots/01-scan.png" alt="Scan" width="160" />
-  <img src="screenshots/02-history.png" alt="History" width="160" />
-  <img src="screenshots/05-product-detail.png" alt="Product Detail" width="160" />
-  <img src="screenshots/06-product-breakdown.png" alt="FODMAP Breakdown" width="160" />
-  <img src="screenshots/03-search.png" alt="Search" width="160" />
+  <img src="screenshots/01-scan.jpg" alt="Scan" width="160" />
+  <img src="screenshots/02-history.jpg" alt="History" width="160" />
+  <img src="screenshots/05-product-detail.jpg" alt="Product Detail" width="160" />
+  <img src="screenshots/06-product-breakdown.jpg" alt="FODMAP Breakdown" width="160" />
+  <img src="screenshots/03-search.jpg" alt="Search" width="160" />
 </p>
 
 ---
