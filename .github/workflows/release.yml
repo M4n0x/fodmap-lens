@@ -50,8 +50,8 @@ jobs:
       - name: Patch Android build for CI
         run: |
           ASYNC_REPO='maven { url "$rootDir/../node_modules/@react-native-async-storage/async-storage/android/local_repo" }'
-          # Add AsyncStorage local Maven repo to build.gradle
-          sed -i "/jitpack.io/a\\        $ASYNC_REPO" android/build.gradle
+          # Insert AsyncStorage local Maven repo BEFORE jitpack in build.gradle
+          sed -i "/jitpack.io/i\\        $ASYNC_REPO" android/build.gradle
           # Also add to settings.gradle if it has dependencyResolutionManagement
           if grep -q "dependencyResolutionManagement" android/settings.gradle; then
             sed -i "/mavenCentral()/a\\        $ASYNC_REPO" android/settings.gradle
@@ -61,10 +61,6 @@ jobs:
           # Verify
           grep -q "local_repo" android/build.gradle && echo "build.gradle patched: OK" || exit 1
           grep -q "8.13" android/gradle/wrapper/gradle-wrapper.properties && echo "Gradle 8.13: OK" || exit 1
-          echo "--- build.gradle repos ---"
-          grep -A2 "maven" android/build.gradle
-          echo "--- settings.gradle repos ---"
-          grep -A2 "maven\|repositories" android/settings.gradle | head -30
 
       - name: Decode keystore
         env:
