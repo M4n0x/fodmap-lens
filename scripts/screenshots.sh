@@ -3,7 +3,7 @@
 # Usage: ./scripts/screenshots.sh [avd_name]
 #
 # Takes screenshots of all main screens using the release APK.
-# Requires: Android SDK with emulator, release APK installed, ImageMagick (convert).
+# Requires: Android SDK with emulator, release APK installed, ImageMagick (magick).
 
 set -euo pipefail
 
@@ -12,6 +12,7 @@ EMULATOR="${ANDROID_HOME:-$HOME/Library/Android/sdk}/emulator/emulator"
 PACKAGE="com.anonymous.fodmapapp"
 SCHEME="fodmapapp"
 OUT_DIR="screenshots"
+APK_PATH="android/app/build/outputs/apk/release/app-release.apk"
 AVD="${1:-Pixel_8_API_35}"
 
 mkdir -p "$OUT_DIR"
@@ -74,25 +75,36 @@ fi
 
 get_screen_dims
 
-# Grant permissions upfront
-echo "Granting permissions..."
+# --- Phase 1: Fresh install and seed data ---
+
+echo "Reinstalling app..."
+adb_cmd uninstall "$PACKAGE" >/dev/null 2>&1 || true
+adb_cmd install -r "$APK_PATH" >/dev/null 2>&1
 adb_cmd shell pm grant "$PACKAGE" android.permission.CAMERA 2>/dev/null || true
 
-# Force stop and clean launch
-echo "Launching app..."
-adb_cmd shell am force-stop "$PACKAGE"
-sleep 1
-adb_cmd shell am start -n "$PACKAGE/.MainActivity" >/dev/null 2>&1
-sleep 6
+# Verify install
+adb_cmd shell pm list packages | grep -q "$PACKAGE" || { echo "ERROR: Install failed"; exit 1; }
 
-# Seed history: visit 3 products with source=manual
+echo "Launching app and waiting for DB initialization..."
+adb_cmd shell am start -n "$PACKAGE/.MainActivity" >/dev/null 2>&1
+sleep 12
+
+# Warm up: navigate tabs to ensure DB + UI are fully ready
+tap_tab 1; sleep 2; tap_tab 2; sleep 2; tap_tab 0; sleep 2
+
 echo "Seeding scan history..."
-for barcode in 8076802085738 3017620422003 5449000000996; do
+for barcode in 5449000000996 3017620422003 8076802085738; do
   open_deeplink "product/${barcode}?source=manual"
-  sleep 7
-  adb_cmd shell input keyevent 4
-  sleep 2
+  sleep 12
 done
+
+# --- Phase 2: Restart and take screenshots ---
+
+echo "Restarting app for screenshots..."
+adb_cmd shell am force-stop "$PACKAGE"
+sleep 2
+adb_cmd shell am start -n "$PACKAGE/.MainActivity" >/dev/null 2>&1
+sleep 8
 
 echo "Taking screenshots..."
 
@@ -104,34 +116,25 @@ screenshot "01-scan"
 tap_tab 1
 screenshot "02-history"
 
-# 3. Search tab
+# 3. Search tab (empty)
 tap_tab 2
 screenshot "03-search"
 
-# 4. Settings tab
+# 4. Tap the "Garlic" quick start chip for search results
+adb_cmd shell input tap 135 800
+screenshot "07-search-results" 3
+
+# 5. Settings tab
 tap_tab 3
 screenshot "04-settings"
 
-# 5. Product detail via deep link
+# 6. Product detail via deep link (Barilla)
 open_deeplink "product/8076802085738?source=history"
 screenshot "05-product-detail" 5
 
-# 6. Scroll down for FODMAP breakdown
+# 7. Scroll down for FODMAP breakdown
 adb_cmd shell input swipe $((WIDTH / 2)) 1500 $((WIDTH / 2)) 600 300
 screenshot "06-product-breakdown" 2
-
-# 7. Go back, search for garlic
-adb_cmd shell input keyevent 4
-sleep 2
-tap_tab 2
-sleep 2
-# Tap the search input field
-adb_cmd shell input tap $((WIDTH / 2)) 230
-sleep 1
-adb_cmd shell input text "garlic"
-screenshot "07-search-results" 3
-# Dismiss keyboard
-adb_cmd shell input keyevent 4
 
 echo ""
 echo "All screenshots saved to $OUT_DIR/"
