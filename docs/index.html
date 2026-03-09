@@ -6,6 +6,9 @@
   <title>Fodmap Lens — Scan. Check. Eat with confidence.</title>
   <meta name="description" content="Scan food barcodes and instantly check their FODMAP content. Free Android app for the low-FODMAP diet.">
   <link rel="icon" href="images/icon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -25,170 +28,182 @@
 
   <!-- Hero -->
   <section class="hero">
-    <div class="hero-text">
-      <h1 data-lang="en">Scan. Check.<br><span class="highlight">Eat with confidence.</span></h1>
-      <h1 data-lang="fr">Scannez. Verifiez.<br><span class="highlight">Mangez en confiance.</span></h1>
-      <h1 data-lang="de">Scannen. Pruefen.<br><span class="highlight">Sicher geniessen.</span></h1>
+    <!-- Decorative leaf SVGs -->
+    <svg class="leaf-deco leaf-1" viewBox="0 0 200 300" fill="none">
+      <path d="M100 10C50 50 10 120 30 220c10 40 40 60 70 70 30-10 60-30 70-70 20-100-20-170-70-210z" fill="#A8E6CF"/>
+      <path d="M100 40v220M100 80c-20 15-40 40-50 80M100 120c20 15 40 40 50 70M100 160c-15 10-30 30-40 50" stroke="#fff" stroke-width="2" opacity="0.3"/>
+    </svg>
+    <svg class="leaf-deco leaf-2" viewBox="0 0 200 300" fill="none">
+      <path d="M100 10C50 50 10 120 30 220c10 40 40 60 70 70 30-10 60-30 70-70 20-100-20-170-70-210z" fill="#A8E6CF"/>
+      <path d="M100 40v220M100 100c-25 20-45 50-55 90M100 140c25 15 45 45 55 65" stroke="#fff" stroke-width="2" opacity="0.3"/>
+    </svg>
 
-      <p data-lang="en">Instantly check the FODMAP content of any food product by scanning its barcode. Get a clear score, see which categories are safe, and eat without the guesswork.</p>
-      <p data-lang="fr">Verifiez instantanement le contenu FODMAP de n'importe quel produit alimentaire en scannant son code-barres. Obtenez un score clair et mangez sans stress.</p>
-      <p data-lang="de">Pruefen Sie sofort den FODMAP-Gehalt jedes Lebensmittels durch Scannen des Barcodes. Erhalten Sie eine klare Bewertung und essen Sie ohne Ratespiel.</p>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg>
+          <span data-lang="en">Free &amp; Open Source</span>
+          <span data-lang="fr">Gratuit &amp; Open Source</span>
+          <span data-lang="de">Kostenlos &amp; Open Source</span>
+        </div>
 
-      <a href="https://github.com/M4n0x/fodmap-lens/releases/latest/download/app-release.apk" class="btn-primary">
-        <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        <span data-lang="en">Download for Android</span>
-        <span data-lang="fr">Telecharger pour Android</span>
-        <span data-lang="de">Fuer Android herunterladen</span>
-      </a>
-    </div>
-    <div class="hero-phone">
-      <div class="phone-frame">
-        <img src="images/01-scan.jpg" alt="Fodmap Lens scan screen">
+        <h1 data-lang="en">Nature&rsquo;s guide to <em>better digestion</em></h1>
+        <h1 data-lang="fr">Le guide naturel pour <em>mieux dig&eacute;rer</em></h1>
+        <h1 data-lang="de">Ihr nat&uuml;rlicher Wegweiser f&uuml;r <em>bessere Verdauung</em></h1>
+
+        <p data-lang="en">Scan any grocery product and instantly see its FODMAP content. Built for people who want to eat well and feel well.</p>
+        <p data-lang="fr">Scannez n'importe quel produit et d&eacute;couvrez instantan&eacute;ment son contenu FODMAP. Con&ccedil;u pour ceux qui veulent bien manger et se sentir bien.</p>
+        <p data-lang="de">Scannen Sie jedes Lebensmittel und sehen Sie sofort den FODMAP-Gehalt. Entwickelt f&uuml;r Menschen, die gut essen und sich wohl f&uuml;hlen wollen.</p>
+
+        <div class="hero-buttons">
+          <a href="https://github.com/M4n0x/fodmap-lens/releases/latest/download/app-release.apk" class="btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            <span data-lang="en">Download for Android</span>
+            <span data-lang="fr">T&eacute;l&eacute;charger pour Android</span>
+            <span data-lang="de">F&uuml;r Android herunterladen</span>
+          </a>
+          <a href="https://github.com/M4n0x/fodmap-lens" class="btn-outline">
+            <span data-lang="en">View on GitHub</span>
+            <span data-lang="fr">Voir sur GitHub</span>
+            <span data-lang="de">Auf GitHub ansehen</span>
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="phone-frame">
+          <img src="images/05-product-detail.jpg" alt="Fodmap Lens product score">
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Features -->
-  <div class="features-section">
   <section class="features">
-    <h2 class="section-title" data-lang="en">What you get</h2>
-    <h2 class="section-title" data-lang="fr">Ce que vous obtenez</h2>
-    <h2 class="section-title" data-lang="de">Das bietet Ihnen die App</h2>
+    <div class="features-inner">
+      <div class="section-label">
+        <span data-lang="en">How it works</span>
+        <span data-lang="fr">Comment &ccedil;a marche</span>
+        <span data-lang="de">So funktioniert es</span>
+      </div>
+      <h2 class="section-title" data-lang="en">Care for your body, naturally</h2>
+      <h2 class="section-title" data-lang="fr">Prenez soin de votre corps, naturellement</h2>
+      <h2 class="section-title" data-lang="de">Sorgen Sie nat&uuml;rlich f&uuml;r Ihren K&ouml;rper</h2>
 
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon green"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#5B8A72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="6" y1="2" x2="6" y2="6"/><line x1="18" y1="2" x2="18" y2="6"/><line x1="2" y1="12" x2="22" y2="12"/></svg></div>
-        <h3>
-          <span data-lang="en">Scan & Score</span>
-          <span data-lang="fr">Scanner & Score</span>
-          <span data-lang="de">Scannen & Bewerten</span>
-        </h3>
-        <p>
-          <span data-lang="en">Scan any barcode and get an instant 0–100 FODMAP score with a traffic-light rating.</span>
-          <span data-lang="fr">Scannez un code-barres et obtenez un score FODMAP 0-100 avec un feu tricolore.</span>
-          <span data-lang="de">Scannen Sie einen Barcode und erhalten Sie sofort einen FODMAP-Score von 0-100.</span>
-        </p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon amber"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D4A04A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
-        <h3>
-          <span data-lang="en">FODMAP Breakdown</span>
-          <span data-lang="fr">Detail FODMAP</span>
-          <span data-lang="de">FODMAP-Aufschluesselung</span>
-        </h3>
-        <p>
-          <span data-lang="en">See each of the 6 FODMAP categories with clear traffic-light indicators per ingredient.</span>
-          <span data-lang="fr">Consultez les 6 categories FODMAP avec des indicateurs clairs par ingredient.</span>
-          <span data-lang="de">Sehen Sie alle 6 FODMAP-Kategorien mit klaren Ampel-Indikatoren pro Zutat.</span>
-        </p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon coral"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C75B4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-        <h3>
-          <span data-lang="en">Offline History</span>
-          <span data-lang="fr">Historique hors-ligne</span>
-          <span data-lang="de">Offline-Verlauf</span>
-        </h3>
-        <p>
-          <span data-lang="en">All your scans are saved locally on your device. Review past products anytime, even offline.</span>
-          <span data-lang="fr">Vos scans sont sauvegardes localement. Consultez vos produits a tout moment, meme hors-ligne.</span>
-          <span data-lang="de">Alle Scans werden lokal gespeichert. Sehen Sie vergangene Produkte jederzeit ein, auch offline.</span>
-        </p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon blue"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4a7db5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-        <h3>
-          <span data-lang="en">3 Languages</span>
-          <span data-lang="fr">3 Langues</span>
-          <span data-lang="de">3 Sprachen</span>
-        </h3>
-        <p>
-          <span data-lang="en">Available in English, French, and German — with ingredient matching in all three languages.</span>
-          <span data-lang="fr">Disponible en anglais, francais et allemand — avec correspondance d'ingredients dans les 3 langues.</span>
-          <span data-lang="de">Verfuegbar auf Englisch, Franzoesisch und Deutsch — mit Zutatenerkennung in allen drei Sprachen.</span>
-        </p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7v10M12 7v10M17 7v10"/></svg>
+          </div>
+          <div>
+            <h3>
+              <span data-lang="en">Scan at the store</span>
+              <span data-lang="fr">Scannez au magasin</span>
+              <span data-lang="de">Im Laden scannen</span>
+            </h3>
+            <p>
+              <span data-lang="en">Point your camera at any barcode. Ingredients are looked up instantly from a global food database.</span>
+              <span data-lang="fr">Pointez votre cam&eacute;ra vers un code-barres. Les ingr&eacute;dients sont recherch&eacute;s instantan&eacute;ment.</span>
+              <span data-lang="de">Richten Sie Ihre Kamera auf einen Barcode. Die Zutaten werden sofort aus einer globalen Datenbank abgerufen.</span>
+            </p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div>
+            <h3>
+              <span data-lang="en">Instant FODMAP score</span>
+              <span data-lang="fr">Score FODMAP instantan&eacute;</span>
+              <span data-lang="de">Sofortiger FODMAP-Score</span>
+            </h3>
+            <p>
+              <span data-lang="en">A clear 0&ndash;100 score with traffic-light colors tells you whether a product is safe for your gut.</span>
+              <span data-lang="fr">Un score clair de 0 &agrave; 100 avec des couleurs de feu tricolore vous indique si un produit est s&ucirc;r.</span>
+              <span data-lang="de">Ein klarer 0&ndash;100 Score mit Ampelfarben zeigt Ihnen, ob ein Produkt vertr&auml;glich ist.</span>
+            </p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <div>
+            <h3>
+              <span data-lang="en">6 category breakdown</span>
+              <span data-lang="fr">D&eacute;tail par 6 cat&eacute;gories</span>
+              <span data-lang="de">6 Kategorien im Detail</span>
+            </h3>
+            <p>
+              <span data-lang="en">See which FODMAP groups are present: Fructans, GOS, Lactose, Fructose, Sorbitol, and Mannitol.</span>
+              <span data-lang="fr">D&eacute;couvrez quels groupes FODMAP sont pr&eacute;sents : Fructanes, GOS, Lactose, Fructose, Sorbitol et Mannitol.</span>
+              <span data-lang="de">Sehen Sie welche FODMAP-Gruppen vorhanden sind: Fruktane, GOS, Laktose, Fruktose, Sorbit und Mannit.</span>
+            </p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2zM3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
+          </div>
+          <div>
+            <h3>
+              <span data-lang="en">Your food diary</span>
+              <span data-lang="fr">Votre journal alimentaire</span>
+              <span data-lang="de">Ihr Ern&auml;hrungstagebuch</span>
+            </h3>
+            <p>
+              <span data-lang="en">Every scan is saved on your device. Review past products anytime &mdash; even without internet.</span>
+              <span data-lang="fr">Chaque scan est sauvegard&eacute; sur votre appareil. Consultez vos produits &agrave; tout moment, m&ecirc;me hors-ligne.</span>
+              <span data-lang="de">Jeder Scan wird auf Ihrem Ger&auml;t gespeichert. Sehen Sie fr&uuml;here Produkte jederzeit ein &mdash; auch offline.</span>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
-  </div>
 
   <!-- Screenshots -->
   <section class="screenshots">
-    <h2 class="section-title" data-lang="en">See it in action</h2>
-    <h2 class="section-title" data-lang="fr">Decouvrez l'application</h2>
-    <h2 class="section-title" data-lang="de">Die App in Aktion</h2>
+    <svg class="leaf-deco leaf-bg" viewBox="0 0 200 300" fill="none">
+      <path d="M100 10C50 50 10 120 30 220c10 40 40 60 70 70 30-10 60-30 70-70 20-100-20-170-70-210z" fill="#A8E6CF"/>
+    </svg>
+    <div class="screenshots-inner">
+      <div class="section-label">
+        <span data-lang="en">Inside the app</span>
+        <span data-lang="fr">Dans l'application</span>
+        <span data-lang="de">In der App</span>
+      </div>
+      <h2 class="section-title" data-lang="en">Every screen, designed with care</h2>
+      <h2 class="section-title" data-lang="fr">Chaque &eacute;cran, con&ccedil;u avec soin</h2>
+      <h2 class="section-title" data-lang="de">Jeder Bildschirm, sorgf&auml;ltig gestaltet</h2>
 
-    <div class="screenshots-scroll">
-      <div class="screenshot-item">
-        <div class="screenshot-frame"><img src="images/01-scan.jpg" alt="Barcode scanning"></div>
-        <div class="screenshot-label">
-          <span data-lang="en">Scan</span>
-          <span data-lang="fr">Scanner</span>
-          <span data-lang="de">Scannen</span>
-        </div>
-      </div>
-      <div class="screenshot-item">
-        <div class="screenshot-frame"><img src="images/05-product-detail.jpg" alt="Product detail"></div>
-        <div class="screenshot-label">
-          <span data-lang="en">Product Score</span>
-          <span data-lang="fr">Score produit</span>
-          <span data-lang="de">Produkt-Score</span>
-        </div>
-      </div>
-      <div class="screenshot-item">
-        <div class="screenshot-frame"><img src="images/06-product-breakdown.jpg" alt="FODMAP breakdown"></div>
-        <div class="screenshot-label">
-          <span data-lang="en">Breakdown</span>
-          <span data-lang="fr">Detail</span>
-          <span data-lang="de">Details</span>
-        </div>
-      </div>
-      <div class="screenshot-item">
-        <div class="screenshot-frame"><img src="images/02-history.jpg" alt="Scan history"></div>
-        <div class="screenshot-label">
-          <span data-lang="en">History</span>
-          <span data-lang="fr">Historique</span>
-          <span data-lang="de">Verlauf</span>
-        </div>
-      </div>
-      <div class="screenshot-item">
-        <div class="screenshot-frame"><img src="images/03-search.jpg" alt="Search"></div>
-        <div class="screenshot-label">
-          <span data-lang="en">Search</span>
-          <span data-lang="fr">Recherche</span>
-          <span data-lang="de">Suche</span>
-        </div>
-      </div>
-      <div class="screenshot-item">
-        <div class="screenshot-frame"><img src="images/07-search-results.jpg" alt="Search results"></div>
-        <div class="screenshot-label">
-          <span data-lang="en">Results</span>
-          <span data-lang="fr">Resultats</span>
-          <span data-lang="de">Ergebnisse</span>
-        </div>
-      </div>
-      <div class="screenshot-item">
-        <div class="screenshot-frame"><img src="images/04-settings.jpg" alt="Settings"></div>
-        <div class="screenshot-label">
-          <span data-lang="en">Settings</span>
-          <span data-lang="fr">Parametres</span>
-          <span data-lang="de">Einstellungen</span>
-        </div>
+      <div class="screenshots-scroll">
+        <div class="phone-frame"><img src="images/01-scan.jpg" alt="Scan"></div>
+        <div class="phone-frame"><img src="images/05-product-detail.jpg" alt="Score"></div>
+        <div class="phone-frame"><img src="images/06-product-breakdown.jpg" alt="Breakdown"></div>
+        <div class="phone-frame"><img src="images/02-history.jpg" alt="History"></div>
+        <div class="phone-frame"><img src="images/07-search-results.jpg" alt="Search"></div>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
   <section class="cta">
-    <h2 data-lang="en">Ready to eat with confidence?</h2>
-    <h2 data-lang="fr">Pret a manger en confiance ?</h2>
-    <h2 data-lang="de">Bereit, sicher zu geniessen?</h2>
+    <h2 data-lang="en">Nourish yourself <em>with confidence</em></h2>
+    <h2 data-lang="fr">Nourrissez-vous <em>en confiance</em></h2>
+    <h2 data-lang="de">Ern&auml;hren Sie sich <em>mit Vertrauen</em></h2>
+
+    <p>
+      <span data-lang="en">Free, open-source, and built with care for your wellbeing.</span>
+      <span data-lang="fr">Gratuit, open-source et con&ccedil;u avec soin pour votre bien-&ecirc;tre.</span>
+      <span data-lang="de">Kostenlos, Open-Source und mit Sorgfalt f&uuml;r Ihr Wohlbefinden entwickelt.</span>
+    </p>
 
     <a href="https://github.com/M4n0x/fodmap-lens/releases/latest/download/app-release.apk" class="btn-primary">
-      <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
       <span data-lang="en">Download for Android</span>
-      <span data-lang="fr">Telecharger pour Android</span>
-      <span data-lang="de">Fuer Android herunterladen</span>
+      <span data-lang="fr">T&eacute;l&eacute;charger pour Android</span>
+      <span data-lang="de">F&uuml;r Android herunterladen</span>
     </a>
   </section>
 
@@ -196,7 +211,7 @@
   <footer class="footer">
     <p class="footer-disclaimer">
       <span data-lang="en">Disclaimer: This app is for informational purposes only and does not constitute medical advice. Always consult a healthcare professional for dietary guidance.</span>
-      <span data-lang="fr">Avertissement : Cette application est a titre informatif uniquement et ne constitue pas un avis medical. Consultez toujours un professionnel de sante.</span>
+      <span data-lang="fr">Avertissement : Cette application est &agrave; titre informatif uniquement et ne constitue pas un avis m&eacute;dical. Consultez toujours un professionnel de sant&eacute;.</span>
       <span data-lang="de">Haftungsausschluss: Diese App dient nur zu Informationszwecken und stellt keine medizinische Beratung dar. Konsultieren Sie immer einen Arzt.</span>
     </p>
     <div class="footer-links">
