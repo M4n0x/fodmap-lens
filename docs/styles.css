@@ -159,7 +159,7 @@ body.lang-de .hero-buttons span[data-lang="de"] {
 
 /* ===== Hero ===== */
 .hero {
-  min-height: 90vh;
+  min-height: 100vh;
   background: var(--forest);
   color: #fff;
   display: flex;
@@ -174,8 +174,27 @@ body.lang-de .hero-buttons span[data-lang="de"] {
   pointer-events: none;
   opacity: 0.07;
 }
-.leaf-1 { top: -5%; right: -5%; width: 500px; transform: rotate(30deg); }
-.leaf-2 { bottom: -10%; left: -8%; width: 400px; transform: rotate(-20deg); }
+.leaf-1 {
+  top: -5%; right: -5%; width: 500px;
+  animation: leaf-drift-1 20s ease-in-out infinite;
+}
+.leaf-2 {
+  bottom: -10%; left: -8%; width: 400px;
+  animation: leaf-drift-2 25s ease-in-out infinite;
+}
+
+@keyframes leaf-drift-1 {
+  0%, 100% { transform: rotate(30deg) translate(0, 0); }
+  25% { transform: rotate(34deg) translate(-10px, 8px); }
+  50% { transform: rotate(28deg) translate(5px, 15px); }
+  75% { transform: rotate(32deg) translate(10px, -5px); }
+}
+@keyframes leaf-drift-2 {
+  0%, 100% { transform: rotate(-20deg) translate(0, 0); }
+  25% { transform: rotate(-16deg) translate(8px, -10px); }
+  50% { transform: rotate(-22deg) translate(-5px, -15px); }
+  75% { transform: rotate(-18deg) translate(-10px, 5px); }
+}
 
 .hero-inner {
   max-width: 1200px;
