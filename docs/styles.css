@@ -359,12 +359,10 @@ body.lang-de .cta span[data-lang="de"] {
 
 .screenshots-scroll {
   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 24px;
-  overflow-x: auto;
   padding: 0 32px 24px;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
 }
 
 .screenshots-scroll::-webkit-scrollbar {
@@ -373,7 +371,6 @@ body.lang-de .cta span[data-lang="de"] {
 
 .screenshot-item {
   flex-shrink: 0;
-  scroll-snap-align: center;
 }
 
 .screenshot-frame {
