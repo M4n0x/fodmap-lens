@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OG Image Template — Screenshot at 1200x630</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      font-family: 'Karla', sans-serif;
+    }
+
+    .og {
+      width: 1200px;
+      height: 630px;
+      background: #1B4332;
+      display: flex;
+      align-items: center;
+      padding: 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative leaves */
+    .leaf {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0.06;
+    }
+    .leaf-1 {
+      top: -80px;
+      right: -40px;
+      width: 500px;
+      height: 500px;
+    }
+    .leaf-2 {
+      bottom: -120px;
+      left: -60px;
+      width: 400px;
+      height: 400px;
+      transform: rotate(-30deg);
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      padding-right: 60px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .brand img {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+    }
+
+    .brand span {
+      font-family: 'Fraunces', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-size: 52px;
+      font-weight: 900;
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: #A8E6CF;
+      font-weight: 400;
+    }
+
+    .tagline {
+      font-size: 22px;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+      max-width: 480px;
+    }
+
+    .phone-area {
+      position: relative;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+
+    .phone-frame {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 6px;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.4);
+      width: 230px;
+    }
+
+    .phone-frame img {
+      border-radius: 22px;
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Subtle gradient overlay at bottom */
+    .og::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.15));
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="og">
+    <!-- Decorative leaves -->
+    <svg class="leaf leaf-1" viewBox="0 0 200 300" fill="none">
+      <path d="M100 10C50 50 10 120 30 220c10 40 40 60 70 70 30-10 60-30 70-70 20-100-20-170-70-210z" fill="#A8E6CF"/>
+      <path d="M100 40v220M100 80c-20 15-40 40-50 80M100 120c20 15 40 40 50 70M100 160c-15 10-30 30-40 50" stroke="#fff" stroke-width="2" opacity="0.3"/>
+    </svg>
+    <svg class="leaf leaf-2" viewBox="0 0 200 300" fill="none">
+      <path d="M100 10C50 50 10 120 30 220c10 40 40 60 70 70 30-10 60-30 70-70 20-100-20-170-70-210z" fill="#A8E6CF"/>
+    </svg>
+
+    <div class="content">
+      <div class="brand">
+        <img src="images/icon.png" alt="Fodmap Lens">
+        <span>Fodmap Lens</span>
+      </div>
+      <h1>Scan groceries.<br>Check <em>FODMAPs</em>.<br>Eat with confidence.</h1>
+      <p class="tagline">Free & open-source FODMAP scanner for Android</p>
+    </div>
+
+    <div class="phone-area">
+      <div class="phone-frame">
+        <img src="images/05-product-detail.jpg" alt="App screenshot">
+      </div>
+    </div>
+  </div>
+</body>
+</html>
