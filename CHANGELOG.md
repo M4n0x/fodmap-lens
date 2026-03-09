@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.0](https://github.com/M4n0x/fodmap-lens/compare/v1.0.6...v1.1.0) (2026-03-09)
+
+
+### Features
+
+* add category overrides, FODMAP breakdown improvements, and history enhancements ([f9fa1f0](https://github.com/M4n0x/fodmap-lens/commit/f9fa1f0482b135308a8319259ef907c6c9373189))
+
+
+### Bug Fixes
+
+* replace emoji flags with bundled local flag images for offline support ([2cc9eda](https://github.com/M4n0x/fodmap-lens/commit/2cc9eda7241604c40db6c23dd67f100d890eb24a))
+* resolve duplicate key warning in search FlatList ([0e23318](https://github.com/M4n0x/fodmap-lens/commit/0e23318b822bc4ec878d656f9ac9e1e104fe50c0))
+
 ## [1.0.6](https://github.com/M4n0x/fodmap-lens/compare/v1.0.5...v1.0.6) (2026-03-09)
 
 
