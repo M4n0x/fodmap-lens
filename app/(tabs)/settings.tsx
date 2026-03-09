@@ -4,6 +4,7 @@ import { Text, RadioButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { useSQLiteContext } from 'expo-sqlite';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Constants from 'expo-constants';
 import { useAppStore } from '@/src/store/appStore';
 import { clearScanHistory } from '@/src/db/queries';
 import { colors, ratingColors, typography, spacing, radius, shadows } from '@/src/theme/design';
@@ -190,7 +191,7 @@ export default function SettingsScreen() {
       </View>
 
       <View style={styles.version}>
-        <Text style={styles.versionText}>{t('settings.version')} 1.0.0</Text>
+        <Text style={styles.versionText}>{t('settings.version')} {Constants.expoConfig?.version}</Text>
       </View>
     </ScrollView>
   );
