@@ -168,6 +168,8 @@ Mandelsplitter* 10%, Mandelkrokant* 5% (Rohzucker, Mandeln).
     expect(names).toContain('rohzucker');
     expect(names).toContain('kakaobutter');
     expect(names).toContain('mandelsplitter');
+    // Sub-ingredients from parentheses should be extracted
+    expect(names).toContain('mandeln');
   });
 
   it('full pipeline: OCR English milk chocolate → parsed ingredients', () => {
@@ -198,11 +200,13 @@ describe('splitIngredientsText', () => {
     expect(result).toHaveLength(3);
   });
 
-  it('handles parenthetical sub-ingredients without splitting', () => {
+  it('extracts sub-ingredients from parentheses', () => {
     const result = splitIngredientsText('chocolate (cocoa, sugar), milk');
-    expect(result).toHaveLength(2);
+    expect(result).toHaveLength(4);
     expect(result[0].text).toBe('chocolate');
-    expect(result[1].text).toBe('milk');
+    expect(result[1].text).toBe('cocoa');
+    expect(result[2].text).toBe('sugar');
+    expect(result[3].text).toBe('milk');
   });
 
   it('assigns position indices', () => {
@@ -229,20 +233,25 @@ describe('splitIngredientsText', () => {
     // Just the ingredient line from the OCR text
     const ingredientLine = 'Kakaomasse* (Peru), Rohzucker*, Kakaobutter*, Mandelsplitter* 10%, Mandelkrokant* 5% (Rohzucker, Mandeln)';
     const result = splitIngredientsText(ingredientLine);
-    expect(result.length).toBeGreaterThanOrEqual(4);
-    expect(result[0].text).toBe('kakaomasse');
-    expect(result[1].text).toBe('rohzucker');
-    expect(result[2].text).toBe('kakaobutter');
-    expect(result[3].text).toBe('mandelsplitter');
+    const names = result.map((i) => i.text);
+    expect(names).toContain('kakaomasse');
+    expect(names).toContain('peru'); // sub-ingredient from parentheses
+    expect(names).toContain('rohzucker');
+    expect(names).toContain('kakaobutter');
+    expect(names).toContain('mandelsplitter');
+    expect(names).toContain('mandelkrokant');
+    expect(names).toContain('mandeln'); // sub-ingredient from parentheses
   });
 
   it('handles French ingredient text', () => {
     const line = "cacao en pâte* (Pérou), cassonade*, beurre de cacao*, éclats d'amandes* 10%";
     const result = splitIngredientsText(line);
-    expect(result.length).toBeGreaterThanOrEqual(3);
-    expect(result[0].text).toBe('cacao en pate');
-    expect(result[1].text).toBe('cassonade');
-    expect(result[2].text).toBe('beurre de cacao');
+    const names = result.map((i) => i.text);
+    expect(names).toContain('cacao en pate');
+    expect(names).toContain('perou'); // sub-ingredient from parentheses
+    expect(names).toContain('cassonade');
+    expect(names).toContain('beurre de cacao');
+    expect(names).toContain("eclats d'amandes");
   });
 });
 

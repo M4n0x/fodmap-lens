@@ -64,8 +64,35 @@ export function parseIngredients(
 }
 
 /**
+ * Extract the contents of top-level parenthetical/bracket groups from a token.
+ * e.g., "Mandelkrokant 5% (Rohzucker, Mandeln)" → ["Rohzucker, Mandeln"]
+ */
+function extractParenContents(raw: string): string[] {
+  const results: string[] = [];
+  let depth = 0;
+  let start = -1;
+
+  for (let i = 0; i < raw.length; i++) {
+    const ch = raw[i];
+    if (ch === '(' || ch === '[') {
+      if (depth === 0) start = i + 1;
+      depth++;
+    } else if (ch === ')' || ch === ']') {
+      depth--;
+      if (depth === 0 && start !== -1) {
+        results.push(raw.substring(start, i));
+        start = -1;
+      }
+    }
+  }
+
+  return results;
+}
+
+/**
  * Split a raw ingredients text string into individual ingredients.
  * Handles nested parentheses, commas, semicolons.
+ * Sub-ingredients inside parentheses are extracted as separate entries.
  */
 export function splitIngredientsText(text: string): ParsedIngredient[] {
   const ingredients: ParsedIngredient[] = [];
@@ -81,23 +108,46 @@ export function splitIngredientsText(text: string): ParsedIngredient[] {
       depth--;
       current += char;
     } else if ((char === ',' || char === ';') && depth === 0) {
-      const normalized = normalizeText(current);
-      if (normalized) {
-        ingredients.push({ text: normalized, offId: null, position });
-        position++;
-      }
+      position = pushWithSubIngredients(current, ingredients, position);
       current = '';
     } else {
       current += char;
     }
   }
 
-  const last = normalizeText(current);
-  if (last) {
-    ingredients.push({ text: last, offId: null, position });
+  pushWithSubIngredients(current, ingredients, position);
+  return ingredients;
+}
+
+/**
+ * Push a main ingredient and any sub-ingredients from parenthetical content.
+ * Returns the next available position index.
+ */
+function pushWithSubIngredients(
+  raw: string,
+  ingredients: ParsedIngredient[],
+  position: number
+): number {
+  // Add the main ingredient (normalizeText strips parentheticals)
+  const mainText = normalizeText(raw);
+  if (mainText) {
+    ingredients.push({ text: mainText, offId: null, position });
+    position++;
   }
 
-  return ingredients;
+  // Extract and add sub-ingredients from parenthetical groups
+  for (const content of extractParenContents(raw)) {
+    const subs = content.split(/[,;]/);
+    for (const sub of subs) {
+      const normalized = normalizeText(sub);
+      if (normalized) {
+        ingredients.push({ text: normalized, offId: null, position });
+        position++;
+      }
+    }
+  }
+
+  return position;
 }
 
 /**
