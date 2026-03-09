@@ -77,6 +77,16 @@ export interface MatchedIngredient {
   position: number;
 }
 
+export interface CategoryOverrideInfo {
+  category: FodmapCategory;
+  originalRating: FodmapRating;
+  newRating: FodmapRating;
+  /** i18n key — short label for the breakdown row (e.g. "Aged cheese") */
+  reasonKey: string;
+  /** i18n key — longer note shown below the product description */
+  noteKey: string;
+}
+
 export interface FodmapAnalysis {
   categories: Record<FodmapCategory, {
     rating: FodmapRating;
@@ -86,4 +96,6 @@ export interface FodmapAnalysis {
   overallRating: FodmapRating;
   matchedIngredients: MatchedIngredient[];
   matchRate: number;
+  /** Product-level overrides applied based on OFF category tags */
+  appliedOverrides?: CategoryOverrideInfo[];
 }

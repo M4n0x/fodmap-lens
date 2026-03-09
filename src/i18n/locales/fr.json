@@ -35,6 +35,9 @@
     "typeIngredients": "Saisir les ingrédients manuellement",
     "ingredientsPlaceholder": "Collez ou saisissez les ingrédients séparés par des virgules...",
     "analyzeIngredients": "Analyser",
+    "rescanTitle": "Rescanner le produit ?",
+    "rescanMessage": "Retourner au scanner pour rescanner ce produit.",
+    "rescanConfirm": "Rescanner",
     "overallScore": "Score FODMAP global",
     "fodmapBreakdown": "Détail FODMAP",
     "ingredients": "Ingrédients",
@@ -58,6 +61,20 @@
       "green": "Faible en FODMAP",
       "yellow": "Modéré en FODMAP",
       "red": "Élevé en FODMAP"
+    },
+    "override": {
+      "hardCheeseLabel": "Fromage affiné",
+      "hardCheeseNote": "Ce produit est un fromage affiné — le lactose est dégradé lors du processus d'affinage.",
+      "butterLabel": "Beurre",
+      "butterNote": "Le beurre contient un lactose négligeable — il est séparé lors du barattage.",
+      "gheeLabel": "Ghee",
+      "gheeNote": "Le ghee est du beurre clarifié — les solides du lait et le lactose sont éliminés.",
+      "soySauceLabel": "Fermenté",
+      "soySauceNote": "La sauce soja est fermentée — les fructanes et GOS sont dégradés lors du processus.",
+      "tempehLabel": "Fermenté",
+      "tempehNote": "Le tempeh est fermenté — les fructanes et GOS du soja sont dégradés lors de la fermentation.",
+      "lactoseFreeLabel": "Sans lactose",
+      "lactoseFreeNote": "Ce produit est étiqueté sans lactose."
     }
   },
   "history": {
@@ -65,7 +82,9 @@
     "empty": "Aucun scan",
     "emptyMessage": "Scannez un produit pour le voir ici",
     "clearAll": "Effacer l'historique",
-    "clearConfirm": "Voulez-vous vraiment effacer tout l'historique ?"
+    "clearConfirm": "Voulez-vous vraiment effacer tout l'historique ?",
+    "deleteTitle": "Supprimer l'entrée ?",
+    "deleteMessage": "Retirer « {{name}} » de votre historique ?"
   },
   "search": {
     "title": "Recherche d'ingrédients",

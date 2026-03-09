@@ -25,6 +25,7 @@ export interface OFFProduct {
   ingredients_text_de?: string;
   quantity?: string;
   categories_tags?: string[];
+  labels_tags?: string[];
   countries_tags?: string[];
   nutriments?: Record<string, number | string>;
   nutrient_levels?: Record<string, 'low' | 'moderate' | 'high'>;

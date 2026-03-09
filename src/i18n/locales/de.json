@@ -35,6 +35,9 @@
     "typeIngredients": "Zutaten manuell eingeben",
     "ingredientsPlaceholder": "Zutaten durch Kommas getrennt eingeben oder einfugen...",
     "analyzeIngredients": "Analysieren",
+    "rescanTitle": "Produkt erneut scannen?",
+    "rescanMessage": "Zurück zum Scanner, um dieses Produkt erneut zu scannen.",
+    "rescanConfirm": "Erneut scannen",
     "overallScore": "FODMAP-Gesamtbewertung",
     "fodmapBreakdown": "FODMAP-Aufschlüsselung",
     "ingredients": "Zutaten",
@@ -58,6 +61,20 @@
       "green": "Niedriger FODMAP",
       "yellow": "Mittlerer FODMAP",
       "red": "Hoher FODMAP"
+    },
+    "override": {
+      "hardCheeseLabel": "Gereifter Käse",
+      "hardCheeseNote": "Dies ist ein gereifter Käse — Laktose wird beim Reifungsprozess abgebaut.",
+      "butterLabel": "Butter",
+      "butterNote": "Butter enthält vernachlässigbare Laktose — sie wird beim Buttern abgetrennt.",
+      "gheeLabel": "Ghee",
+      "gheeNote": "Ghee ist geklärte Butter — alle Milchfeststoffe und Laktose werden entfernt.",
+      "soySauceLabel": "Fermentiert",
+      "soySauceNote": "Sojasauce ist fermentiert — Fruktane und GOS werden beim Prozess abgebaut.",
+      "tempehLabel": "Fermentiert",
+      "tempehNote": "Tempeh ist fermentiert — Fruktane und GOS in Sojabohnen werden bei der Fermentation abgebaut.",
+      "lactoseFreeLabel": "Laktosefrei",
+      "lactoseFreeNote": "Dieses Produkt ist als laktosefrei gekennzeichnet."
     }
   },
   "history": {
@@ -65,7 +82,9 @@
     "empty": "Noch keine Scans",
     "emptyMessage": "Scannen Sie ein Produkt, um es hier zu sehen",
     "clearAll": "Verlauf löschen",
-    "clearConfirm": "Möchten Sie den gesamten Scanverlauf wirklich löschen?"
+    "clearConfirm": "Möchten Sie den gesamten Scanverlauf wirklich löschen?",
+    "deleteTitle": "Eintrag löschen?",
+    "deleteMessage": "{{name}} aus dem Verlauf entfernen?"
   },
   "search": {
     "title": "Zutatensuche",

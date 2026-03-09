@@ -13,7 +13,12 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.fodmapapp",
+      "deploymentTarget": "16.0",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Fodmap Lens uses the camera to scan food barcodes."
+      }
     },
     "android": {
       "adaptiveIcon": {

@@ -35,6 +35,9 @@
     "typeIngredients": "Type ingredients manually",
     "ingredientsPlaceholder": "Paste or type ingredients separated by commas...",
     "analyzeIngredients": "Analyze",
+    "rescanTitle": "Rescan product?",
+    "rescanMessage": "Go back to the scanner to scan this product again.",
+    "rescanConfirm": "Rescan",
     "overallScore": "Overall FODMAP Score",
     "fodmapBreakdown": "FODMAP Breakdown",
     "ingredients": "Ingredients",
@@ -58,6 +61,20 @@
       "green": "Low FODMAP",
       "yellow": "Moderate FODMAP",
       "red": "High FODMAP"
+    },
+    "override": {
+      "hardCheeseLabel": "Aged cheese",
+      "hardCheeseNote": "This is an aged cheese — lactose is broken down during the ripening process.",
+      "butterLabel": "Butter",
+      "butterNote": "Butter contains negligible lactose — it is separated during churning.",
+      "gheeLabel": "Ghee",
+      "gheeNote": "Ghee is clarified butter — all milk solids and lactose are removed.",
+      "soySauceLabel": "Fermented",
+      "soySauceNote": "Soy sauce is fermented — fructans and GOS are broken down during the process.",
+      "tempehLabel": "Fermented",
+      "tempehNote": "Tempeh is fermented — fructans and GOS in soybeans are broken down during fermentation.",
+      "lactoseFreeLabel": "Lactose-free",
+      "lactoseFreeNote": "This product is labeled lactose-free."
     }
   },
   "history": {
@@ -65,7 +82,9 @@
     "empty": "No scans yet",
     "emptyMessage": "Scan a product to see it here",
     "clearAll": "Clear History",
-    "clearConfirm": "Are you sure you want to clear all scan history?"
+    "clearConfirm": "Are you sure you want to clear all scan history?",
+    "deleteTitle": "Delete entry?",
+    "deleteMessage": "Remove \"{{name}}\" from your scan history?"
   },
   "search": {
     "title": "Ingredient Search",

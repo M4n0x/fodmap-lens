@@ -21,6 +21,7 @@ export function FodmapBreakdown({ analysis, embedded }: FodmapBreakdownProps) {
         const { rating, triggerIngredients } = analysis.categories[cat];
         const isLast = idx === FODMAP_CATEGORIES.length - 1;
         const palette = paletteForRating(rating);
+        const override = analysis.appliedOverrides?.find((o) => o.category === cat);
 
         return (
           <View key={cat} style={[styles.row, !isLast && styles.rowBorder]}>
@@ -29,9 +30,15 @@ export function FodmapBreakdown({ analysis, embedded }: FodmapBreakdownProps) {
                 <View style={[styles.categoryDot, { backgroundColor: palette.dot }]} />
                 <Text style={styles.categoryName}>{t(`product.categories.${cat}`)}</Text>
               </View>
-              <Text style={styles.triggers} numberOfLines={2}>
-                {triggerIngredients.length > 0 ? triggerIngredients.join(', ') : t('revamp.product.noClearTriggers')}
-              </Text>
+              {override ? (
+                <Text style={styles.overrideNote} numberOfLines={2}>
+                  {t(override.reasonKey)}
+                </Text>
+              ) : (
+                <Text style={styles.triggers} numberOfLines={2}>
+                  {triggerIngredients.length > 0 ? triggerIngredients.join(', ') : t('revamp.product.noClearTriggers')}
+                </Text>
+              )}
             </View>
             <View style={[styles.badgeWrap, { backgroundColor: palette.bg }]}>
               <TrafficLight rating={rating} size="sm" showBadge label={t(`product.ratings.${rating}`)} />
@@ -98,6 +105,12 @@ const styles = StyleSheet.create({
   triggers: {
     ...typography.bodySmall,
     color: colors.textSecondary,
+    lineHeight: 18,
+  },
+  overrideNote: {
+    ...typography.bodySmall,
+    color: colors.textSecondary,
+    fontStyle: 'italic',
     lineHeight: 18,
   },
   badgeWrap: {

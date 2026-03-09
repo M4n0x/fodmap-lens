@@ -1,10 +1,12 @@
 import { useCallback, useMemo } from 'react';
-import { StyleSheet, View, FlatList, Pressable, Image } from 'react-native';
+import { StyleSheet, View, FlatList, Pressable, Image, Alert } from 'react-native';
 import { Text } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { router, useFocusEffect } from 'expo-router';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useSQLiteContext } from 'expo-sqlite';
 import { useScanHistory } from '@/src/hooks/useScanHistory';
+import { deleteScanHistoryItem } from '@/src/db/queries';
 import { LoadingState } from '@/src/components/common/LoadingState';
 import type { ScanHistoryItem } from '@/src/types/product';
 import { Platform } from 'react-native';
@@ -12,7 +14,25 @@ import { colors, ratingColors, paletteForRating, typography, spacing, radius, sh
 
 export default function HistoryScreen() {
   const { t } = useTranslation();
+  const db = useSQLiteContext();
   const { history, isLoading, refresh } = useScanHistory();
+
+  const handleDelete = useCallback((item: ScanHistoryItem) => {
+    Alert.alert(
+      t('history.deleteTitle'),
+      t('history.deleteMessage', { name: item.product_name || item.barcode }),
+      [
+        { text: t('common.cancel'), style: 'cancel' },
+        {
+          text: t('common.delete'),
+          style: 'destructive',
+          onPress: () => {
+            deleteScanHistoryItem(db, item.id).then(() => refresh());
+          },
+        },
+      ]
+    );
+  }, [t, db, refresh]);
 
   useFocusEffect(
     useCallback(() => {
@@ -74,6 +94,7 @@ export default function HistoryScreen() {
             params: { barcode: item.barcode, source: 'history' },
           })
         }
+        onLongPress={() => handleDelete(item)}
       >
         {imageUrl ? (
           <Image source={{ uri: imageUrl }} style={styles.productImage} resizeMode="cover" />

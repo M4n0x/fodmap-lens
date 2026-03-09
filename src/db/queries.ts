@@ -217,3 +217,7 @@ export async function clearScanHistory(db: SQLiteDatabase): Promise<void> {
   await db.runAsync('DELETE FROM scan_history');
 }
 
+export async function deleteScanHistoryItem(db: SQLiteDatabase, id: number): Promise<void> {
+  await db.runAsync('DELETE FROM scan_history WHERE id = ?', [id]);
+}
+

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { ScrollView, StyleSheet, View, Pressable, Image, TextInput, ActivityIndicator, KeyboardAvoidingView, Platform } from 'react-native';
+import { ScrollView, StyleSheet, View, Pressable, Image, TextInput, ActivityIndicator, KeyboardAvoidingView, Platform, Alert } from 'react-native';
 import { Text } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useLocalSearchParams, router } from 'expo-router';
@@ -73,12 +73,14 @@ function ProductInsightHero({
   isFromOcr,
   showActions,
   onOpenOcr,
+  onRescan,
 }: {
   product: any;
   analysis: FodmapAnalysis;
   isFromOcr: boolean;
   showActions: boolean;
   onOpenOcr: () => void;
+  onRescan: () => void;
 }) {
   const { t } = useTranslation();
   const summary = summaryForAnalysis(t, analysis.overallRating);
@@ -108,9 +110,9 @@ function ProductInsightHero({
             <Text style={styles.insightBrand}>{brand}</Text>
             <Text style={styles.insightName} numberOfLines={2}>{productName}</Text>
           </View>
-          <View style={[styles.insightScoreWrap, { backgroundColor: palette.dot }]}>
+          <Pressable onLongPress={onRescan} style={[styles.insightScoreWrap, { backgroundColor: palette.dot }]}>
             <Text style={styles.insightScore}>{analysis.overallScore}</Text>
-          </View>
+          </Pressable>
         </View>
 
         <View style={styles.insightMetaRow}>
@@ -127,6 +129,15 @@ function ProductInsightHero({
         </View>
 
         <Text style={styles.insightSummary}>{summary.body}</Text>
+
+        {analysis.appliedOverrides && analysis.appliedOverrides.length > 0 && (
+          <View style={styles.overrideNoteRow}>
+            <MaterialCommunityIcons name="information-outline" size={16} color={colors.sage} />
+            <Text style={styles.overrideNoteText}>
+              {analysis.appliedOverrides.map((o) => t(o.noteKey)).join(' ')}
+            </Text>
+          </View>
+        )}
 
         {showActions && (
           <View style={styles.heroActionRow}>
@@ -151,7 +162,7 @@ export default function ProductScreen() {
   const { t } = useTranslation();
   const db = useSQLiteContext();
   const savedRef = useRef(false);
-  const { product, analysis, isLoadingProduct, isAnalyzing, error, productNotFound, noIngredients } =
+  const { product, analysis, isLoadingProduct, isAnalyzing, error, productNotFound, noIngredients, refetch } =
     useFodmapAnalysis(barcode ?? '');
   const ocrAnalysis = useAppStore((s) => (barcode ? s.ocrResults[barcode] : undefined));
   const setOcrResult = useAppStore((s) => s.setOcrResult);
@@ -159,6 +170,24 @@ export default function ProductScreen() {
   const [showManualInput, setShowManualInput] = useState(false);
   const [manualText, setManualText] = useState('');
   const { analyze: analyzeText, isAnalyzing: isManualAnalyzing } = useOcrAnalysis();
+  const handleRescan = useCallback(() => {
+    Alert.alert(
+      t('product.rescanTitle'),
+      t('product.rescanMessage'),
+      [
+        { text: t('common.cancel'), style: 'cancel' },
+        {
+          text: t('product.rescanConfirm'),
+          onPress: () => {
+            refetch();
+            if (barcode && activeAnalysis && activeAnalysis.matchedIngredients.length > 0) {
+              updateScanHistoryOcr(db, barcode, activeAnalysis.overallScore, activeAnalysis.overallRating).catch(() => {});
+            }
+          },
+        },
+      ]
+    );
+  }, [t, refetch, barcode, activeAnalysis, db]);
 
   const handleManualSubmit = useCallback(async () => {
     if (!manualText.trim() || !barcode) return;
@@ -298,6 +327,7 @@ export default function ProductScreen() {
                 isFromOcr={!!ocrAnalysis}
                 showActions={!!ocrAnalysis || noIngredients}
                 onOpenOcr={() => router.push({ pathname: '/ocr-scan' as any, params: { barcode } })}
+                onRescan={handleRescan}
               />
               <FodmapBreakdown analysis={activeAnalysis} embedded />
               <ReintroductionGroups analysis={activeAnalysis} embedded />
@@ -529,6 +559,22 @@ const styles = StyleSheet.create({
     color: colors.textSecondary,
     lineHeight: 22,
     marginTop: spacing.md,
+  },
+  overrideNoteRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: spacing.xs,
+    marginTop: spacing.sm,
+    backgroundColor: 'rgba(107,142,117,0.08)',
+    borderRadius: radius.md,
+    padding: spacing.sm,
+  },
+  overrideNoteText: {
+    ...typography.bodySmall,
+    color: colors.sage,
+    fontStyle: 'italic',
+    flex: 1,
+    lineHeight: 18,
   },
   heroActionRow: {
     flexDirection: 'row',

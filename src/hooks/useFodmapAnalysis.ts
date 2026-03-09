@@ -4,6 +4,7 @@ import { useProductLookup } from './useProductLookup';
 import { parseIngredients } from '@/src/services/ingredientParser';
 import { matchAllIngredients } from '@/src/services/fodmapEngine';
 import { calculateAnalysis } from '@/src/utils/scoring';
+import { applyCategoryOverrides } from '@/src/utils/categoryOverrides';
 import { useAppStore } from '@/src/store/appStore';
 import type { FodmapAnalysis } from '@/src/types/fodmap';
 import type { OFFProduct } from '@/src/types/product';
@@ -16,12 +17,13 @@ interface UseFodmapAnalysisResult {
   error: Error | null;
   productNotFound: boolean;
   noIngredients: boolean;
+  refetch: () => void;
 }
 
 export function useFodmapAnalysis(barcode: string): UseFodmapAnalysisResult {
   const db = useSQLiteContext();
   const language = useAppStore((s) => s.language);
-  const { data: product, isLoading: isLoadingProduct, error } = useProductLookup(barcode);
+  const { data: product, isLoading: isLoadingProduct, error, refetch } = useProductLookup(barcode);
   const [analysis, setAnalysis] = useState<FodmapAnalysis | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
@@ -38,7 +40,8 @@ export function useFodmapAnalysis(barcode: string): UseFodmapAnalysisResult {
       try {
         const parsed = parseIngredients(product!, language);
         const matched = await matchAllIngredients(db, parsed);
-        const result = calculateAnalysis(matched);
+        const baseResult = calculateAnalysis(matched);
+        const result = applyCategoryOverrides(baseResult, product!.categories_tags, product!.labels_tags);
         if (!cancelled) {
           setAnalysis(result);
         }
@@ -68,5 +71,6 @@ export function useFodmapAnalysis(barcode: string): UseFodmapAnalysisResult {
     error: error as Error | null,
     productNotFound: !isLoadingProduct && product === null,
     noIngredients,
+    refetch: () => { refetch(); },
   };
 }

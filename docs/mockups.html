@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fodmap Lens — Landing Page Mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=Karla:wght@400;500;600&family=Quicksand:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Fira+Sans:wght@400;500;600&family=DM+Serif+Display:ital@0;1&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ===== GLOBAL RESET & SWITCHER ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { overflow-x: hidden; }
+img { max-width: 100%; display: block; }
+a { text-decoration: none; }
+
+.mockup { display: none; opacity: 0; transition: opacity 0.4s ease; }
+.mockup.active { display: block; opacity: 1; }
+
+/* Switcher Bar */
+#switcher {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+  display: flex; justify-content: center; align-items: center; gap: 6px;
+  padding: 12px 16px;
+  background: rgba(27, 67, 50, 0.94); backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+#switcher button {
+  font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 600;
+  padding: 8px 18px; border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 100px; background: transparent; color: rgba(255,255,255,0.65);
+  cursor: pointer; transition: all 0.25s ease; white-space: nowrap;
+}
+#switcher button:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
+#switcher button.active {
+  background: #fff; color: #1B4332; border-color: #fff; font-weight: 700;
+}
+@media (max-width: 700px) {
+  #switcher { flex-wrap: wrap; gap: 4px; padding: 10px 12px; }
+  #switcher button { font-size: 11px; padding: 6px 12px; }
+}
+
+/* Shared phone frame */
+.phone-frame {
+  position: relative; display: inline-block;
+  padding: 10px; border-radius: 32px;
+}
+.phone-frame img { border-radius: 22px; width: 100%; height: auto; }
+
+
+/* ================================================================
+   MOCKUP 1: SERENE WELLNESS
+   Calm, minimal, lots of whitespace, sage green, zen-like
+   ================================================================ */
+#m1 {
+  --s-white: #FFFFFF; --s-bg: #F9FBF9; --s-sage: #7BAE7F;
+  --s-sage-deep: #5A8E5E; --s-sage-light: #E8F0E9; --s-sage-pale: #F2F7F3;
+  --s-text: #2C3E2D; --s-text-soft: #6B7E6C;
+  background: var(--s-white); color: var(--s-text);
+  font-family: 'Nunito', sans-serif; padding-top: 60px;
+}
+
+#m1 .s-hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  padding: 100px 32px 80px; position: relative; overflow: hidden;
+}
+/* Subtle leaf watermark */
+#m1 .s-hero::before {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  width: 600px; height: 600px; transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse, var(--s-sage-light) 0%, transparent 70%);
+  opacity: 0.4; pointer-events: none;
+}
+#m1 .s-hero-content { position: relative; z-index: 2; max-width: 600px; }
+#m1 .s-hero .s-leaf-icon {
+  display: inline-block; margin-bottom: 32px;
+}
+#m1 .s-hero .s-leaf-icon svg { width: 48px; height: 48px; }
+#m1 .s-hero .s-overtitle {
+  font-size: 13px; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--s-sage); margin-bottom: 20px;
+}
+#m1 .s-hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 6vw, 4.5rem); font-weight: 600;
+  line-height: 1.15; color: var(--s-text); margin-bottom: 20px;
+}
+#m1 .s-hero h1 em { font-style: italic; color: var(--s-sage-deep); }
+#m1 .s-hero .s-sub {
+  font-size: 17px; line-height: 1.8; color: var(--s-text-soft);
+  margin-bottom: 40px;
+}
+#m1 .s-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 36px; background: var(--s-sage); color: #fff;
+  font-family: 'Nunito', sans-serif; font-weight: 600; font-size: 15px;
+  border-radius: 100px; transition: all 0.3s ease; cursor: pointer;
+  box-shadow: 0 4px 20px rgba(123,174,127,0.3);
+}
+#m1 .s-btn:hover { background: var(--s-sage-deep); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(123,174,127,0.35); }
+#m1 .s-btn svg { width: 18px; height: 18px; }
+
+#m1 .s-hero-phone { margin-top: 64px; position: relative; z-index: 2; }
+#m1 .s-hero-phone .phone-frame {
+  max-width: 260px; background: var(--s-sage-deep); padding: 8px;
+  box-shadow: 0 32px 80px rgba(90,142,94,0.15);
+}
+#m1 .s-hero-phone .phone-frame img { border-radius: 24px; }
+
+/* Serene trust bar */
+#m1 .s-trust {
+  display: flex; justify-content: center; gap: 48px; padding: 48px 32px;
+  border-top: 1px solid var(--s-sage-light); border-bottom: 1px solid var(--s-sage-light);
+}
+#m1 .s-trust-item { text-align: center; }
+#m1 .s-trust-item .s-trust-num {
+  font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 700;
+  color: var(--s-sage-deep);
+}
+#m1 .s-trust-item .s-trust-label {
+  font-size: 12px; color: var(--s-text-soft); margin-top: 4px; font-weight: 500;
+}
+
+/* Serene features */
+#m1 .s-features {
+  padding: 100px 32px; background: var(--s-bg);
+}
+#m1 .s-features-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+#m1 .s-features .s-section-tag {
+  font-size: 12px; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--s-sage); margin-bottom: 16px;
+}
+#m1 .s-features h2 {
+  font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 600; margin-bottom: 60px; color: var(--s-text);
+}
+#m1 .s-feat-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
+  text-align: center;
+}
+#m1 .s-feat-card {
+  padding: 32px 24px;
+}
+#m1 .s-feat-card .s-feat-circle {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--s-sage-light); display: flex; align-items: center;
+  justify-content: center; margin: 0 auto 20px;
+}
+#m1 .s-feat-card .s-feat-circle svg { width: 32px; height: 32px; color: var(--s-sage-deep); }
+#m1 .s-feat-card h3 {
+  font-family: 'Cormorant Garamond', serif; font-size: 20px;
+  font-weight: 700; margin-bottom: 8px;
+}
+#m1 .s-feat-card p { font-size: 14px; color: var(--s-text-soft); line-height: 1.7; }
+
+/* Serene screenshots */
+#m1 .s-screens {
+  padding: 80px 32px 100px; text-align: center;
+}
+#m1 .s-screens .s-section-tag {
+  font-size: 12px; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--s-sage); margin-bottom: 16px;
+}
+#m1 .s-screens h2 {
+  font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 600; margin-bottom: 60px;
+}
+#m1 .s-screen-row {
+  display: flex; gap: 28px; justify-content: center; flex-wrap: wrap;
+}
+#m1 .s-screen-row .phone-frame {
+  max-width: 190px; background: var(--s-sage-deep); padding: 8px;
+  box-shadow: 0 16px 48px rgba(90,142,94,0.12);
+  transition: transform 0.4s ease;
+}
+#m1 .s-screen-row .phone-frame:hover { transform: translateY(-8px); }
+#m1 .s-screen-row .phone-frame img { border-radius: 18px; }
+
+/* Serene CTA */
+#m1 .s-cta {
+  padding: 100px 32px; text-align: center; background: var(--s-sage-pale);
+}
+#m1 .s-cta h2 {
+  font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 600; margin-bottom: 16px;
+}
+#m1 .s-cta h2 em { color: var(--s-sage-deep); }
+#m1 .s-cta p { color: var(--s-text-soft); margin-bottom: 32px; font-size: 16px; }
+
+#m1 .s-footer {
+  padding: 32px; text-align: center; font-size: 13px; color: var(--s-text-soft);
+  border-top: 1px solid var(--s-sage-light);
+}
+#m1 .s-footer a { color: var(--s-sage-deep); }
+
+@media (max-width: 768px) {
+  #m1 .s-feat-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+  #m1 .s-trust { gap: 24px; flex-wrap: wrap; }
+  #m1 .s-screen-row .phone-frame { max-width: 150px; }
+}
+
+
+/* ================================================================
+   MOCKUP 2: BOTANICAL GARDEN
+   Rich emerald, leaf decorations, alternating dark/light sections
+   ================================================================ */
+#m2 {
+  --b-emerald: #2D6A4F; --b-forest: #1B4332; --b-mint: #A8E6CF;
+  --b-mint-pale: #E8F8F0; --b-white: #FFFFFF; --b-cream: #F8FBF9;
+  --b-text: #1B4332; --b-text-light: rgba(255,255,255,0.85);
+  background: var(--b-white); color: var(--b-text);
+  font-family: 'Karla', sans-serif; padding-top: 60px;
+}
+
+/* Botanical Hero — dark green bg */
+#m2 .b-hero {
+  min-height: 100vh; background: var(--b-forest); color: #fff;
+  display: flex; align-items: center; position: relative;
+  overflow: hidden; padding: 100px 64px;
+}
+/* Decorative leaf shapes */
+#m2 .b-hero .b-leaf-deco {
+  position: absolute; pointer-events: none; opacity: 0.07;
+}
+#m2 .b-hero .b-leaf-1 { top: -5%; right: -5%; width: 500px; transform: rotate(30deg); }
+#m2 .b-hero .b-leaf-2 { bottom: -10%; left: -8%; width: 400px; transform: rotate(-20deg); }
+#m2 .b-hero-inner {
+  max-width: 1200px; margin: 0 auto; display: grid;
+  grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  position: relative; z-index: 2; width: 100%;
+}
+#m2 .b-hero-text .b-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; background: rgba(168,230,207,0.15);
+  border: 1px solid rgba(168,230,207,0.2); border-radius: 100px;
+  font-size: 12px; font-weight: 600; color: var(--b-mint); margin-bottom: 32px;
+}
+#m2 .b-hero-text .b-tag svg { width: 14px; height: 14px; }
+#m2 .b-hero-text h1 {
+  font-family: 'Fraunces', serif; font-size: clamp(3rem, 5.5vw, 4.5rem);
+  font-weight: 900; line-height: 1.1; margin-bottom: 24px;
+}
+#m2 .b-hero-text h1 em { font-style: italic; color: var(--b-mint); font-weight: 400; }
+#m2 .b-hero-text p {
+  font-size: 17px; line-height: 1.7; color: var(--b-text-light);
+  max-width: 460px; margin-bottom: 40px;
+}
+#m2 .b-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 36px; background: var(--b-mint); color: var(--b-forest);
+  font-family: 'Karla', sans-serif; font-weight: 700; font-size: 15px;
+  border-radius: 14px; transition: all 0.3s ease; cursor: pointer;
+}
+#m2 .b-btn:hover { background: #c2f0dc; transform: translateY(-2px); }
+#m2 .b-btn svg { width: 18px; height: 18px; }
+#m2 .b-btn-outline {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 36px; background: transparent; color: #fff;
+  border: 1.5px solid rgba(255,255,255,0.3);
+  font-family: 'Karla', sans-serif; font-weight: 600; font-size: 15px;
+  border-radius: 14px; transition: all 0.3s ease; cursor: pointer;
+  margin-left: 12px;
+}
+#m2 .b-btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.05); }
+#m2 .b-hero-visual { display: flex; justify-content: center; }
+#m2 .b-hero-visual .phone-frame {
+  max-width: 280px; background: rgba(255,255,255,0.1); padding: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.3);
+}
+#m2 .b-hero-visual .phone-frame img { border-radius: 22px; }
+
+/* Botanical Features — light bg */
+#m2 .b-features { padding: 100px 64px; background: var(--b-cream); }
+#m2 .b-features-inner { max-width: 1000px; margin: 0 auto; }
+#m2 .b-features .b-section-label {
+  font-family: 'Fraunces', serif; font-style: italic; font-size: 15px;
+  color: var(--b-emerald); margin-bottom: 8px; text-align: center;
+}
+#m2 .b-features h2 {
+  font-family: 'Fraunces', serif; font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 900; text-align: center; margin-bottom: 64px;
+}
+#m2 .b-feat-cards {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+}
+#m2 .b-feat-card {
+  background: var(--b-white); border-radius: 20px; padding: 36px 32px;
+  border: 1px solid rgba(45,106,79,0.08);
+  display: flex; gap: 20px; align-items: flex-start;
+  transition: all 0.3s ease;
+}
+#m2 .b-feat-card:hover { box-shadow: 0 8px 32px rgba(45,106,79,0.08); transform: translateY(-2px); }
+#m2 .b-feat-card .b-feat-icon {
+  flex-shrink: 0; width: 52px; height: 52px; border-radius: 16px;
+  background: var(--b-mint-pale); display: flex; align-items: center;
+  justify-content: center;
+}
+#m2 .b-feat-card .b-feat-icon svg { width: 24px; height: 24px; color: var(--b-emerald); }
+#m2 .b-feat-card h3 {
+  font-family: 'Fraunces', serif; font-size: 18px; font-weight: 700;
+  margin-bottom: 6px;
+}
+#m2 .b-feat-card p { font-size: 14px; color: #5A7A65; line-height: 1.7; }
+
+/* Botanical Screenshots — dark bg */
+#m2 .b-screens {
+  padding: 100px 64px; background: var(--b-emerald);
+  color: #fff; position: relative; overflow: hidden;
+}
+#m2 .b-screens .b-leaf-bg {
+  position: absolute; top: -10%; right: -5%; width: 500px; opacity: 0.05;
+  pointer-events: none;
+}
+#m2 .b-screens-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; text-align: center; }
+#m2 .b-screens .b-section-label {
+  font-family: 'Fraunces', serif; font-style: italic; font-size: 15px;
+  color: var(--b-mint); margin-bottom: 8px;
+}
+#m2 .b-screens h2 {
+  font-family: 'Fraunces', serif; font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 900; margin-bottom: 64px;
+}
+#m2 .b-screen-scroll {
+  display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+}
+#m2 .b-screen-scroll .phone-frame {
+  max-width: 185px; background: rgba(255,255,255,0.08); padding: 8px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+  transition: transform 0.4s ease;
+}
+#m2 .b-screen-scroll .phone-frame:hover { transform: translateY(-8px) scale(1.02); }
+#m2 .b-screen-scroll .phone-frame img { border-radius: 18px; }
+
+/* Botanical CTA */
+#m2 .b-cta { padding: 100px 64px; text-align: center; }
+#m2 .b-cta h2 {
+  font-family: 'Fraunces', serif; font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 900; margin-bottom: 16px;
+}
+#m2 .b-cta h2 em { font-style: italic; color: var(--b-emerald); font-weight: 400; }
+#m2 .b-cta p { color: #5A7A65; margin-bottom: 36px; font-size: 16px; }
+
+#m2 .b-footer {
+  padding: 32px 64px; text-align: center; font-size: 13px; color: #8AAF98;
+  border-top: 1px solid rgba(45,106,79,0.08);
+}
+#m2 .b-footer a { color: var(--b-emerald); }
+
+@media (max-width: 900px) {
+  #m2 .b-hero { padding: 100px 24px; }
+  #m2 .b-hero-inner { grid-template-columns: 1fr; text-align: center; }
+  #m2 .b-hero-text p { margin-inline: auto; }
+  #m2 .b-hero-visual { margin-top: 40px; }
+  #m2 .b-features { padding: 80px 24px; }
+  #m2 .b-feat-cards { grid-template-columns: 1fr; }
+  #m2 .b-screens { padding: 80px 24px; }
+  #m2 .b-screen-scroll .phone-frame { max-width: 150px; }
+  #m2 .b-cta { padding: 80px 24px; }
+}
+
+
+/* ================================================================
+   MOCKUP 3: FRESH MORNING
+   Bright mint, rounded shapes, cheerful, card-based
+   ================================================================ */
+#m3 {
+  --f-green: #43A047; --f-green-light: #E8F5E9; --f-green-pale: #F1F8F2;
+  --f-lime: #7CB342; --f-white: #FFFFFF; --f-text: #1B2E1C;
+  --f-text-soft: #5F7A60;
+  background: var(--f-white); color: var(--f-text);
+  font-family: 'Plus Jakarta Sans', sans-serif; padding-top: 60px;
+}
+
+/* Fresh Hero */
+#m3 .f-hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 100px 48px; position: relative; overflow: hidden;
+}
+#m3 .f-hero::before {
+  content: ''; position: absolute; top: -20%; right: -10%;
+  width: 700px; height: 700px; border-radius: 50%;
+  background: var(--f-green-light); opacity: 0.6; pointer-events: none;
+}
+#m3 .f-hero::after {
+  content: ''; position: absolute; bottom: -15%; left: -8%;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: var(--f-green-pale); opacity: 0.5; pointer-events: none;
+}
+#m3 .f-hero-inner {
+  max-width: 1200px; margin: 0 auto; display: grid;
+  grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+  position: relative; z-index: 2; width: 100%;
+}
+#m3 .f-hero-text .f-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 18px; background: var(--f-green-light);
+  border-radius: 100px; font-size: 13px; font-weight: 600;
+  color: var(--f-green); margin-bottom: 24px;
+}
+#m3 .f-hero-text h1 {
+  font-family: 'Quicksand', sans-serif;
+  font-size: clamp(2.8rem, 5vw, 4rem); font-weight: 700;
+  line-height: 1.15; margin-bottom: 20px;
+}
+#m3 .f-hero-text h1 span { color: var(--f-green); }
+#m3 .f-hero-text p {
+  font-size: 17px; line-height: 1.7; color: var(--f-text-soft);
+  max-width: 460px; margin-bottom: 32px;
+}
+#m3 .f-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 32px; background: var(--f-green); color: #fff;
+  font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 15px;
+  border-radius: 16px; transition: all 0.3s ease; cursor: pointer;
+  box-shadow: 0 4px 16px rgba(67,160,71,0.25);
+}
+#m3 .f-btn:hover { background: #388E3C; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(67,160,71,0.3); }
+#m3 .f-btn svg { width: 18px; height: 18px; }
+#m3 .f-github {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 16px 24px; color: var(--f-text-soft);
+  font-weight: 600; font-size: 14px; margin-left: 12px;
+  transition: color 0.2s; cursor: pointer;
+}
+#m3 .f-github:hover { color: var(--f-green); }
+
+#m3 .f-hero-visual {
+  display: flex; justify-content: center; position: relative;
+}
+#m3 .f-hero-visual .f-circle-bg {
+  position: absolute; inset: -20px; border-radius: 50%;
+  background: var(--f-green-light); z-index: 0;
+}
+#m3 .f-hero-visual .phone-frame {
+  position: relative; z-index: 2; max-width: 270px;
+  background: #fff; padding: 10px; border: 2px solid var(--f-green-light);
+  box-shadow: 0 24px 64px rgba(67,160,71,0.12);
+}
+#m3 .f-hero-visual .phone-frame img { border-radius: 20px; }
+
+/* Fresh benefits bar */
+#m3 .f-benefits {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  background: var(--f-green); color: #fff;
+}
+#m3 .f-benefit {
+  padding: 32px 24px; text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.15);
+}
+#m3 .f-benefit:last-child { border-right: none; }
+#m3 .f-benefit .f-ben-num {
+  font-family: 'Quicksand', sans-serif; font-size: 28px; font-weight: 700;
+}
+#m3 .f-benefit .f-ben-label {
+  font-size: 12px; font-weight: 500; opacity: 0.8; margin-top: 4px;
+}
+
+/* Fresh features */
+#m3 .f-features { padding: 100px 48px; }
+#m3 .f-features-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
+#m3 .f-features .f-tag {
+  display: inline-flex; padding: 6px 16px; background: var(--f-green-light);
+  border-radius: 100px; font-size: 12px; font-weight: 700;
+  color: var(--f-green); margin-bottom: 16px; text-transform: uppercase;
+  letter-spacing: 1px;
+}
+#m3 .f-features h2 {
+  font-family: 'Quicksand', sans-serif; font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 700; margin-bottom: 56px;
+}
+#m3 .f-feat-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+#m3 .f-feat-card {
+  background: var(--f-green-pale); border-radius: 24px; padding: 36px 28px;
+  text-align: center; transition: all 0.3s ease;
+}
+#m3 .f-feat-card:hover { background: var(--f-green-light); transform: translateY(-4px); }
+#m3 .f-feat-card .f-fc-icon {
+  width: 60px; height: 60px; border-radius: 20px; background: var(--f-white);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px; font-size: 26px;
+  box-shadow: 0 2px 12px rgba(67,160,71,0.08);
+}
+#m3 .f-feat-card h3 {
+  font-family: 'Quicksand', sans-serif; font-size: 18px;
+  font-weight: 700; margin-bottom: 8px;
+}
+#m3 .f-feat-card p { font-size: 14px; color: var(--f-text-soft); line-height: 1.7; }
+
+/* Fresh screenshots */
+#m3 .f-screens {
+  padding: 80px 48px 100px; background: var(--f-green-pale); text-align: center;
+}
+#m3 .f-screens h2 {
+  font-family: 'Quicksand', sans-serif; font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 700; margin-bottom: 56px;
+}
+#m3 .f-screen-grid {
+  display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+}
+#m3 .f-screen-grid .phone-frame {
+  max-width: 180px; background: #fff; padding: 8px;
+  border: 2px solid var(--f-green-light);
+  box-shadow: 0 12px 40px rgba(67,160,71,0.08);
+  transition: transform 0.3s ease;
+}
+#m3 .f-screen-grid .phone-frame:hover { transform: scale(1.04); }
+#m3 .f-screen-grid .phone-frame img { border-radius: 18px; }
+
+/* Fresh CTA */
+#m3 .f-cta {
+  padding: 100px 48px; text-align: center;
+}
+#m3 .f-cta h2 {
+  font-family: 'Quicksand', sans-serif; font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 700; margin-bottom: 16px;
+}
+#m3 .f-cta h2 span { color: var(--f-green); }
+#m3 .f-cta p { color: var(--f-text-soft); margin-bottom: 32px; font-size: 16px; }
+
+#m3 .f-footer {
+  padding: 32px; text-align: center; font-size: 13px; color: var(--f-text-soft);
+  border-top: 1px solid var(--f-green-light);
+}
+#m3 .f-footer a { color: var(--f-green); }
+
+@media (max-width: 900px) {
+  #m3 .f-hero { padding: 100px 24px; }
+  #m3 .f-hero-inner { grid-template-columns: 1fr; text-align: center; }
+  #m3 .f-hero-text p { margin-inline: auto; }
+  #m3 .f-hero-visual { margin-top: 40px; }
+  #m3 .f-benefits { grid-template-columns: repeat(2, 1fr); }
+  #m3 .f-features { padding: 80px 24px; }
+  #m3 .f-feat-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+  #m3 .f-screens { padding: 60px 24px; }
+  #m3 .f-screen-grid .phone-frame { max-width: 140px; }
+}
+
+
+/* ================================================================
+   MOCKUP 4: HERBAL APOTHECARY
+   Cream canvas, deep forest green, elegant serif, warm/traditional
+   ================================================================ */
+#m4 {
+  --h-cream: #FEFEF2; --h-cream-deep: #F5F0E0; --h-forest: #1B4332;
+  --h-olive: #4A6741; --h-sage: #7A9E7E; --h-gold: #B8960C;
+  --h-text: #2C3A2E; --h-text-soft: #6B7E6C;
+  background: var(--h-cream); color: var(--h-text);
+  font-family: 'Fira Sans', sans-serif; padding-top: 60px;
+}
+
+/* Herbal Hero */
+#m4 .h-hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 100px 64px; position: relative;
+}
+/* Decorative border frame */
+#m4 .h-hero::before {
+  content: ''; position: absolute;
+  top: 80px; left: 32px; right: 32px; bottom: 32px;
+  border: 1px solid rgba(27,67,50,0.08); border-radius: 4px;
+  pointer-events: none;
+}
+#m4 .h-hero-inner {
+  max-width: 1200px; margin: 0 auto; display: grid;
+  grid-template-columns: 1.1fr 0.9fr; gap: 80px; align-items: center;
+  width: 100%; position: relative; z-index: 2;
+}
+#m4 .h-hero-text .h-crest {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 32px;
+}
+#m4 .h-hero-text .h-crest img {
+  width: 48px; height: 48px; border-radius: 12px;
+}
+#m4 .h-hero-text .h-crest span {
+  font-family: 'Libre Caslon Text', serif; font-size: 14px;
+  color: var(--h-olive); letter-spacing: 2px; text-transform: uppercase;
+}
+#m4 .h-hero-text h1 {
+  font-family: 'Libre Caslon Text', serif;
+  font-size: clamp(3rem, 5.5vw, 4.5rem); font-weight: 700;
+  line-height: 1.1; margin-bottom: 24px; color: var(--h-forest);
+}
+#m4 .h-hero-text h1 em {
+  font-style: italic; font-weight: 400; color: var(--h-olive);
+}
+#m4 .h-hero-text p {
+  font-size: 17px; line-height: 1.8; color: var(--h-text-soft);
+  max-width: 440px; margin-bottom: 40px;
+}
+#m4 .h-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 36px; background: var(--h-forest); color: var(--h-cream);
+  font-family: 'Libre Caslon Text', serif; font-size: 15px;
+  border-radius: 4px; transition: all 0.3s ease; cursor: pointer;
+}
+#m4 .h-btn:hover { background: var(--h-olive); }
+#m4 .h-btn svg { width: 16px; height: 16px; }
+#m4 .h-hero-visual { display: flex; justify-content: center; }
+#m4 .h-hero-visual .h-phone-wrap {
+  position: relative; padding: 24px;
+}
+/* Decorative botanical frame around phone */
+#m4 .h-hero-visual .h-phone-wrap::before {
+  content: ''; position: absolute; inset: 0;
+  border: 1px solid rgba(27,67,50,0.1); border-radius: 40px;
+}
+#m4 .h-hero-visual .phone-frame {
+  max-width: 260px; background: var(--h-forest); padding: 10px;
+  box-shadow: 0 24px 64px rgba(27,67,50,0.15);
+}
+#m4 .h-hero-visual .phone-frame img { border-radius: 20px; }
+
+/* Herbal divider */
+#m4 .h-divider {
+  display: flex; align-items: center; justify-content: center;
+  gap: 20px; padding: 24px 32px;
+}
+#m4 .h-divider .h-line { flex: 1; max-width: 200px; height: 1px; background: rgba(27,67,50,0.1); }
+#m4 .h-divider svg { width: 24px; height: 24px; color: var(--h-sage); opacity: 0.5; }
+
+/* Herbal Features */
+#m4 .h-features { padding: 80px 64px; }
+#m4 .h-features-inner { max-width: 900px; margin: 0 auto; }
+#m4 .h-features .h-section-title {
+  font-family: 'Libre Caslon Text', serif; font-size: 13px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--h-olive); text-align: center; margin-bottom: 12px;
+}
+#m4 .h-features h2 {
+  font-family: 'Libre Caslon Text', serif; font-size: clamp(2rem, 4vw, 2.6rem);
+  font-weight: 700; text-align: center; margin-bottom: 64px;
+  color: var(--h-forest);
+}
+#m4 .h-feat-list { max-width: 700px; margin: 0 auto; }
+#m4 .h-feat-item {
+  display: flex; gap: 24px; padding: 32px 0;
+  border-bottom: 1px solid rgba(27,67,50,0.06);
+}
+#m4 .h-feat-item:last-child { border-bottom: none; }
+#m4 .h-feat-item .h-feat-icon {
+  flex-shrink: 0; width: 48px; height: 48px; border-radius: 50%;
+  background: var(--h-cream-deep); display: flex; align-items: center;
+  justify-content: center;
+}
+#m4 .h-feat-item .h-feat-icon svg { width: 22px; height: 22px; color: var(--h-olive); }
+#m4 .h-feat-item h3 {
+  font-family: 'Libre Caslon Text', serif; font-size: 19px;
+  font-weight: 700; margin-bottom: 6px; color: var(--h-forest);
+}
+#m4 .h-feat-item p { font-size: 14px; color: var(--h-text-soft); line-height: 1.7; }
+
+/* Herbal Screenshots */
+#m4 .h-screens {
+  padding: 80px 64px; background: var(--h-cream-deep);
+}
+#m4 .h-screens-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+#m4 .h-screens .h-section-title {
+  font-family: 'Libre Caslon Text', serif; font-size: 13px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--h-olive); margin-bottom: 12px;
+}
+#m4 .h-screens h2 {
+  font-family: 'Libre Caslon Text', serif; font-size: clamp(2rem, 4vw, 2.6rem);
+  font-weight: 700; margin-bottom: 56px; color: var(--h-forest);
+}
+#m4 .h-screen-row {
+  display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;
+}
+#m4 .h-screen-row .phone-frame {
+  max-width: 185px; background: var(--h-forest); padding: 8px;
+  box-shadow: 0 16px 48px rgba(27,67,50,0.12);
+  transition: transform 0.35s ease;
+}
+#m4 .h-screen-row .phone-frame:hover { transform: translateY(-6px); }
+#m4 .h-screen-row .phone-frame img { border-radius: 18px; }
+
+/* Herbal CTA */
+#m4 .h-cta {
+  padding: 100px 64px; text-align: center;
+}
+#m4 .h-cta h2 {
+  font-family: 'Libre Caslon Text', serif; font-size: clamp(2rem, 4vw, 2.6rem);
+  font-weight: 700; margin-bottom: 16px; color: var(--h-forest);
+}
+#m4 .h-cta h2 em { font-style: italic; font-weight: 400; color: var(--h-olive); }
+#m4 .h-cta p { color: var(--h-text-soft); margin-bottom: 36px; font-size: 16px; }
+
+#m4 .h-footer {
+  padding: 32px 64px; text-align: center; font-size: 13px;
+  color: var(--h-text-soft); border-top: 1px solid rgba(27,67,50,0.06);
+}
+#m4 .h-footer a { color: var(--h-olive); }
+
+@media (max-width: 900px) {
+  #m4 .h-hero { padding: 100px 24px; }
+  #m4 .h-hero-inner { grid-template-columns: 1fr; text-align: center; }
+  #m4 .h-hero-text p { margin-inline: auto; }
+  #m4 .h-hero-visual { margin-top: 40px; }
+  #m4 .h-features { padding: 60px 24px; }
+  #m4 .h-screens { padding: 60px 24px; }
+  #m4 .h-screen-row .phone-frame { max-width: 150px; }
+  #m4 .h-cta { padding: 80px 24px; }
+}
+
+
+/* ================================================================
+   MOCKUP 5: MEADOW / FLOWING
+   Gradients, flowing waves, overlapping circles, soft and dynamic
+   ================================================================ */
+#m5 {
+  --w-green: #388E3C; --w-green-dark: #2E7D32; --w-teal: #26A69A;
+  --w-mint: #C8E6C9; --w-mint-pale: #E8F5E9; --w-white: #FFFFFF;
+  --w-text: #1B3A1D; --w-text-soft: #5A7A5C;
+  background: var(--w-white); color: var(--w-text);
+  font-family: 'Outfit', sans-serif; padding-top: 60px;
+}
+
+/* Meadow Hero */
+#m5 .w-hero {
+  min-height: 100vh; position: relative; overflow: hidden;
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; text-align: center;
+  padding: 100px 32px 60px;
+  background: linear-gradient(170deg, #E8F5E9 0%, #FFFFFF 40%, #E0F2F1 100%);
+}
+/* Floating circles */
+#m5 .w-hero .w-circle {
+  position: absolute; border-radius: 50%; pointer-events: none;
+}
+#m5 .w-hero .w-c1 {
+  width: 400px; height: 400px; top: -10%; right: -5%;
+  background: rgba(56,142,60,0.06); animation: w-float 8s ease-in-out infinite;
+}
+#m5 .w-hero .w-c2 {
+  width: 300px; height: 300px; bottom: 5%; left: -8%;
+  background: rgba(38,166,154,0.06); animation: w-float 10s ease-in-out infinite reverse;
+}
+#m5 .w-hero .w-c3 {
+  width: 200px; height: 200px; top: 30%; left: 10%;
+  background: rgba(200,230,201,0.4); animation: w-float 12s ease-in-out infinite;
+}
+@keyframes w-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+#m5 .w-hero-content { position: relative; z-index: 2; max-width: 650px; }
+#m5 .w-hero .w-icon {
+  width: 72px; height: 72px; border-radius: 22px;
+  margin: 0 auto 28px; box-shadow: 0 8px 32px rgba(56,142,60,0.15);
+}
+#m5 .w-hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(3rem, 7vw, 5rem); line-height: 1.1;
+  margin-bottom: 20px;
+}
+#m5 .w-hero h1 span {
+  background: linear-gradient(135deg, var(--w-green) 0%, var(--w-teal) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+#m5 .w-hero .w-sub {
+  font-size: 18px; line-height: 1.7; color: var(--w-text-soft);
+  max-width: 500px; margin: 0 auto 40px;
+}
+#m5 .w-btn-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+#m5 .w-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 32px; color: #fff;
+  font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 15px;
+  border-radius: 100px; transition: all 0.3s ease; cursor: pointer;
+  background: linear-gradient(135deg, var(--w-green) 0%, var(--w-teal) 100%);
+  box-shadow: 0 4px 20px rgba(56,142,60,0.25);
+}
+#m5 .w-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(56,142,60,0.3); }
+#m5 .w-btn svg { width: 18px; height: 18px; }
+#m5 .w-btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 16px 28px; color: var(--w-text-soft);
+  font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 15px;
+  border-radius: 100px; border: 1.5px solid rgba(56,142,60,0.2);
+  transition: all 0.3s ease; cursor: pointer;
+}
+#m5 .w-btn-ghost:hover { border-color: var(--w-green); color: var(--w-green); }
+
+#m5 .w-hero-phones {
+  display: flex; gap: 16px; margin-top: 56px; position: relative; z-index: 2;
+  justify-content: center;
+}
+#m5 .w-hero-phones .phone-frame {
+  max-width: 200px; padding: 8px;
+  background: linear-gradient(135deg, var(--w-green), var(--w-teal));
+  box-shadow: 0 24px 64px rgba(56,142,60,0.15);
+  transition: transform 0.4s ease;
+}
+#m5 .w-hero-phones .phone-frame img { border-radius: 20px; }
+#m5 .w-hero-phones .phone-frame:nth-child(1) { transform: rotate(-4deg); }
+#m5 .w-hero-phones .phone-frame:nth-child(2) { transform: translateY(-16px); z-index: 3; max-width: 220px; }
+#m5 .w-hero-phones .phone-frame:nth-child(3) { transform: rotate(4deg); }
+#m5 .w-hero-phones .phone-frame:hover { transform: translateY(-8px) rotate(0deg) scale(1.03); z-index: 4; }
+
+/* Wave divider */
+#m5 .w-wave svg { display: block; width: 100%; }
+
+/* Meadow Features */
+#m5 .w-features {
+  padding: 100px 48px;
+  background: linear-gradient(180deg, var(--w-white) 0%, var(--w-mint-pale) 100%);
+}
+#m5 .w-features-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
+#m5 .w-features .w-tag {
+  font-size: 13px; font-weight: 600; color: var(--w-green);
+  margin-bottom: 12px; letter-spacing: 1px;
+}
+#m5 .w-features h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 64px;
+}
+#m5 .w-feat-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+}
+#m5 .w-feat-card {
+  background: var(--w-white); border-radius: 28px; padding: 40px 28px;
+  text-align: center;
+  box-shadow: 0 2px 20px rgba(56,142,60,0.06);
+  transition: all 0.35s ease;
+}
+#m5 .w-feat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(56,142,60,0.1);
+}
+#m5 .w-feat-card .w-fc-icon {
+  width: 64px; height: 64px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px; font-size: 28px;
+  background: linear-gradient(135deg, var(--w-mint-pale), #E0F2F1);
+}
+#m5 .w-feat-card h3 {
+  font-family: 'DM Serif Display', serif; font-size: 20px;
+  margin-bottom: 8px;
+}
+#m5 .w-feat-card p { font-size: 14px; color: var(--w-text-soft); line-height: 1.7; }
+
+/* Meadow Screenshots */
+#m5 .w-screens {
+  padding: 80px 48px 100px; text-align: center;
+  background: var(--w-mint-pale);
+}
+#m5 .w-screens h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 56px;
+}
+#m5 .w-screen-row {
+  display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+}
+#m5 .w-screen-row .phone-frame {
+  max-width: 175px; padding: 8px;
+  background: linear-gradient(135deg, var(--w-green), var(--w-teal));
+  box-shadow: 0 12px 40px rgba(56,142,60,0.12);
+  transition: all 0.35s ease;
+}
+#m5 .w-screen-row .phone-frame:hover { transform: translateY(-8px) scale(1.02); }
+#m5 .w-screen-row .phone-frame img { border-radius: 18px; }
+
+/* Meadow CTA */
+#m5 .w-cta {
+  padding: 100px 48px; text-align: center;
+  background: linear-gradient(180deg, var(--w-mint-pale) 0%, var(--w-white) 100%);
+}
+#m5 .w-cta h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 16px;
+}
+#m5 .w-cta h2 span {
+  background: linear-gradient(135deg, var(--w-green), var(--w-teal));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+#m5 .w-cta p { color: var(--w-text-soft); margin-bottom: 36px; font-size: 16px; }
+
+#m5 .w-footer {
+  padding: 32px; text-align: center; font-size: 13px; color: var(--w-text-soft);
+  border-top: 1px solid rgba(56,142,60,0.08);
+}
+#m5 .w-footer a { color: var(--w-green); }
+
+@media (max-width: 800px) {
+  #m5 .w-hero-phones .phone-frame { max-width: 140px; }
+  #m5 .w-hero-phones .phone-frame:nth-child(2) { max-width: 160px; }
+  #m5 .w-feat-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+  #m5 .w-screen-row .phone-frame { max-width: 140px; }
+}
+
+
+/* ================================================================
+   MOCKUP 6: HARMONY (Serene fonts + Meadow phones)
+   Cormorant Garamond + Nunito, sage palette, 3-phone fanned hero
+   ================================================================ */
+#m6 {
+  --h6-white: #FFFFFF; --h6-bg: #F7FAF7; --h6-sage: #7BAE7F;
+  --h6-sage-deep: #5A8E5E; --h6-sage-dark: #3E7042;
+  --h6-sage-light: #E8F0E9; --h6-sage-pale: #F2F7F3;
+  --h6-text: #2C3E2D; --h6-text-soft: #6B7E6C;
+  background: var(--h6-white); color: var(--h6-text);
+  font-family: 'Nunito', sans-serif; padding-top: 60px;
+}
+
+/* Harmony Hero */
+#m6 .h6-hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  padding: 100px 32px 60px; position: relative; overflow: hidden;
+  background: var(--h6-white);
+}
+#m6 .h6-hero .h6-orb {
+  position: absolute; border-radius: 50%; pointer-events: none;
+}
+#m6 .h6-hero .h6-o1 {
+  width: 420px; height: 420px; top: -8%; right: -4%;
+  background: rgba(123,174,127,0.08);
+  animation: h6-drift 10s ease-in-out infinite;
+}
+#m6 .h6-hero .h6-o2 {
+  width: 320px; height: 320px; bottom: 2%; left: -6%;
+  background: rgba(90,142,94,0.06);
+  animation: h6-drift 13s ease-in-out infinite reverse;
+}
+#m6 .h6-hero .h6-o3 {
+  width: 180px; height: 180px; top: 25%; left: 12%;
+  background: rgba(123,174,127,0.05);
+  animation: h6-drift 9s ease-in-out infinite;
+}
+@keyframes h6-drift {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-16px) scale(1.03); }
+}
+
+#m6 .h6-hero-content { position: relative; z-index: 2; max-width: 620px; }
+#m6 .h6-hero .h6-leaf { display: inline-block; margin-bottom: 28px; }
+#m6 .h6-hero .h6-leaf svg { width: 44px; height: 44px; }
+#m6 .h6-hero .h6-overtitle {
+  font-size: 13px; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--h6-sage); margin-bottom: 20px;
+}
+#m6 .h6-hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 6.5vw, 5rem); font-weight: 600;
+  line-height: 1.12; color: var(--h6-text); margin-bottom: 20px;
+}
+#m6 .h6-hero h1 em { font-style: italic; color: var(--h6-sage-deep); }
+#m6 .h6-hero .h6-sub {
+  font-size: 17px; line-height: 1.8; color: var(--h6-text-soft);
+  margin-bottom: 40px; max-width: 500px; margin-inline: auto;
+}
+#m6 .h6-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 36px; background: var(--h6-sage); color: #fff;
+  font-family: 'Nunito', sans-serif; font-weight: 600; font-size: 15px;
+  border-radius: 100px; transition: all 0.3s ease; cursor: pointer;
+  box-shadow: 0 4px 20px rgba(123,174,127,0.3);
+}
+#m6 .h6-btn:hover { background: var(--h6-sage-deep); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(123,174,127,0.35); }
+#m6 .h6-btn svg { width: 18px; height: 18px; }
+#m6 .h6-btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 16px 28px; color: var(--h6-text-soft);
+  font-family: 'Nunito', sans-serif; font-weight: 600; font-size: 15px;
+  border-radius: 100px; border: 1.5px solid var(--h6-sage-light);
+  transition: all 0.3s ease; cursor: pointer; margin-left: 12px;
+}
+#m6 .h6-btn-ghost:hover { border-color: var(--h6-sage); color: var(--h6-sage-deep); }
+
+/* Fanned 3-phone display */
+#m6 .h6-hero-phones {
+  display: flex; gap: 16px; margin-top: 56px; position: relative; z-index: 2;
+  justify-content: center; align-items: center;
+}
+#m6 .h6-hero-phones .phone-frame {
+  max-width: 200px; padding: 5px;
+  background: var(--h6-sage-deep);
+  box-shadow: 0 24px 64px rgba(90,142,94,0.18);
+  transition: transform 0.4s ease; border-radius: 28px;
+}
+#m6 .h6-hero-phones .phone-frame img { border-radius: 23px; }
+#m6 .h6-hero-phones .phone-frame:nth-child(1) { transform: rotate(-5deg) translateY(12px); }
+#m6 .h6-hero-phones .phone-frame:nth-child(2) { transform: translateY(-12px); z-index: 3; max-width: 230px; padding: 6px;
+  border-radius: 30px; box-shadow: 0 32px 80px rgba(90,142,94,0.22); }
+#m6 .h6-hero-phones .phone-frame:nth-child(3) { transform: rotate(5deg) translateY(12px); }
+#m6 .h6-hero-phones .phone-frame:hover { transform: translateY(-12px) rotate(0deg) scale(1.04); z-index: 4; }
+
+/* Harmony trust bar */
+#m6 .h6-trust {
+  display: flex; justify-content: center; gap: 64px; padding: 60px 32px;
+  border-top: 1px solid var(--h6-sage-light); border-bottom: 1px solid var(--h6-sage-light);
+  background: var(--h6-white);
+}
+#m6 .h6-trust-item { text-align: center; }
+#m6 .h6-trust-item .h6-t-num {
+  font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 700;
+  color: var(--h6-sage-deep); line-height: 1;
+}
+#m6 .h6-trust-item .h6-t-label {
+  font-size: 15px; color: var(--h6-text-soft); margin-top: 8px; font-weight: 500;
+}
+
+/* Harmony features */
+#m6 .h6-features { padding: 100px 32px; background: var(--h6-bg); }
+#m6 .h6-features-inner { max-width: 920px; margin: 0 auto; text-align: center; }
+#m6 .h6-features .h6-tag {
+  font-size: 12px; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--h6-sage); margin-bottom: 16px;
+}
+#m6 .h6-features h2 {
+  font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 600; margin-bottom: 60px; color: var(--h6-text);
+}
+#m6 .h6-feat-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; text-align: center;
+}
+#m6 .h6-feat-card { padding: 28px 20px; }
+#m6 .h6-feat-card .h6-fc-circle {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--h6-sage-light); display: flex; align-items: center;
+  justify-content: center; margin: 0 auto 20px;
+}
+#m6 .h6-feat-card .h6-fc-circle svg { width: 30px; height: 30px; color: var(--h6-sage-deep); }
+#m6 .h6-feat-card h3 {
+  font-family: 'Cormorant Garamond', serif; font-size: 21px;
+  font-weight: 700; margin-bottom: 8px;
+}
+#m6 .h6-feat-card p { font-size: 14px; color: var(--h6-text-soft); line-height: 1.7; }
+
+/* Harmony screenshots */
+#m6 .h6-screens {
+  padding: 80px 32px 100px; text-align: center;
+}
+#m6 .h6-screens .h6-tag {
+  font-size: 12px; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--h6-sage); margin-bottom: 16px;
+}
+#m6 .h6-screens h2 {
+  font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 600; margin-bottom: 60px;
+}
+#m6 .h6-screen-row {
+  display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+}
+#m6 .h6-screen-row .phone-frame {
+  max-width: 190px; background: var(--h6-sage-deep); padding: 8px;
+  box-shadow: 0 16px 48px rgba(90,142,94,0.12);
+  transition: transform 0.4s ease;
+}
+#m6 .h6-screen-row .phone-frame:hover { transform: translateY(-8px); }
+#m6 .h6-screen-row .phone-frame img { border-radius: 18px; }
+
+/* Harmony CTA */
+#m6 .h6-cta {
+  padding: 100px 32px; text-align: center;
+  background: var(--h6-sage-pale); position: relative; overflow: hidden;
+}
+#m6 .h6-cta .h6-cta-orb {
+  position: absolute; width: 300px; height: 300px; border-radius: 50%;
+  background: rgba(123,174,127,0.06); pointer-events: none;
+}
+#m6 .h6-cta .h6-cta-orb:first-child { top: -20%; left: -5%; }
+#m6 .h6-cta .h6-cta-orb:nth-child(2) { bottom: -20%; right: -5%; }
+#m6 .h6-cta h2 {
+  font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 600; margin-bottom: 16px; position: relative; z-index: 2;
+}
+#m6 .h6-cta h2 em { font-style: italic; color: var(--h6-sage-deep); }
+#m6 .h6-cta p {
+  color: var(--h6-text-soft); margin-bottom: 36px; font-size: 16px;
+  position: relative; z-index: 2;
+}
+
+#m6 .h6-footer {
+  padding: 32px; text-align: center; font-size: 13px; color: var(--h6-text-soft);
+  border-top: 1px solid var(--h6-sage-light);
+}
+#m6 .h6-footer a { color: var(--h6-sage-deep); }
+
+@media (max-width: 800px) {
+  #m6 .h6-hero-phones .phone-frame { max-width: 140px; }
+  #m6 .h6-hero-phones .phone-frame:nth-child(2) { max-width: 170px; }
+  #m6 .h6-trust { gap: 24px; flex-wrap: wrap; }
+  #m6 .h6-feat-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+  #m6 .h6-screen-row .phone-frame { max-width: 150px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== SWITCHER BAR ===== -->
+<nav id="switcher">
+  <button class="active" data-target="m1">1. Serene</button>
+  <button data-target="m2">2. Botanical</button>
+  <button data-target="m3">3. Fresh</button>
+  <button data-target="m4">4. Herbal</button>
+  <button data-target="m5">5. Meadow</button>
+  <button data-target="m6">6. Harmony</button>
+</nav>
+
+
+<!-- ================================================================
+     MOCKUP 1: SERENE WELLNESS
+     ================================================================ -->
+<div class="mockup active" id="m1">
+
+  <section class="s-hero">
+    <div class="s-hero-content">
+      <div class="s-leaf-icon">
+        <svg viewBox="0 0 48 48" fill="none">
+          <path d="M24 4C14 12 6 22 8 36c2 6 8 8 16 8s14-2 16-8c2-14-6-24-16-32z" fill="#E8F0E9" stroke="#7BAE7F" stroke-width="1.5"/>
+          <path d="M24 12v28M24 20c-4 2-8 6-10 12M24 26c4 2 8 6 10 10" stroke="#7BAE7F" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+      <div class="s-overtitle">Gentle food guidance</div>
+      <h1>Eat with <em>peace of mind</em></h1>
+      <p class="s-sub">Scan any product and understand its FODMAP content instantly. A calm, reliable companion for sensitive digestion.</p>
+      <a href="https://github.com/M4n0x/fodmap-lens/releases/latest/download/app-release.apk" class="s-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Download for Android
+      </a>
+    </div>
+    <div class="s-hero-phone">
+      <div class="phone-frame">
+        <img src="images/05-product-detail.jpg" alt="FODMAP Score">
+      </div>
+    </div>
+  </section>
+
+  <section class="s-trust">
+    <div class="s-trust-item"><div class="s-trust-num">154+</div><div class="s-trust-label">Ingredients analyzed</div></div>
+    <div class="s-trust-item"><div class="s-trust-num">6</div><div class="s-trust-label">FODMAP categories</div></div>
+    <div class="s-trust-item"><div class="s-trust-num">3</div><div class="s-trust-label">Languages</div></div>
+    <div class="s-trust-item"><div class="s-trust-num">100%</div><div class="s-trust-label">Free &amp; open source</div></div>
+  </section>
+
+  <section class="s-features">
+    <div class="s-features-inner">
+      <div class="s-section-tag">How it helps</div>
+      <h2>Simple clarity for every meal</h2>
+      <div class="s-feat-grid">
+        <div class="s-feat-card">
+          <div class="s-feat-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7v10M12 7v10M17 7v10"/></svg>
+          </div>
+          <h3>Scan any barcode</h3>
+          <p>Point your camera at a product in the store and get an instant, easy-to-read FODMAP assessment.</p>
+        </div>
+        <div class="s-feat-card">
+          <div class="s-feat-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+          </div>
+          <h3>Clear traffic-light scores</h3>
+          <p>Green, yellow, or red &mdash; know at a glance whether a food is safe for your sensitive digestion.</p>
+        </div>
+        <div class="s-feat-card">
+          <div class="s-feat-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3>Detailed breakdown</h3>
+          <p>Understand exactly which FODMAP groups are present, so you can make informed choices for your body.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s-screens">
+    <div class="s-section-tag">Inside the app</div>
+    <h2>Designed for calm, daily use</h2>
+    <div class="s-screen-row">
+      <div class="phone-frame"><img src="images/01-scan.jpg" alt="Scan"></div>
+      <div class="phone-frame"><img src="images/05-product-detail.jpg" alt="Score"></div>
+      <div class="phone-frame"><img src="images/06-product-breakdown.jpg" alt="Breakdown"></div>
+      <div class="phone-frame"><img src="images/02-history.jpg" alt="History"></div>
+    </div>
+  </section>
+
+  <section class="s-cta">
+    <h2>Start your journey to <em>easier eating</em></h2>
+    <p>Free, private, and always with you.</p>
+    <a href="https://github.com/M4n0x/fodmap-lens/releases/latest/download/app-release.apk" class="s-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      Download for Android
+    </a>
+  </section>
+
+  <footer class="s-footer">
+    &copy; 2026 M4n0x &middot; <a href="https://github.com/M4n0x/fodmap-lens">View on GitHub</a> &middot; MIT License
+  </footer>
+</div>
+
+
+<!-- ================================================================
+     MOCKUP 2: BOTANICAL GARDEN
+     ================================================================ -->
+<div class="mockup" id="m2">
+
+  <section class="b-hero">
+    <!-- Decorative leaf SVGs -->
+    <svg class="b-leaf-deco b-leaf-1" viewBox="0 0 200 300" fill="none">
+      <path d="M100 10C50 50 10 120 30 220c10 40 40 60 70 70 30-10 60-30 70-70 20-100-20-170-70-210z" fill="#A8E6CF"/>
+      <path d="M100 40v220M100 80c-20 15-40 40-50 80M100 120c20 15 40 40 50 70M100 160c-15 10-30 30-40 50" stroke="#fff" stroke-width="2" opacity="0.3"/>
+    </svg>
+    <svg class="b-leaf-deco b-leaf-2" viewBox="0 0 200 300" fill="none">
+      <path d="M100 10C50 50 10 120 30 220c10 40 40 60 70 70 30-10 60-30 70-70 20-100-20-170-70-210z" fill="#A8E6CF"/>
+      <path d="M100 40v220M100 100c-25 20-45 50-55 90M100 140c25 15 45 45 55 65" stroke="#fff" stroke-width="2" opacity="0.3"/>
+    </svg>
+
+    <div class="b-hero-inner">
+      <div class="b-hero-text">
+        <div class="b-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg>
+          Free &amp; Open Source
+        </div>
+        <h1>Nature&rsquo;s guide to <em>better digestion</em></h1>
+        <p>Fodmap Lens scans any grocery product and reveals its FODMAP content. Built for people who want to eat well and feel well.</p>
+        <a href="https://github.com/M4n0x/fodmap-lens/releases/latest/download/app-release.apk" class="b-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Download for Android
+        </a>
+        <a href="https://github.com/M4n0x/fodmap-lens" class="b-btn-outline">View on GitHub</a>
+      </div>
+      <div class="b-hero-visual">
+        <div class="phone-frame">
+          <img src="images/05-product-detail.jpg" alt="Product Score">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="b-features">
+    <div class="b-features-inner">
+      <div class="b-section-label">How it works</div>
+      <h2>Care for your body, naturally</h2>
+      <div class="b-feat-cards">
+        <div class="b-feat-card">
+          <div class="b-feat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7v10M12 7v10M17 7v10"/></svg>
+          </div>
+          <div>
+            <h3>Scan at the store</h3>
+            <p>Point your camera at any barcode. Ingredients are looked up instantly from a global food database.</p>
+          </div>
+        </div>
+        <div class="b-feat-card">
+          <div class="b-feat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div>
+            <h3>Instant FODMAP score</h3>
+            <p>A clear 0&ndash;100 score with traffic-light colors tells you whether a product is safe for your gut.</p>
+          </div>
+        </div>
+        <div class="b-feat-card">
+          <div class="b-feat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <div>
+            <h3>6 category breakdown</h3>
+            <p>See which FODMAP groups are present: Fructans, GOS, Lactose, Fructose, Sorbitol, and Mannitol.</p>
+          </div>
+        </div>
+        <div class="b-feat-card">
+          <div class="b-feat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2zM3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
+          </div>
+          <div>
+            <h3>Your food diary</h3>
+            <p>Every scan is saved on your device. Review past products anytime &mdash; even without internet.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="b-screens">
+    <svg class="b-leaf-deco b-leaf-bg" viewBox="0 0 200 300" fill="none">
+      <path d="M100 10C50 50 10 120 30 220c10 40 40 60 70 70 30-10 60-30 70-70 20-100-20-170-70-210z" fill="#A8E6CF"/>
+    </svg>
+    <div class="b-screens-inner">
+      <div class="b-section-label">Inside the app</div>
+      <h2>Every screen, designed with care</h2>
+      <div class="b-screen-scroll">
+        <div class="phone-frame"><img src="images/01-scan.jpg" alt="Scan"></div>
+        <div class="phone-frame"><img src="images/05-product-detail.jpg" alt="Score"></div>
+        <div class="phone-frame"><img src="images/06-product-breakdown.jpg" alt="Breakdown"></div>
+        <div class="phone-frame"><img src="images/02-history.jpg" alt="History"></div>
+        <div class="phone-frame"><img src="images/07-search-results.jpg" alt="Search"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="b-cta">
+    <h2>Nourish yourself <em>with confidence</em></h2>
+    <p>Free, open-source, and built with care for your wellbeing.</p>
+    <a href="https://github.com/M4n0x/fodmap-lens/releases/latest/download/app-release.apk" class="b-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      Download for Android
+    </a>
+  </section>
+
+  <footer class="b-footer">
+    &copy; 2026 M4n0x &middot; <a href="https://github.com/M4n0x/fodmap-lens">GitHub</a> &middot; MIT License
+  </footer>
+</div>
+
+
+<!-- ================================================================
+     MOCKUP 3: FRESH MORNING
+     ================================================================ -->
+<div class="mockup" id="m3">
+
+  <section class="f-hero">
+    <div class="f-hero-inner">
+      <div class="f-hero-text">
+        <div class="f-pill">&#x1F331; Your gut health companion</div>
+        <h1>Know what&rsquo;s <span>good for you</span></h1>
+        <p>Scan any product at the grocery store and get instant FODMAP guidance. Simple, fast, and designed for your wellbeing.</p>
+        <div>
+          <a href="https://github.com/M4n0x/fodmap-lens/releases/latest/download/app-release.apk" class="f-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            Download Free
+          </a>
+          <a href="https://github.com/M4n0x/fodmap-lens" class="f-github">
+            View on GitHub &rarr;
+          </a>
+        </div>
+      </div>
+      <div class="f-hero-visual">
+        <div class="f-circle-bg"></div>
+        <div class="phone-frame">
+          <img src="images/05-product-detail.jpg" alt="Product Score">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-benefits">
+    <div class="f-benefit"><div class="f-ben-num">154+</div><div class="f-ben-label">Ingredients</div></div>
+    <div class="f-benefit"><div class="f-ben-num">6</div><div class="f-ben-label">FODMAP groups</div></div>
+    <div class="f-benefit"><div class="f-ben-num">3</div><div class="f-ben-label">Languages</div></div>
+    <div class="f-benefit"><div class="f-ben-num">Free</div><div class="f-ben-label">Forever</div></div>
+  </section>
+
+  <section class="f-features">
+    <div class="f-features-inner">
+      <div class="f-tag">Features</div>
+      <h2>Everything your gut needs to know</h2>
+      <div class="f-feat-grid">
+        <div class="f-feat-card">
+          <div class="f-fc-icon">&#x1F4F7;</div>
+          <h3>Barcode scanning</h3>
+          <p>Point your phone at any product and instantly see its FODMAP profile with a clear safety rating.</p>
+        </div>
+        <div class="f-feat-card">
+          <div class="f-fc-icon">&#x1F7E2;</div>
+          <h3>Traffic-light guidance</h3>
+          <p>Green means go, red means caution. Know at a glance what&rsquo;s safe for your sensitive stomach.</p>
+        </div>
+        <div class="f-feat-card">
+          <div class="f-fc-icon">&#x1F33F;</div>
+          <h3>Full ingredient analysis</h3>
+          <p>See which of the 6 FODMAP categories are present in every ingredient, with clear visual indicators.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-screens">
+    <h2>See it in action</h2>
+    <div class="f-screen-grid">
+      <div class="phone-frame"><img src="images/01-scan.jpg" alt="Scan"></div>
+      <div class="phone-frame"><img src="images/05-product-detail.jpg" alt="Score"></div>
+      <div class="phone-frame"><img src="images/06-product-breakdown.jpg" alt="Breakdown"></div>
+      <div class="phone-frame"><img src="images/02-history.jpg" alt="History"></div>
+      <div class="phone-frame"><img src="images/03-search.jpg" alt="Search"></div>
+    </div>
+  </section>
+
+  <section class="f-cta">
+    <h2>Start eating <span>with confidence</span></h2>
+    <p>Free and open source. Your data stays on your device.</p>
+    <a href="https://github.com/M4n0x/fodmap-lens/releases/latest/download/app-release.apk" class="f-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      Download for Android
+    </a>
+  </section>
+
+  <footer class="f-footer">
+    &copy; 2026 M4n0x &middot; <a href="https://github.com/M4n0x/fodmap-lens">GitHub</a> &middot; MIT License
+  </footer>
+</div>
+
+
+<!-- ================================================================
+     MOCKUP 4: HERBAL APOTHECARY
+     ================================================================ -->
+<div class="mockup" id="m4">
+
+  <section class="h-hero">
+    <div class="h-hero-inner">
+      <div class="h-hero-text">
+        <div class="h-crest">
+          <img src="images/icon.png" alt="Fodmap Lens">
+          <span>Fodmap Lens</span>
+        </div>
+        <h1>Understand what you eat, <em>naturally</em></h1>
+        <p>A thoughtful companion for the low-FODMAP journey. Scan any product, see every ingredient, and make choices that honour your body.</p>
+        <a href="https://github.com/M4n0x/fodmap-lens/releases/latest/download/app-release.apk" class="h-btn">
+          Download for Android
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M7 17l10-10M7 7h10v10"/></svg>
+        </a>
+      </div>
+      <div class="h-hero-visual">
+        <div class="h-phone-wrap">
+          <div class="phone-frame">
+            <img src="images/05-product-detail.jpg" alt="Product Detail">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="h-divider">
+    <div class="h-line"></div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M12 2C8 8 4 14 6 20c1 3 3 3 6 2s5 1 6-2c2-6-2-12-6-18z"/>
+      <path d="M12 6v14M12 10c-2 2-4 5-5 8M12 14c2 2 4 4 5 6"/>
+    </svg>
+    <div class="h-line"></div>
+  </div>
+
+  <section class="h-features">
+    <div class="h-features-inner">
+      <div class="h-section-title">Benefits</div>
+      <h2>Gentle guidance for every meal</h2>
+      <div class="h-feat-list">
+        <div class="h-feat-item">
+          <div class="h-feat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7v10M12 7v10M17 7v10"/></svg>
+          </div>
+          <div>
+            <h3>Scan any product</h3>
+            <p>Point your camera at a barcode in the store. The app looks up the ingredients and analyses each one for FODMAP content.</p>
+          </div>
+        </div>
+        <div class="h-feat-item">
+          <div class="h-feat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+          </div>
+          <div>
+            <h3>Understand at a glance</h3>
+            <p>A simple green, yellow, or red score tells you whether a product is likely safe, moderate, or high in FODMAPs.</p>
+          </div>
+        </div>
+        <div class="h-feat-item">
+          <div class="h-feat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <div>
+            <h3>See the full picture</h3>
+            <p>Each ingredient is mapped to six FODMAP categories, so you know exactly what might affect your digestion.</p>
+          </div>
+        </div>
+        <div class="h-feat-item">
+          <div class="h-feat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2zM3 10h18"/></svg>
+          </div>
+          <div>
+            <h3>Remember everything</h3>
+            <p>Your scan history is saved on your device, so you can review past products at any time &mdash; even offline.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="h-screens">
+    <div class="h-screens-inner">
+      <div class="h-section-title">The App</div>
+      <h2>Crafted with care</h2>
+      <div class="h-screen-row">
+        <div class="phone-frame"><img src="images/01-scan.jpg" alt="Scan"></div>
+        <div class="phone-frame"><img src="images/06-product-breakdown.jpg" alt="Breakdown"></div>
+        <div class="phone-frame"><img src="images/02-history.jpg" alt="History"></div>
+        <div class="phone-frame"><img src="images/07-search-results.jpg" alt="Search"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="h-divider">
+    <div class="h-line"></div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M12 2C8 8 4 14 6 20c1 3 3 3 6 2s5 1 6-2c2-6-2-12-6-18z"/>
+      <path d="M12 6v14"/>
+    </svg>
+    <div class="h-line"></div>
+  </div>
+
+  <section class="h-cta">
+    <h2>Begin eating <em>with intention</em></h2>
+    <p>Free, private, and respectful of your journey.</p>
+    <a href="https://github.com/M4n0x/fodmap-lens/releases/latest/download/app-release.apk" class="h-btn">
+      Download for Android
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M7 17l10-10M7 7h10v10"/></svg>
+    </a>
+  </section>
+
+  <footer class="h-footer">
+    &copy; 2026 M4n0x &middot; <a href="https://github.com/M4n0x/fodmap-lens">View on GitHub</a> &middot; MIT License
+  </footer>
+</div>
+
+
+<!-- ================================================================
+     MOCKUP 5: MEADOW / FLOWING
+     ================================================================ -->
+<div class="mockup" id="m5">
+
+  <section class="w-hero">
+    <div class="w-circle w-c1"></div>
+    <div class="w-circle w-c2"></div>
+    <div class="w-circle w-c3"></div>
+
+    <div class="w-hero-content">
+      <img src="images/icon.png" alt="Fodmap Lens" class="w-icon">
+      <h1>Your path to <span>better digestion</span></h1>
+      <p class="w-sub">Scan groceries, understand FODMAPs, and nourish your body with confidence. Free and open source.</p>
+      <div class="w-btn-group">
+        <a href="https://github.com/M4n0x/fodmap-lens/releases/latest/download/app-release.apk" class="w-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Download Free
+        </a>
+        <a href="https://github.com/M4n0x/fodmap-lens" class="w-btn-ghost">View Source</a>
+      </div>
+    </div>
+    <div class="w-hero-phones">
+      <div class="phone-frame"><img src="images/01-scan.jpg" alt="Scan"></div>
+      <div class="phone-frame"><img src="images/05-product-detail.jpg" alt="Score"></div>
+      <div class="phone-frame"><img src="images/06-product-breakdown.jpg" alt="Breakdown"></div>
+    </div>
+  </section>
+
+  <!-- Wave divider -->
+  <div class="w-wave">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+      <path fill="#FFFFFF" d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z"/>
+    </svg>
+  </div>
+
+  <section class="w-features">
+    <div class="w-features-inner">
+      <div class="w-tag">Why Fodmap Lens</div>
+      <h2>Nourish your body, trust your gut</h2>
+      <div class="w-feat-grid">
+        <div class="w-feat-card">
+          <div class="w-fc-icon">&#x1F33F;</div>
+          <h3>Instant clarity</h3>
+          <p>Scan any barcode and get a simple green, yellow, or red FODMAP rating in seconds.</p>
+        </div>
+        <div class="w-feat-card">
+          <div class="w-fc-icon">&#x1F331;</div>
+          <h3>Deep understanding</h3>
+          <p>See all 6 FODMAP categories broken down per ingredient, so you know exactly what&rsquo;s inside.</p>
+        </div>
+        <div class="w-feat-card">
+          <div class="w-fc-icon">&#x1F343;</div>
+          <h3>Always with you</h3>
+          <p>Your scan history is saved on your phone. Check past products anytime, even without internet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="w-screens">
+    <h2>Explore every screen</h2>
+    <div class="w-screen-row">
+      <div class="phone-frame"><img src="images/01-scan.jpg" alt="Scan"></div>
+      <div class="phone-frame"><img src="images/05-product-detail.jpg" alt="Score"></div>
+      <div class="phone-frame"><img src="images/06-product-breakdown.jpg" alt="Breakdown"></div>
+      <div class="phone-frame"><img src="images/02-history.jpg" alt="History"></div>
+      <div class="phone-frame"><img src="images/03-search.jpg" alt="Search"></div>
+    </div>
+  </section>
+
+  <section class="w-cta">
+    <h2>Start your <span>wellness journey</span></h2>
+    <p>Free, private, and built with care for your wellbeing.</p>
+    <a href="https://github.com/M4n0x/fodmap-lens/releases/latest/download/app-release.apk" class="w-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      Download for Android
+    </a>
+  </section>
+
+  <footer class="w-footer">
+    &copy; 2026 M4n0x &middot; <a href="https://github.com/M4n0x/fodmap-lens">GitHub</a> &middot; MIT License
+  </footer>
+</div>
+
+
+<!-- ================================================================
+     MOCKUP 6: HARMONY
+     ================================================================ -->
+<div class="mockup" id="m6">
+
+  <section class="h6-hero">
+    <div class="h6-orb h6-o1"></div>
+    <div class="h6-orb h6-o2"></div>
+    <div class="h6-orb h6-o3"></div>
+
+    <div class="h6-hero-content">
+      <img src="images/icon.png" alt="Fodmap Lens" style="width:64px;height:64px;border-radius:18px;margin:0 auto 28px;box-shadow:0 6px 24px rgba(90,142,94,0.15);">
+      <div class="h6-overtitle">Gentle food guidance</div>
+      <h1>Eat with <em>peace of mind</em></h1>
+      <p class="h6-sub">Scan any product and understand its FODMAP content instantly. A calm, reliable companion for sensitive digestion.</p>
+      <div>
+        <a href="https://github.com/M4n0x/fodmap-lens/releases/latest/download/app-release.apk" class="h6-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Download for Android
+        </a>
+        <a href="https://github.com/M4n0x/fodmap-lens" class="h6-btn-ghost">View on GitHub</a>
+      </div>
+    </div>
+
+    <div class="h6-hero-phones">
+      <div class="phone-frame"><img src="images/01-scan.jpg" alt="Scan"></div>
+      <div class="phone-frame"><img src="images/05-product-detail.jpg" alt="Score"></div>
+      <div class="phone-frame"><img src="images/06-product-breakdown.jpg" alt="Breakdown"></div>
+    </div>
+  </section>
+
+  <section class="h6-trust">
+    <div class="h6-trust-item"><div class="h6-t-num">154+</div><div class="h6-t-label">Ingredients analyzed</div></div>
+    <div class="h6-trust-item"><div class="h6-t-num">6</div><div class="h6-t-label">FODMAP categories</div></div>
+    <div class="h6-trust-item"><div class="h6-t-num">3</div><div class="h6-t-label">Languages</div></div>
+    <div class="h6-trust-item"><div class="h6-t-num">100%</div><div class="h6-t-label">Free &amp; open source</div></div>
+  </section>
+
+  <section class="h6-features">
+    <div class="h6-features-inner">
+      <div class="h6-tag">How it helps</div>
+      <h2>Simple clarity for every meal</h2>
+      <div class="h6-feat-grid">
+        <div class="h6-feat-card">
+          <div class="h6-fc-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7v10M12 7v10M17 7v10"/></svg>
+          </div>
+          <h3>Scan any barcode</h3>
+          <p>Point your camera at a product in the store and get an instant, easy-to-read FODMAP assessment.</p>
+        </div>
+        <div class="h6-feat-card">
+          <div class="h6-fc-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+          </div>
+          <h3>Clear traffic-light scores</h3>
+          <p>Green, yellow, or red &mdash; know at a glance whether a food is safe for your sensitive digestion.</p>
+        </div>
+        <div class="h6-feat-card">
+          <div class="h6-fc-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3>Detailed breakdown</h3>
+          <p>Understand exactly which FODMAP groups are present, so you can make informed choices for your body.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="h6-screens">
+    <div class="h6-tag">Inside the app</div>
+    <h2>Designed for calm, daily use</h2>
+    <div class="h6-screen-row">
+      <div class="phone-frame"><img src="images/01-scan.jpg" alt="Scan"></div>
+      <div class="phone-frame"><img src="images/05-product-detail.jpg" alt="Score"></div>
+      <div class="phone-frame"><img src="images/06-product-breakdown.jpg" alt="Breakdown"></div>
+      <div class="phone-frame"><img src="images/02-history.jpg" alt="History"></div>
+    </div>
+  </section>
+
+  <section class="h6-cta">
+    <div class="h6-cta-orb"></div>
+    <div class="h6-cta-orb"></div>
+    <h2>Start your journey to <em>easier eating</em></h2>
+    <p>Free, private, and always with you.</p>
+    <a href="https://github.com/M4n0x/fodmap-lens/releases/latest/download/app-release.apk" class="h6-btn" style="position:relative;z-index:2;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      Download for Android
+    </a>
+  </section>
+
+  <footer class="h6-footer">
+    &copy; 2026 M4n0x &middot; <a href="https://github.com/M4n0x/fodmap-lens">View on GitHub</a> &middot; MIT License
+  </footer>
+</div>
+
+
+<!-- ===== SWITCHER LOGIC ===== -->
+<script>
+(function() {
+  const buttons = document.querySelectorAll('#switcher button');
+  const mockups = document.querySelectorAll('.mockup');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.target;
+
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      mockups.forEach(m => {
+        if (m.id === target) {
+          m.style.display = 'block';
+          requestAnimationFrame(() => { m.classList.add('active'); });
+        } else {
+          m.classList.remove('active');
+          m.style.display = 'none';
+        }
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
