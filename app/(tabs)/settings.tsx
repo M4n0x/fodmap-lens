@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, ScrollView, View, Alert, Pressable, Platform } from 'react-native';
+import { StyleSheet, ScrollView, View, Alert, Pressable, Platform, Image, ImageSourcePropType } from 'react-native';
 import { Text, RadioButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { useSQLiteContext } from 'expo-sqlite';
@@ -8,10 +8,16 @@ import { useAppStore } from '@/src/store/appStore';
 import { clearScanHistory } from '@/src/db/queries';
 import { colors, ratingColors, typography, spacing, radius, shadows } from '@/src/theme/design';
 
+const FLAGS: Record<string, ImageSourcePropType> = {
+  en: require('@/assets/images/flags/gb.png'),
+  fr: require('@/assets/images/flags/fr.png'),
+  de: require('@/assets/images/flags/de.png'),
+};
+
 const LANGUAGES = [
-  { code: 'en', label: 'English', flag: '🇬🇧' },
-  { code: 'fr', label: 'Français', flag: '🇫🇷' },
-  { code: 'de', label: 'Deutsch', flag: '🇩🇪' },
+  { code: 'en', label: 'English' },
+  { code: 'fr', label: 'Français' },
+  { code: 'de', label: 'Deutsch' },
 ];
 
 const FODMAP_CATEGORY_KEYS = [
@@ -55,7 +61,10 @@ export default function SettingsScreen() {
         </View>
         <View style={styles.settingInfo}>
           <Text style={styles.settingLabel}>{t('settings.language')}</Text>
-          <Text style={styles.settingValue}>{currentLang?.flag} {currentLang?.label}</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 2 }}>
+            {currentLang && <Image source={FLAGS[currentLang.code]} style={styles.flagIcon} />}
+            <Text style={styles.settingValue}>{currentLang?.label}</Text>
+          </View>
         </View>
         <MaterialCommunityIcons
           name={showLanguages ? 'chevron-up' : 'chevron-down'}
@@ -73,14 +82,18 @@ export default function SettingsScreen() {
             }}
           >
             {LANGUAGES.map((lang) => (
-              <RadioButton.Item
+              <Pressable
                 key={lang.code}
-                label={`${lang.flag}  ${lang.label}`}
-                value={lang.code}
-                style={styles.radioItem}
-                labelStyle={styles.radioLabel}
-                color={colors.sage}
-              />
+                style={[styles.radioItem, { flexDirection: 'row', alignItems: 'center' }]}
+                onPress={() => {
+                  setLanguage(lang.code);
+                  setShowLanguages(false);
+                }}
+              >
+                <Image source={FLAGS[lang.code]} style={styles.flagIcon} />
+                <Text style={[styles.radioLabel, { flex: 1, marginLeft: spacing.sm }]}>{lang.label}</Text>
+                <RadioButton value={lang.code} color={colors.sage} />
+              </Pressable>
             ))}
           </RadioButton.Group>
         </View>
@@ -242,6 +255,13 @@ const styles = StyleSheet.create({
   radioLabel: {
     ...typography.bodyMedium,
     color: colors.textPrimary,
+  },
+  flagIcon: {
+    width: 24,
+    height: 16,
+    borderRadius: 2,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: colors.borderLight,
   },
   guideContainer: {
     marginBottom: spacing.lg,
