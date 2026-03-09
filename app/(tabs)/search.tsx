@@ -137,7 +137,7 @@ export default function SearchScreen() {
   return (
     <FlatList
       data={results}
-      keyExtractor={(item) => item.id.toString()}
+      keyExtractor={(item, index) => `${item.id}-${index}`}
       renderItem={renderItem}
       style={styles.container}
       contentContainerStyle={styles.list}
