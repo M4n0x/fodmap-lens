@@ -209,6 +209,7 @@ const styles = StyleSheet.create({
   sectionLabel: {
     ...typography.labelLarge,
     color: colors.textMuted,
+    marginTop: spacing.md,
     marginBottom: spacing.sm,
     marginLeft: spacing.xs,
   },
@@ -248,6 +249,7 @@ const styles = StyleSheet.create({
     backgroundColor: Platform.OS === 'android' ? colors.cardBg : 'rgba(255,253,252,0.92)',
     borderRadius: 22,
     overflow: 'hidden',
+    marginBottom: spacing.sm,
     ...shadows.sm,
   },
   radioItem: {
