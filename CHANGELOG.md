@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.3.0...fodmap-lens-v1.3.1) (2026-03-10)
+
+
+### Bug Fixes
+
+* correct OFFResponse type for 404 handling ([efb19bd](https://github.com/M4n0x/fodmap-lens/commit/efb19bd9c7bae57aeff8b9f968fc047da3c94ed6))
+
 ## [1.3.0](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.2.1...fodmap-lens-v1.3.0) (2026-03-10)
 
 
