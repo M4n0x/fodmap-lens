@@ -17,16 +17,112 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
-    .policy { padding: 80px 64px; max-width: 780px; margin: 0 auto; }
-    .policy h1 { font-family: 'Fraunces', serif; font-size: 2.4rem; font-weight: 900; margin-bottom: 8px; }
-    .policy .last-updated { font-size: 14px; color: var(--text-soft); margin-bottom: 48px; }
-    .policy h2 { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 700; margin-top: 40px; margin-bottom: 12px; color: var(--emerald); }
-    .policy p, .policy ul { font-size: 16px; line-height: 1.8; color: var(--text-soft); margin-bottom: 16px; }
-    .policy ul { padding-left: 24px; }
-    .policy li { margin-bottom: 8px; }
-    .policy strong { color: var(--text); font-weight: 600; }
-    @media (max-width: 900px) { .policy { padding: 60px 24px; } }
-    @media (max-width: 550px) { .policy { padding: 40px 20px; } .policy h1 { font-size: 1.8rem; } }
+    .policy-hero {
+      background: var(--forest);
+      color: #fff;
+      padding: 80px 64px 60px;
+      text-align: center;
+    }
+    .policy-hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    .policy-hero .last-updated {
+      font-size: 14px;
+      color: var(--text-light);
+    }
+
+    .policy-wrapper {
+      background: var(--cream);
+      padding: 64px;
+    }
+    .policy {
+      max-width: 780px;
+      margin: 0 auto;
+      background: var(--white);
+      border-radius: 24px;
+      border: 1px solid rgba(45,106,79,0.08);
+      padding: 56px 48px;
+      box-shadow: 0 4px 24px rgba(45,106,79,0.06);
+    }
+    .policy h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-top: 40px;
+      margin-bottom: 12px;
+      color: var(--emerald);
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(45,106,79,0.08);
+    }
+    .policy h2:first-child {
+      margin-top: 0;
+    }
+    .policy p, .policy ul {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-soft);
+      margin-bottom: 16px;
+    }
+    .policy ul {
+      padding-left: 24px;
+      list-style: none;
+    }
+    .policy li {
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 20px;
+    }
+    .policy li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--mint);
+    }
+    .policy strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+    .policy a {
+      color: var(--emerald);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .policy a:hover {
+      color: var(--forest);
+    }
+
+    /* Language visibility for policy pages */
+    .policy-hero .last-updated span[data-lang] { display: none; }
+    .policy-hero .last-updated span[data-lang="en"] { display: inline; }
+    body.lang-fr .policy-hero .last-updated span[data-lang] { display: none; }
+    body.lang-fr .policy-hero .last-updated span[data-lang="fr"] { display: inline; }
+    body.lang-de .policy-hero .last-updated span[data-lang] { display: none; }
+    body.lang-de .policy-hero .last-updated span[data-lang="de"] { display: inline; }
+
+    .policy-wrapper .policy[data-lang] { display: none; }
+    .policy-wrapper .policy[data-lang="en"] { display: block; }
+    body.lang-fr .policy-wrapper .policy[data-lang] { display: none; }
+    body.lang-fr .policy-wrapper .policy[data-lang="fr"] { display: block; }
+    body.lang-de .policy-wrapper .policy[data-lang] { display: none; }
+    body.lang-de .policy-wrapper .policy[data-lang="de"] { display: block; }
+
+    @media (max-width: 900px) {
+      .policy-hero { padding: 60px 24px 48px; }
+      .policy-wrapper { padding: 32px 24px; }
+      .policy { padding: 40px 32px; }
+    }
+    @media (max-width: 550px) {
+      .policy-hero { padding: 48px 20px 36px; }
+      .policy-wrapper { padding: 24px 16px; }
+      .policy { padding: 32px 24px; border-radius: 20px; }
+    }
   </style>
 </head>
 <body>
@@ -44,118 +140,126 @@
     </div>
   </header>
 
-  <!-- English -->
-  <div class="policy" data-lang="en">
-    <h1>Privacy Policy</h1>
-    <p class="last-updated">Last updated: March 10, 2026</p>
+  <!-- Hero Banner -->
+  <section class="policy-hero">
+    <h1 data-lang="en">Privacy Policy</h1>
+    <h1 data-lang="fr">Politique de confidentialit&eacute;</h1>
+    <h1 data-lang="de">Datenschutzerkl&auml;rung</h1>
+    <p class="last-updated">
+      <span data-lang="en">Last updated: March 10, 2026</span>
+      <span data-lang="fr">Derni&egrave;re mise &agrave; jour : 10 mars 2026</span>
+      <span data-lang="de">Zuletzt aktualisiert: 10. M&auml;rz 2026</span>
+    </p>
+  </section>
 
-    <p>Fodmap Lens ("the App") is a free, open-source mobile application. Your privacy matters to us. This policy explains what data the App accesses, how it is used, and what is shared.</p>
+  <!-- Policy Content -->
+  <div class="policy-wrapper">
 
-    <h2>Data We Do Not Collect</h2>
-    <p>The App does <strong>not</strong> collect, store, or transmit any personal information. There are:</p>
-    <ul>
-      <li>No user accounts or sign-ups</li>
-      <li>No analytics or tracking</li>
-      <li>No advertising</li>
-      <li>No cookies</li>
-    </ul>
+    <!-- English -->
+    <div class="policy" data-lang="en">
+      <p>Fodmap Lens ("the App") is a free, open-source mobile application. Your privacy matters to us. This policy explains what data the App accesses, how it is used, and what is shared.</p>
 
-    <h2>Camera Access</h2>
-    <p>The App requests camera permission solely to <strong>scan food barcodes</strong>. Camera images are processed on your device in real time and are never stored, uploaded, or shared.</p>
+      <h2>Data We Do Not Collect</h2>
+      <p>The App does <strong>not</strong> collect, store, or transmit any personal information. There are:</p>
+      <ul>
+        <li>No user accounts or sign-ups</li>
+        <li>No analytics or tracking</li>
+        <li>No advertising</li>
+        <li>No cookies</li>
+      </ul>
 
-    <h2>Data Stored on Your Device</h2>
-    <p>Your scan history (products you have scanned and their FODMAP results) is stored <strong>locally on your device</strong> using an on-device database. This data never leaves your phone. You can clear your history at any time from within the App.</p>
+      <h2>Camera Access</h2>
+      <p>The App requests camera permission solely to <strong>scan food barcodes</strong>. Camera images are processed on your device in real time and are never stored, uploaded, or shared.</p>
 
-    <h2>Network Requests</h2>
-    <p>When you scan a barcode, the App sends the <strong>barcode number only</strong> to the <a href="https://world.openfoodfacts.org/" style="color: var(--emerald)">Open Food Facts</a> public API to retrieve product information (name, ingredients, image). No personal data is included in these requests. Open Food Facts has its own <a href="https://world.openfoodfacts.org/privacy" style="color: var(--emerald)">privacy policy</a>.</p>
+      <h2>Data Stored on Your Device</h2>
+      <p>Your scan history (products you have scanned and their FODMAP results) is stored <strong>locally on your device</strong> using an on-device database. This data never leaves your phone. You can clear your history at any time from within the App.</p>
 
-    <h2>Third-Party Services</h2>
-    <p>The App does not integrate any third-party analytics, advertising, or crash-reporting services.</p>
+      <h2>Network Requests</h2>
+      <p>When you scan a barcode, the App sends the <strong>barcode number only</strong> to the <a href="https://world.openfoodfacts.org/">Open Food Facts</a> public API to retrieve product information (name, ingredients, image). No personal data is included in these requests. Open Food Facts has its own <a href="https://world.openfoodfacts.org/privacy">privacy policy</a>.</p>
 
-    <h2>Children's Privacy</h2>
-    <p>The App does not knowingly collect any information from children. The App collects no personal information from anyone.</p>
+      <h2>Third-Party Services</h2>
+      <p>The App does not integrate any third-party analytics, advertising, or crash-reporting services.</p>
 
-    <h2>Changes to This Policy</h2>
-    <p>If this policy is updated, the changes will be posted on this page with a revised date.</p>
+      <h2>Children's Privacy</h2>
+      <p>The App does not knowingly collect any information from children. The App collects no personal information from anyone.</p>
 
-    <h2>Contact</h2>
-    <p>If you have any questions about this Privacy Policy, you can reach us via our <a href="https://github.com/M4n0x/fodmap-lens/issues" style="color: var(--emerald)">GitHub repository</a>.</p>
-  </div>
+      <h2>Changes to This Policy</h2>
+      <p>If this policy is updated, the changes will be posted on this page with a revised date.</p>
 
-  <!-- French -->
-  <div class="policy" data-lang="fr">
-    <h1>Politique de confidentialit&eacute;</h1>
-    <p class="last-updated">Derni&egrave;re mise &agrave; jour : 10 mars 2026</p>
+      <h2>Contact</h2>
+      <p>If you have any questions about this Privacy Policy, you can reach us via our <a href="https://github.com/M4n0x/fodmap-lens/issues">GitHub repository</a>.</p>
+    </div>
 
-    <p>Fodmap Lens (&laquo; l'Application &raquo;) est une application mobile gratuite et open-source. Votre vie priv&eacute;e nous importe. Cette politique explique quelles donn&eacute;es l'Application utilise, comment elles sont trait&eacute;es et ce qui est partag&eacute;.</p>
+    <!-- French -->
+    <div class="policy" data-lang="fr">
+      <p>Fodmap Lens (&laquo; l'Application &raquo;) est une application mobile gratuite et open-source. Votre vie priv&eacute;e nous importe. Cette politique explique quelles donn&eacute;es l'Application utilise, comment elles sont trait&eacute;es et ce qui est partag&eacute;.</p>
 
-    <h2>Donn&eacute;es que nous ne collectons pas</h2>
-    <p>L'Application ne collecte, ne stocke et ne transmet <strong>aucune donn&eacute;e personnelle</strong>. Il n'y a :</p>
-    <ul>
-      <li>Aucun compte utilisateur ni inscription</li>
-      <li>Aucun outil d'analyse ou de suivi</li>
-      <li>Aucune publicit&eacute;</li>
-      <li>Aucun cookie</li>
-    </ul>
+      <h2>Donn&eacute;es que nous ne collectons pas</h2>
+      <p>L'Application ne collecte, ne stocke et ne transmet <strong>aucune donn&eacute;e personnelle</strong>. Il n'y a :</p>
+      <ul>
+        <li>Aucun compte utilisateur ni inscription</li>
+        <li>Aucun outil d'analyse ou de suivi</li>
+        <li>Aucune publicit&eacute;</li>
+        <li>Aucun cookie</li>
+      </ul>
 
-    <h2>Acc&egrave;s &agrave; la cam&eacute;ra</h2>
-    <p>L'Application demande l'acc&egrave;s &agrave; la cam&eacute;ra uniquement pour <strong>scanner les codes-barres alimentaires</strong>. Les images sont trait&eacute;es en temps r&eacute;el sur votre appareil et ne sont jamais stock&eacute;es, envoy&eacute;es ou partag&eacute;es.</p>
+      <h2>Acc&egrave;s &agrave; la cam&eacute;ra</h2>
+      <p>L'Application demande l'acc&egrave;s &agrave; la cam&eacute;ra uniquement pour <strong>scanner les codes-barres alimentaires</strong>. Les images sont trait&eacute;es en temps r&eacute;el sur votre appareil et ne sont jamais stock&eacute;es, envoy&eacute;es ou partag&eacute;es.</p>
 
-    <h2>Donn&eacute;es stock&eacute;es sur votre appareil</h2>
-    <p>Votre historique de scans (produits scann&eacute;s et r&eacute;sultats FODMAP) est stock&eacute; <strong>localement sur votre appareil</strong>. Ces donn&eacute;es ne quittent jamais votre t&eacute;l&eacute;phone. Vous pouvez effacer votre historique &agrave; tout moment depuis l'Application.</p>
+      <h2>Donn&eacute;es stock&eacute;es sur votre appareil</h2>
+      <p>Votre historique de scans (produits scann&eacute;s et r&eacute;sultats FODMAP) est stock&eacute; <strong>localement sur votre appareil</strong>. Ces donn&eacute;es ne quittent jamais votre t&eacute;l&eacute;phone. Vous pouvez effacer votre historique &agrave; tout moment depuis l'Application.</p>
 
-    <h2>Requ&ecirc;tes r&eacute;seau</h2>
-    <p>Lorsque vous scannez un code-barres, l'Application envoie <strong>uniquement le num&eacute;ro du code-barres</strong> &agrave; l'API publique <a href="https://world.openfoodfacts.org/" style="color: var(--emerald)">Open Food Facts</a> pour r&eacute;cup&eacute;rer les informations du produit. Aucune donn&eacute;e personnelle n'est incluse. Open Food Facts dispose de sa propre <a href="https://world.openfoodfacts.org/privacy" style="color: var(--emerald)">politique de confidentialit&eacute;</a>.</p>
+      <h2>Requ&ecirc;tes r&eacute;seau</h2>
+      <p>Lorsque vous scannez un code-barres, l'Application envoie <strong>uniquement le num&eacute;ro du code-barres</strong> &agrave; l'API publique <a href="https://world.openfoodfacts.org/">Open Food Facts</a> pour r&eacute;cup&eacute;rer les informations du produit. Aucune donn&eacute;e personnelle n'est incluse. Open Food Facts dispose de sa propre <a href="https://world.openfoodfacts.org/privacy">politique de confidentialit&eacute;</a>.</p>
 
-    <h2>Services tiers</h2>
-    <p>L'Application n'int&egrave;gre aucun service tiers d'analyse, de publicit&eacute; ou de rapport d'erreurs.</p>
+      <h2>Services tiers</h2>
+      <p>L'Application n'int&egrave;gre aucun service tiers d'analyse, de publicit&eacute; ou de rapport d'erreurs.</p>
 
-    <h2>Confidentialit&eacute; des enfants</h2>
-    <p>L'Application ne collecte sciemment aucune information concernant des enfants. L'Application ne collecte aucune donn&eacute;e personnelle de qui que ce soit.</p>
+      <h2>Confidentialit&eacute; des enfants</h2>
+      <p>L'Application ne collecte sciemment aucune information concernant des enfants. L'Application ne collecte aucune donn&eacute;e personnelle de qui que ce soit.</p>
 
-    <h2>Modifications de cette politique</h2>
-    <p>En cas de mise &agrave; jour, les changements seront publi&eacute;s sur cette page avec une date r&eacute;vis&eacute;e.</p>
+      <h2>Modifications de cette politique</h2>
+      <p>En cas de mise &agrave; jour, les changements seront publi&eacute;s sur cette page avec une date r&eacute;vis&eacute;e.</p>
 
-    <h2>Contact</h2>
-    <p>Pour toute question concernant cette politique, vous pouvez nous contacter via notre <a href="https://github.com/M4n0x/fodmap-lens/issues" style="color: var(--emerald)">d&eacute;p&ocirc;t GitHub</a>.</p>
-  </div>
+      <h2>Contact</h2>
+      <p>Pour toute question concernant cette politique, vous pouvez nous contacter via notre <a href="https://github.com/M4n0x/fodmap-lens/issues">d&eacute;p&ocirc;t GitHub</a>.</p>
+    </div>
 
-  <!-- German -->
-  <div class="policy" data-lang="de">
-    <h1>Datenschutzerkl&auml;rung</h1>
-    <p class="last-updated">Zuletzt aktualisiert: 10. M&auml;rz 2026</p>
+    <!-- German -->
+    <div class="policy" data-lang="de">
+      <p>Fodmap Lens (&bdquo;die App&ldquo;) ist eine kostenlose, quelloffene mobile Anwendung. Ihre Privatsph&auml;re ist uns wichtig. Diese Erkl&auml;rung erl&auml;utert, welche Daten die App nutzt, wie sie verarbeitet werden und was geteilt wird.</p>
 
-    <p>Fodmap Lens (&bdquo;die App&ldquo;) ist eine kostenlose, quelloffene mobile Anwendung. Ihre Privatsph&auml;re ist uns wichtig. Diese Erkl&auml;rung erl&auml;utert, welche Daten die App nutzt, wie sie verarbeitet werden und was geteilt wird.</p>
+      <h2>Daten, die wir nicht erheben</h2>
+      <p>Die App erhebt, speichert und &uuml;bermittelt <strong>keine personenbezogenen Daten</strong>. Es gibt:</p>
+      <ul>
+        <li>Keine Benutzerkonten oder Registrierungen</li>
+        <li>Keine Analyse- oder Tracking-Tools</li>
+        <li>Keine Werbung</li>
+        <li>Keine Cookies</li>
+      </ul>
 
-    <h2>Daten, die wir nicht erheben</h2>
-    <p>Die App erhebt, speichert und &uuml;bermittelt <strong>keine personenbezogenen Daten</strong>. Es gibt:</p>
-    <ul>
-      <li>Keine Benutzerkonten oder Registrierungen</li>
-      <li>Keine Analyse- oder Tracking-Tools</li>
-      <li>Keine Werbung</li>
-      <li>Keine Cookies</li>
-    </ul>
+      <h2>Kamerazugriff</h2>
+      <p>Die App fordert den Kamerazugriff ausschliesslich zum <strong>Scannen von Lebensmittel-Barcodes</strong> an. Kamerabilder werden in Echtzeit auf Ihrem Ger&auml;t verarbeitet und werden niemals gespeichert, hochgeladen oder geteilt.</p>
 
-    <h2>Kamerazugriff</h2>
-    <p>Die App fordert den Kamerazugriff ausschliesslich zum <strong>Scannen von Lebensmittel-Barcodes</strong> an. Kamerabilder werden in Echtzeit auf Ihrem Ger&auml;t verarbeitet und werden niemals gespeichert, hochgeladen oder geteilt.</p>
+      <h2>Auf Ihrem Ger&auml;t gespeicherte Daten</h2>
+      <p>Ihr Scanverlauf (gescannte Produkte und FODMAP-Ergebnisse) wird <strong>lokal auf Ihrem Ger&auml;t</strong> gespeichert. Diese Daten verlassen nie Ihr Telefon. Sie k&ouml;nnen Ihren Verlauf jederzeit in der App l&ouml;schen.</p>
 
-    <h2>Auf Ihrem Ger&auml;t gespeicherte Daten</h2>
-    <p>Ihr Scanverlauf (gescannte Produkte und FODMAP-Ergebnisse) wird <strong>lokal auf Ihrem Ger&auml;t</strong> gespeichert. Diese Daten verlassen nie Ihr Telefon. Sie k&ouml;nnen Ihren Verlauf jederzeit in der App l&ouml;schen.</p>
+      <h2>Netzwerkanfragen</h2>
+      <p>Beim Scannen eines Barcodes sendet die App <strong>nur die Barcodenummer</strong> an die &ouml;ffentliche API von <a href="https://world.openfoodfacts.org/">Open Food Facts</a>, um Produktinformationen abzurufen. Es werden keine personenbezogenen Daten &uuml;bermittelt. Open Food Facts hat eine eigene <a href="https://world.openfoodfacts.org/privacy">Datenschutzerkl&auml;rung</a>.</p>
 
-    <h2>Netzwerkanfragen</h2>
-    <p>Beim Scannen eines Barcodes sendet die App <strong>nur die Barcodenummer</strong> an die &ouml;ffentliche API von <a href="https://world.openfoodfacts.org/" style="color: var(--emerald)">Open Food Facts</a>, um Produktinformationen abzurufen. Es werden keine personenbezogenen Daten &uuml;bermittelt. Open Food Facts hat eine eigene <a href="https://world.openfoodfacts.org/privacy" style="color: var(--emerald)">Datenschutzerkl&auml;rung</a>.</p>
+      <h2>Drittanbieterdienste</h2>
+      <p>Die App integriert keine Analyse-, Werbe- oder Absturzberichterstattungsdienste von Drittanbietern.</p>
 
-    <h2>Drittanbieterdienste</h2>
-    <p>Die App integriert keine Analyse-, Werbe- oder Absturzberichterstattungsdienste von Drittanbietern.</p>
+      <h2>Datenschutz f&uuml;r Kinder</h2>
+      <p>Die App erhebt wissentlich keine Informationen von Kindern. Die App erhebt keinerlei personenbezogene Daten.</p>
 
-    <h2>Datenschutz f&uuml;r Kinder</h2>
-    <p>Die App erhebt wissentlich keine Informationen von Kindern. Die App erhebt keinerlei personenbezogene Daten.</p>
+      <h2>&Auml;nderungen dieser Erkl&auml;rung</h2>
+      <p>Bei Aktualisierungen werden die &Auml;nderungen auf dieser Seite mit einem aktualisierten Datum ver&ouml;ffentlicht.</p>
 
-    <h2>&Auml;nderungen dieser Erkl&auml;rung</h2>
-    <p>Bei Aktualisierungen werden die &Auml;nderungen auf dieser Seite mit einem aktualisierten Datum ver&ouml;ffentlicht.</p>
+      <h2>Kontakt</h2>
+      <p>Bei Fragen zu dieser Datenschutzerkl&auml;rung k&ouml;nnen Sie uns &uuml;ber unser <a href="https://github.com/M4n0x/fodmap-lens/issues">GitHub-Repository</a> erreichen.</p>
+    </div>
 
-    <h2>Kontakt</h2>
-    <p>Bei Fragen zu dieser Datenschutzerkl&auml;rung k&ouml;nnen Sie uns &uuml;ber unser <a href="https://github.com/M4n0x/fodmap-lens/issues" style="color: var(--emerald)">GitHub-Repository</a> erreichen.</p>
   </div>
 
   <!-- Footer -->
