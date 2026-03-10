@@ -253,7 +253,8 @@ const styles = StyleSheet.create({
     ...shadows.sm,
   },
   radioItem: {
-    paddingLeft: spacing.md,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.xs,
   },
   radioLabel: {
     ...typography.bodyMedium,
