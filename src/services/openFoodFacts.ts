@@ -12,6 +12,10 @@ export async function fetchProduct(barcode: string): Promise<OFFResponse> {
     },
   });
 
+  if (response.status === 404) {
+    return { status: 0, product: null } as OFFResponse;
+  }
+
   if (!response.ok) {
     throw new Error(`OFF API error: ${response.status}`);
   }

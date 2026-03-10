@@ -30,6 +30,7 @@
     "title": "Analyse du produit",
     "notFound": "Produit non trouvé",
     "notFoundMessage": "Ce code-barres n'est pas dans la base Open Food Facts.",
+    "backToScan": "Retour au scanner",
     "noIngredients": "Pas de liste d'ingrédients",
     "noIngredientsMessage": "Ce produit a été trouvé mais ne contient pas de liste d'ingrédients dans la base de données. L'analyse FODMAP ne peut pas être effectuée.",
     "typeIngredients": "Saisir les ingrédients manuellement",

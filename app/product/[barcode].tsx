@@ -250,6 +250,13 @@ export default function ProductScreen() {
         <Text style={styles.stateTitle}>{t('product.notFound')}</Text>
         <Text style={styles.stateMessage}>{t('product.notFoundMessage')}</Text>
         <Text style={styles.barcode}>{barcode}</Text>
+        <Pressable
+          style={[styles.primaryAction, { marginTop: spacing.lg }]}
+          onPress={() => router.replace('/(tabs)')}
+        >
+          <MaterialCommunityIcons name="barcode-scan" size={20} color={colors.textOnDark} />
+          <Text style={styles.primaryActionText}>{t('product.backToScan')}</Text>
+        </Pressable>
       </View>
     );
   }

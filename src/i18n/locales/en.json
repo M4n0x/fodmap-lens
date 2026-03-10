@@ -30,6 +30,7 @@
     "title": "Product Analysis",
     "notFound": "Product not found",
     "notFoundMessage": "This barcode is not in the Open Food Facts database.",
+    "backToScan": "Back to scanner",
     "noIngredients": "No ingredient data",
     "noIngredientsMessage": "This product was found but has no ingredient list in the database. The FODMAP analysis cannot be performed.",
     "typeIngredients": "Type ingredients manually",
