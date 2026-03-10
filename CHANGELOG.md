@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.2.0...fodmap-lens-v1.2.1) (2026-03-10)
+
+
+### Bug Fixes
+
+* improve language dropdown padding on Android ([ef6df11](https://github.com/M4n0x/fodmap-lens/commit/ef6df11abbf109e2c7f8d8234461a329630e6d44))
+
 ## [1.2.0](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.1.0...fodmap-lens-v1.2.0) (2026-03-10)
 
 
