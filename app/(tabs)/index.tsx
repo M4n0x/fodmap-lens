@@ -36,6 +36,8 @@ export default function ScanScreen() {
   useFocusEffect(
     useCallback(() => {
       setCameraActive(true);
+      setMode('camera');
+      setManualBarcode('');
       resetScanner();
       return () => {
         setCameraActive(false);
