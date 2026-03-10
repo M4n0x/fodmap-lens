@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.2.1...fodmap-lens-v1.3.0) (2026-03-10)
+
+
+### Features
+
+* add back-to-scanner button on product not found screen ([d0dc9f9](https://github.com/M4n0x/fodmap-lens/commit/d0dc9f95b76830f49b8158969052ee120182a94b))
+
 ## [1.2.1](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.2.0...fodmap-lens-v1.2.1) (2026-03-10)
 
 
