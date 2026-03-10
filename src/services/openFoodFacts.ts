@@ -13,7 +13,7 @@ export async function fetchProduct(barcode: string): Promise<OFFResponse> {
   });
 
   if (response.status === 404) {
-    return { status: 0, product: null } as OFFResponse;
+    return { code: barcode, status: 0, status_verbose: 'product not found', product: undefined };
   }
 
   if (!response.ok) {
