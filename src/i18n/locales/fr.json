@@ -101,7 +101,7 @@
     "title": "Réglages",
     "language": "Langue",
     "about": "À propos",
-    "aboutText": "FODMAP Scanner vous aide à identifier le contenu FODMAP des produits alimentaires en scannant les codes-barres. Les données proviennent d'Open Food Facts et de la recherche FODMAP de l'Université Monash.",
+    "aboutText": "FODMAP Scanner vous aide à identifier le contenu FODMAP des produits alimentaires en scannant les codes-barres. Les données proviennent d'Open Food Facts et de la recherche FODMAP publiée et revue par des pairs.",
     "disclaimer": "Avertissement",
     "disclaimerText": "Cette application est fournie à titre informatif uniquement et ne remplace pas un avis médical ou diététique professionnel. Les tolérances FODMAP varient d'une personne à l'autre. Consultez toujours un diététicien qualifié avant de modifier votre alimentation.",
     "clearHistory": "Effacer l'historique",
@@ -144,8 +144,8 @@
     "step1Text": "Utilisez votre caméra pour scanner les codes-barres des produits de votre supermarché.",
     "step2Title": "Analyse FODMAP",
     "step2Text": "Consultez une analyse détaillée des catégories FODMAP avec des indicateurs tricolores.",
-    "step3Title": "Portions sûres",
-    "step3Text": "Découvrez les portions sûres et modérées pour chaque ingrédient.",
+    "step3Title": "Détails des ingrédients",
+    "step3Text": "Consultez la répartition détaillée des catégories FODMAP pour chaque ingrédient.",
     "getStarted": "Commencer"
   },
   "revamp": {

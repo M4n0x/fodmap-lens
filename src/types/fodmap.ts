@@ -53,8 +53,6 @@ export interface FodmapIngredient {
   sorbitol: FodmapRating;
   mannitol: FodmapRating;
   overall_rating: FodmapRating;
-  safe_serving_g: number | null;
-  moderate_serving_g: number | null;
   notes: string | null;
   source: string;
   confidence: number;

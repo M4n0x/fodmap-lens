@@ -38,7 +38,7 @@ Fodmap Lens helps people following a low FODMAP diet by scanning product barcode
 - **Overall FODMAP score** (0-100) with traffic light rating
 - **Per-category breakdown** across all 6 FODMAP categories (fructans, GOS, lactose, excess fructose, sorbitol, mannitol)
 - **Reintroduction groups** (Oligosaccharides, Disaccharides, Monosaccharides, Polyols)
-- **Safe serving sizes** when available
+- **Ingredient-level FODMAP detail** across all 6 categories
 - **Ingredient-level matching** with confidence indicator
 
 ## Data sources
@@ -46,7 +46,7 @@ Fodmap Lens helps people following a low FODMAP diet by scanning product barcode
 | Source | Usage |
 |--------|-------|
 | [Open Food Facts](https://world.openfoodfacts.org/) | Product data (name, brand, image, ingredients) fetched via API on barcode scan |
-| [Monash University FODMAP Research](https://www.monashfodmap.com/) | Basis for the bundled FODMAP ingredient database (246 ingredients, manually curated) |
+| Published FODMAP research | Basis for the bundled FODMAP ingredient database (246 ingredients, curated from peer-reviewed literature) |
 
 The FODMAP database is shipped locally with the app — no external FODMAP API is called at runtime.
 
@@ -119,7 +119,7 @@ Grab the latest APK from the [Releases](https://github.com/M4n0x/fodmap-lens/rel
 
 ## Disclaimer
 
-This app is provided for **informational purposes only** and does not replace professional medical or dietary advice. FODMAP tolerances vary between individuals. Always consult a qualified dietitian before modifying your diet. Data is based on Monash University research but accuracy is not guaranteed.
+This app is provided for **informational purposes only** and does not replace professional medical or dietary advice. FODMAP tolerances vary between individuals. Always consult a qualified dietitian before modifying your diet. Data is based on published peer-reviewed research but accuracy is not guaranteed.
 
 ## License
 

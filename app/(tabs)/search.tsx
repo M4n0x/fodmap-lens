@@ -112,19 +112,6 @@ export default function SearchScreen() {
         </View>
 
         <View style={styles.cardFooter}>
-          {item.safe_serving_g ? (
-            <View style={styles.footerItem}>
-              <MaterialCommunityIcons name="scale-balance" size={16} color={colors.sage} />
-              <Text style={styles.footerText}>
-                {t('product.safeServing')}: {item.safe_serving_g}g
-              </Text>
-            </View>
-          ) : (
-            <View style={styles.footerItem}>
-              <MaterialCommunityIcons name="information-outline" size={16} color={colors.textMuted} />
-              <Text style={styles.footerText}>{t('revamp.search.noServingThreshold')}</Text>
-            </View>
-          )}
           <View style={styles.footerItem}>
             <MaterialCommunityIcons name="database-outline" size={16} color={colors.textMuted} />
             <Text style={styles.footerText}>{item.source}</Text>

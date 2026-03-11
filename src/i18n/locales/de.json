@@ -101,7 +101,7 @@
     "title": "Einstellungen",
     "language": "Sprache",
     "about": "Über",
-    "aboutText": "FODMAP Scanner hilft Ihnen, den FODMAP-Gehalt von Lebensmitteln durch Scannen von Barcodes zu erkennen. Die Daten stammen von Open Food Facts und der FODMAP-Forschung der Monash University.",
+    "aboutText": "FODMAP Scanner hilft Ihnen, den FODMAP-Gehalt von Lebensmitteln durch Scannen von Barcodes zu erkennen. Die Daten stammen von Open Food Facts und veröffentlichter, begutachteter FODMAP-Forschung.",
     "disclaimer": "Haftungsausschluss",
     "disclaimerText": "Diese App dient nur zu Informationszwecken und ersetzt keine professionelle medizinische oder ernährungswissenschaftliche Beratung. FODMAP-Toleranzen variieren von Person zu Person. Konsultieren Sie immer einen qualifizierten Ernährungsberater, bevor Sie Ihre Ernährung umstellen.",
     "clearHistory": "Scanverlauf löschen",
@@ -144,8 +144,8 @@
     "step1Text": "Verwenden Sie Ihre Kamera, um Barcodes von Produkten aus Ihrem Supermarkt zu scannen.",
     "step2Title": "FODMAP-Analyse",
     "step2Text": "Sehen Sie eine detaillierte Aufschlüsselung der FODMAP-Kategorien mit Ampelfarben.",
-    "step3Title": "Sichere Portionen",
-    "step3Text": "Erfahren Sie die sicheren und moderaten Portionsgrößen für jede Zutat.",
+    "step3Title": "Zutaten-Details",
+    "step3Text": "Sehen Sie die detaillierte FODMAP-Kategorieaufschlüsselung für jede Zutat.",
     "getStarted": "Los geht's"
   },
   "revamp": {

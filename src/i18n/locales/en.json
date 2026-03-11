@@ -101,7 +101,7 @@
     "title": "Settings",
     "language": "Language",
     "about": "About",
-    "aboutText": "FODMAP Scanner helps you identify FODMAP content in food products by scanning barcodes. Data is sourced from Open Food Facts and Monash University FODMAP research.",
+    "aboutText": "FODMAP Scanner helps you identify FODMAP content in food products by scanning barcodes. Data is sourced from Open Food Facts and published peer-reviewed FODMAP research.",
     "disclaimer": "Disclaimer",
     "disclaimerText": "This app is for informational purposes only and is not a substitute for professional medical or dietary advice. FODMAP tolerances vary between individuals. Always consult a qualified dietitian before making dietary changes.",
     "clearHistory": "Clear Scan History",
@@ -144,8 +144,8 @@
     "step1Text": "Use your camera to scan product barcodes from your local supermarket.",
     "step2Title": "Get FODMAP Analysis",
     "step2Text": "See a detailed breakdown of FODMAP categories with traffic light indicators.",
-    "step3Title": "Safe Serving Sizes",
-    "step3Text": "Learn about safe and moderate serving sizes for each ingredient.",
+    "step3Title": "Ingredient Insights",
+    "step3Text": "See detailed FODMAP category breakdowns for each ingredient.",
     "getStarted": "Get Started"
   },
   "revamp": {

@@ -16,7 +16,6 @@ import { CropOverlay } from '@/src/components/ocr/CropOverlay';
 import { FodmapScore } from '@/src/components/product/FodmapScore';
 import { FodmapBreakdown } from '@/src/components/product/FodmapBreakdown';
 import { IngredientList } from '@/src/components/product/IngredientList';
-import { ServingInfo } from '@/src/components/product/ServingInfo';
 import { colors, typography, spacing, radius } from '@/src/theme/design';
 
 type Phase = 'camera' | 'crop' | 'processing' | 'results';
@@ -219,7 +218,6 @@ export default function OcrScanScreen() {
         <IngredientList
           ingredients={analysis.matchedIngredients}
         />
-        <ServingInfo ingredients={analysis.matchedIngredients} />
 
         {extractedText ? (
           <View style={styles.textPreview}>

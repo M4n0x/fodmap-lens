@@ -13,7 +13,6 @@ import { useAppStore } from '@/src/store/appStore';
 import { ProductHeader } from '@/src/components/product/ProductHeader';
 import { FodmapBreakdown } from '@/src/components/product/FodmapBreakdown';
 import { IngredientList } from '@/src/components/product/IngredientList';
-import { ServingInfo } from '@/src/components/product/ServingInfo';
 import { NutrientLevels } from '@/src/components/product/NutrientLevels';
 import { ReintroductionGroups } from '@/src/components/product/ReintroductionGroups';
 import { LoadingState } from '@/src/components/common/LoadingState';
@@ -41,31 +40,6 @@ function getProductName(product: any) {
   );
 }
 
-function getServingHighlight(t: (key: string) => string, analysis: FodmapAnalysis) {
-  const withModerate = analysis.matchedIngredients
-    .filter((item) => item.fodmapIngredient?.moderate_serving_g)
-    .sort((a, b) => (a.fodmapIngredient?.moderate_serving_g ?? 0) - (b.fodmapIngredient?.moderate_serving_g ?? 0));
-
-  if (withModerate[0]?.fodmapIngredient?.moderate_serving_g) {
-    return {
-      icon: 'scale-bathroom',
-      text: `${t('product.moderateServing')}: ${withModerate[0].fodmapIngredient.moderate_serving_g}g`,
-    };
-  }
-
-  const withSafe = analysis.matchedIngredients
-    .filter((item) => item.fodmapIngredient?.safe_serving_g)
-    .sort((a, b) => (a.fodmapIngredient?.safe_serving_g ?? 0) - (b.fodmapIngredient?.safe_serving_g ?? 0));
-
-  if (withSafe[0]?.fodmapIngredient?.safe_serving_g) {
-    return {
-      icon: 'scale-balance',
-      text: `${t('product.safeServing')}: ${withSafe[0].fodmapIngredient.safe_serving_g}g`,
-    };
-  }
-
-  return null;
-}
 
 function ProductInsightHero({
   product,
@@ -85,7 +59,6 @@ function ProductInsightHero({
   const { t } = useTranslation();
   const summary = summaryForAnalysis(t, analysis.overallRating);
   const palette = paletteForRating(analysis.overallRating);
-  const servingHighlight = getServingHighlight(t, analysis);
   const productName = getProductName(product);
   const brand = product.brands || t('revamp.common.dataSourceOff');
   const imageUrl = product.image_front_url || product.image_url;
@@ -120,12 +93,6 @@ function ProductInsightHero({
             <MaterialCommunityIcons name="shield-check-outline" size={16} color={palette.dot} />
             <Text style={[styles.metaChipText, { color: palette.text }]}>{summary.title}</Text>
           </View>
-          {servingHighlight && (
-            <View style={[styles.metaChip, { backgroundColor: palette.bg }]}>
-              <MaterialCommunityIcons name={servingHighlight.icon} size={16} color={palette.dot} />
-              <Text style={[styles.metaChipText, { color: palette.text }]}>{servingHighlight.text}</Text>
-            </View>
-          )}
         </View>
 
         <Text style={styles.insightSummary}>{summary.body}</Text>
@@ -339,7 +306,6 @@ export default function ProductScreen() {
               <FodmapBreakdown analysis={activeAnalysis} embedded />
               <ReintroductionGroups analysis={activeAnalysis} embedded />
               <IngredientList ingredients={activeAnalysis.matchedIngredients} embedded />
-              <ServingInfo ingredients={activeAnalysis.matchedIngredients} embedded />
               <NutrientLevels product={product} embedded />
             </View>
           )}
