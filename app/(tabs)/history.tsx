@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, memo } from 'react';
 import { StyleSheet, View, FlatList, Pressable, Image, Alert } from 'react-native';
 import { Text } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
@@ -11,6 +11,53 @@ import { LoadingState } from '@/src/components/common/LoadingState';
 import type { ScanHistoryItem } from '@/src/types/product';
 import { Platform } from 'react-native';
 import { colors, ratingColors, paletteForRating, typography, spacing, radius, shadows } from '@/src/theme/design';
+
+const HistoryCard = memo(function HistoryCard({
+  item,
+  onPress,
+  onLongPress,
+}: {
+  item: ScanHistoryItem;
+  onPress: () => void;
+  onLongPress: () => void;
+}) {
+  const { t } = useTranslation();
+  const date = new Date(item.scanned_at);
+  const timeStr = date.toLocaleDateString(undefined, {
+    day: 'numeric',
+    month: 'short',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+  const rating = item.overall_rating;
+  const palette = paletteForRating(rating);
+  const imageUrl = item.image_url;
+
+  return (
+    <Pressable style={styles.card} onPress={onPress} onLongPress={onLongPress}>
+      {imageUrl ? (
+        <Image source={{ uri: imageUrl }} style={styles.productImage} resizeMode="cover" />
+      ) : (
+        <View style={[styles.productImagePlaceholder, { backgroundColor: palette.bg }]}>
+          <MaterialCommunityIcons name="food-variant" size={22} color={palette.dot} />
+        </View>
+      )}
+
+      <View style={styles.cardBody}>
+        <Text style={styles.productName} numberOfLines={1}>
+          {item.product_name || item.barcode}
+        </Text>
+        <Text style={styles.cardMeta} numberOfLines={2}>
+          {[item.brand || t('revamp.common.dataSourceOff'), timeStr].join(' · ')}
+        </Text>
+      </View>
+
+      <Text style={[styles.scoreText, { color: palette.dot }]}>
+        {item.overall_score != null ? item.overall_score : '?'}
+      </Text>
+    </Pressable>
+  );
+});
 
 export default function HistoryScreen() {
   const { t } = useTranslation();
@@ -66,59 +113,18 @@ export default function HistoryScreen() {
     );
   }
 
-  const renderItem = ({ item }: { item: ScanHistoryItem }) => {
-    const date = new Date(item.scanned_at);
-    const timeStr = date.toLocaleDateString(undefined, {
-      day: 'numeric',
-      month: 'short',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-    const rating = item.overall_rating;
-    const palette = paletteForRating(rating);
-
-    let imageUrl: string | undefined;
-    if (item.product_data) {
-      try {
-        const pd = JSON.parse(item.product_data);
-        imageUrl = pd.image_front_url || pd.image_url;
-      } catch { /* ignore */ }
-    }
-
-    return (
-      <Pressable
-        style={styles.card}
-        onPress={() =>
-          router.push({
-            pathname: '/product/[barcode]' as any,
-            params: { barcode: item.barcode, source: 'history' },
-          })
-        }
-        onLongPress={() => handleDelete(item)}
-      >
-        {imageUrl ? (
-          <Image source={{ uri: imageUrl }} style={styles.productImage} resizeMode="cover" />
-        ) : (
-          <View style={[styles.productImagePlaceholder, { backgroundColor: palette.bg }]}>
-            <MaterialCommunityIcons name="food-variant" size={22} color={palette.dot} />
-          </View>
-        )}
-
-        <View style={styles.cardBody}>
-          <Text style={styles.productName} numberOfLines={1}>
-            {item.product_name || item.barcode}
-          </Text>
-          <Text style={styles.cardMeta} numberOfLines={2}>
-            {[item.brand || t('revamp.common.dataSourceOff'), timeStr].join(' · ')}
-          </Text>
-        </View>
-
-        <Text style={[styles.scoreText, { color: palette.dot }]}>
-          {item.overall_score != null ? item.overall_score : '?'}
-        </Text>
-      </Pressable>
-    );
-  };
+  const renderItem = useCallback(({ item }: { item: ScanHistoryItem }) => (
+    <HistoryCard
+      item={item}
+      onPress={() =>
+        router.push({
+          pathname: '/product/[barcode]' as any,
+          params: { barcode: item.barcode, source: 'history' },
+        })
+      }
+      onLongPress={() => handleDelete(item)}
+    />
+  ), [handleDelete]);
 
   return (
     <FlatList

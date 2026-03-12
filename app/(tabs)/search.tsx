@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
+import { useState, useCallback, useMemo, useRef, useEffect, memo } from 'react';
 import { StyleSheet, View, FlatList, Pressable, ScrollView, Platform, TextInput } from 'react-native';
 import { Text, Searchbar } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
@@ -15,6 +15,57 @@ type SearchResult = FodmapIngredient & { matched_synonym: string };
 
 const quickTerms = ['garlic', 'lactose', 'honey', 'cashew', 'mushroom', 'apple'];
 
+const SearchResultCard = memo(function SearchResultCard({ item }: { item: SearchResult }) {
+  const { t } = useTranslation();
+  const palette = paletteForRating(item.overall_rating);
+
+  return (
+    <View style={styles.card}>
+      <View style={styles.headerRow}>
+        <View style={styles.cardTitleWrap}>
+          <Text style={styles.name}>{item.matched_synonym}</Text>
+          <Text style={styles.subtleLabel}>{item.canonical_key.replace(/_/g, ' ')}</Text>
+        </View>
+        <View style={[styles.scorePill, { backgroundColor: palette.bg }]}>
+          <TrafficLight
+            rating={item.overall_rating as FodmapRating}
+            size="sm"
+            showBadge
+            label={t(`product.ratings.${item.overall_rating}`)}
+          />
+        </View>
+      </View>
+
+      {item.notes && <Text style={styles.notes}>{item.notes}</Text>}
+
+      <View style={styles.categoryWrap}>
+        {FODMAP_CATEGORIES.map((cat) => {
+          const rating = item[cat] as FodmapRating;
+          if (rating === 'green') return null;
+          return (
+            <View key={cat} style={[styles.categoryChip, { backgroundColor: paletteForRating(rating).bg }]}>
+              <Text style={[styles.categoryText, { color: paletteForRating(rating).text }]}>
+                {t(`product.categories.${cat}`)}
+              </Text>
+            </View>
+          );
+        })}
+      </View>
+
+      <View style={styles.cardFooter}>
+        <View style={styles.footerItem}>
+          <MaterialCommunityIcons name="shield-check-outline" size={16} color={item.confidence >= 0.8 ? colors.sage : item.confidence >= 0.6 ? colors.amber : colors.coral} />
+          <Text style={styles.footerText}>{Math.round(item.confidence * 100)}% {t('search.confidence')}</Text>
+        </View>
+        <View style={styles.footerItem}>
+          <MaterialCommunityIcons name="database-outline" size={16} color={colors.textMuted} />
+          <Text style={styles.footerText}>{item.source}</Text>
+        </View>
+      </View>
+    </View>
+  );
+});
+
 export default function SearchScreen() {
   const { t, i18n } = useTranslation();
   const db = useSQLiteContext();
@@ -30,22 +81,33 @@ export default function SearchScreen() {
     });
   }, []);
 
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const handleSearch = useCallback(
-    async (text: string) => {
+    (text: string) => {
       setQuery(text);
       setActiveGroup(null);
+      if (debounceRef.current) clearTimeout(debounceRef.current);
       if (text.trim().length < 2) {
         setResults([]);
         setHasSearched(false);
         return;
       }
-      const lang = i18n.language.substring(0, 2);
-      const items = await searchIngredients(db, text, lang);
-      setResults(items);
-      setHasSearched(true);
+      debounceRef.current = setTimeout(async () => {
+        const lang = i18n.language.substring(0, 2);
+        const items = await searchIngredients(db, text, lang);
+        setResults(items);
+        setHasSearched(true);
+      }, 300);
     },
     [db, i18n.language]
   );
+
+  useEffect(() => {
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
+  }, []);
 
   const handleGroupFilter = useCallback(
     async (group: FodmapGroupKey) => {
@@ -75,55 +137,9 @@ export default function SearchScreen() {
     return counts;
   }, [results]);
 
-  const renderItem = ({ item }: { item: SearchResult }) => {
-    const palette = paletteForRating(item.overall_rating);
-
-    return (
-      <View style={styles.card}>
-        <View style={styles.headerRow}>
-          <View style={styles.cardTitleWrap}>
-            <Text style={styles.name}>{item.matched_synonym}</Text>
-            <Text style={styles.subtleLabel}>{item.canonical_key.replace(/_/g, ' ')}</Text>
-          </View>
-          <View style={[styles.scorePill, { backgroundColor: palette.bg }]}>
-            <TrafficLight
-              rating={item.overall_rating as FodmapRating}
-              size="sm"
-              showBadge
-              label={t(`product.ratings.${item.overall_rating}`)}
-            />
-          </View>
-        </View>
-
-        {item.notes && <Text style={styles.notes}>{item.notes}</Text>}
-
-        <View style={styles.categoryWrap}>
-          {FODMAP_CATEGORIES.map((cat) => {
-            const rating = item[cat] as FodmapRating;
-            if (rating === 'green') return null;
-            return (
-              <View key={cat} style={[styles.categoryChip, { backgroundColor: paletteForRating(rating).bg }]}>
-                <Text style={[styles.categoryText, { color: paletteForRating(rating).text }]}>
-                  {t(`product.categories.${cat}`)}
-                </Text>
-              </View>
-            );
-          })}
-        </View>
-
-        <View style={styles.cardFooter}>
-          <View style={styles.footerItem}>
-            <MaterialCommunityIcons name="shield-check-outline" size={16} color={item.confidence >= 0.8 ? colors.sage : item.confidence >= 0.6 ? colors.amber : colors.coral} />
-            <Text style={styles.footerText}>{Math.round(item.confidence * 100)}% {t('search.confidence')}</Text>
-          </View>
-          <View style={styles.footerItem}>
-            <MaterialCommunityIcons name="database-outline" size={16} color={colors.textMuted} />
-            <Text style={styles.footerText}>{item.source}</Text>
-          </View>
-        </View>
-      </View>
-    );
-  };
+  const renderItem = useCallback(({ item }: { item: SearchResult }) => (
+    <SearchResultCard item={item} />
+  ), []);
 
   return (
     <FlatList

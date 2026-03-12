@@ -172,7 +172,12 @@ export async function getScanHistory(
   limit = 50
 ): Promise<ScanHistoryItem[]> {
   return db.getAllAsync(
-    'SELECT * FROM scan_history ORDER BY scanned_at DESC LIMIT ?',
+    `SELECT *,
+       COALESCE(
+         json_extract(product_data, '$.image_front_url'),
+         json_extract(product_data, '$.image_url')
+       ) AS image_url
+     FROM scan_history ORDER BY scanned_at DESC LIMIT ?`,
     [limit]
   );
 }
