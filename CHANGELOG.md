@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.2](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.3.1...fodmap-lens-v1.3.2) (2026-03-11)
+
+
+### Bug Fixes
+
+* remove Monash-attributed data and serving sizes for legal compliance ([f14b067](https://github.com/M4n0x/fodmap-lens/commit/f14b0671bd922632432b71b55520bf58b9793c40))
+
 ## [1.3.1](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.3.0...fodmap-lens-v1.3.1) (2026-03-10)
 
 
