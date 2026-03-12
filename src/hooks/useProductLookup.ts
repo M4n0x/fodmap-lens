@@ -13,7 +13,7 @@ export function useProductLookup(barcode: string) {
       return null;
     },
     enabled: !!barcode,
-    staleTime: 1000 * 60 * 60 * 24,
+    staleTime: Infinity,
     retry: 2,
   });
 }
