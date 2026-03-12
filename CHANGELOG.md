@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.4.1...fodmap-lens-v1.4.2) (2026-03-12)
+
+
+### Performance Improvements
+
+* debounce search, memoize lists, parallelize matching ([10a0e18](https://github.com/M4n0x/fodmap-lens/commit/10a0e188a28a7468c63b8959c1c5f63032f0aeab))
+
 ## [1.4.1](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.4.0...fodmap-lens-v1.4.1) (2026-03-12)
 
 
