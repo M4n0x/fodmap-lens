@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.4.0](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.3.2...fodmap-lens-v1.4.0) (2026-03-12)
+
+
+### Features
+
+* enriched FODMAP knowledge base (277 ingredients) ([7f665a0](https://github.com/M4n0x/fodmap-lens/commit/7f665a0c058e3c60901ae568cf745b9f5b9a4fd6))
+* enriched FODMAP knowledge base (277 ingredients) ([1598669](https://github.com/M4n0x/fodmap-lens/commit/1598669e8bc8c9991700ca4e3a56005d28579a2d))
+
+
+### Bug Fixes
+
+* add missing serving fields to test fixtures ([d5c9967](https://github.com/M4n0x/fodmap-lens/commit/d5c9967819b1186d30f0ffd5a538f71eb6ed4941))
+* clean up leftover serving fields from test fixtures ([0620da6](https://github.com/M4n0x/fodmap-lens/commit/0620da6b1b648c45a0c0c41f7b1047c1c36ee621))
+* remove unused serving fields from FodmapIngredient type ([2546be3](https://github.com/M4n0x/fodmap-lens/commit/2546be37b3e8e796fa78a507a9f21a81814a37e1))
+
 ## [1.3.2](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.3.1...fodmap-lens-v1.3.2) (2026-03-11)
 
 
