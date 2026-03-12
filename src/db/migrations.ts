@@ -2,7 +2,7 @@ import type { SQLiteDatabase } from 'expo-sqlite';
 import { createTables } from './schema';
 import { seedFodmapData } from './fodmapData';
 
-const CURRENT_VERSION = 7;
+const CURRENT_VERSION = 8;
 
 export async function initializeDatabase(db: SQLiteDatabase): Promise<void> {
   await db.execAsync('PRAGMA journal_mode = WAL;');
@@ -58,6 +58,13 @@ export async function initializeDatabase(db: SQLiteDatabase): Promise<void> {
   if (version < 7) {
     await db.execAsync(`ALTER TABLE fodmap_ingredients ADD COLUMN source TEXT DEFAULT 'literature';`).catch(() => {});
     await db.execAsync(`ALTER TABLE fodmap_ingredients ADD COLUMN confidence REAL DEFAULT 1.0;`).catch(() => {});
+    await db.execAsync('DELETE FROM ingredient_synonyms;');
+    await db.execAsync('DELETE FROM fodmap_ingredients;');
+    await seedFodmapData(db);
+  }
+
+  // v8: re-seed with corrected FR/DE notes (accents, trailing sentences, deduplication)
+  if (version < 8) {
     await db.execAsync('DELETE FROM ingredient_synonyms;');
     await db.execAsync('DELETE FROM fodmap_ingredients;');
     await seedFodmapData(db);
