@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { PaperProvider, MD3LightTheme } from 'react-native-paper';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { SQLiteProvider } from 'expo-sqlite';
 import { initializeDatabase } from '@/src/db/migrations';
+import { queryClient } from '@/src/queryClient';
 import { colors } from '@/src/theme/design';
 import { useAppStore } from '@/src/store/appStore';
 import '@/src/i18n';
@@ -16,15 +17,6 @@ export const unstable_settings = {
 };
 
 SplashScreen.preventAutoHideAsync();
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 1000 * 60 * 60 * 24, // 24 hours
-      retry: 2,
-    },
-  },
-});
 
 const theme = {
   ...MD3LightTheme,

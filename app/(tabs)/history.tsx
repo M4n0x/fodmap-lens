@@ -7,6 +7,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { useSQLiteContext } from 'expo-sqlite';
 import { useScanHistory } from '@/src/hooks/useScanHistory';
 import { deleteScanHistoryItem } from '@/src/db/queries';
+import { queryClient } from '@/src/queryClient';
 import { LoadingState } from '@/src/components/common/LoadingState';
 import type { ScanHistoryItem } from '@/src/types/product';
 import { Platform } from 'react-native';
@@ -97,18 +98,29 @@ export default function HistoryScreen() {
     return counts;
   }, [history]);
 
+  const handlePress = useCallback((item: ScanHistoryItem) => {
+    // Seed the query cache with stored product data so useProductLookup gets an instant hit
+    if (item.product_data) {
+      try {
+        const product = JSON.parse(item.product_data);
+        queryClient.setQueryData(['product', item.barcode], product);
+      } catch {
+        // Ignore parse errors — will fall back to API fetch
+      }
+    }
+    router.push({
+      pathname: '/product/[barcode]' as any,
+      params: { barcode: item.barcode, source: 'history' },
+    });
+  }, []);
+
   const renderItem = useCallback(({ item }: { item: ScanHistoryItem }) => (
     <HistoryCard
       item={item}
-      onPress={() =>
-        router.push({
-          pathname: '/product/[barcode]' as any,
-          params: { barcode: item.barcode, source: 'history' },
-        })
-      }
+      onPress={() => handlePress(item)}
       onLongPress={() => handleDelete(item)}
     />
-  ), [handleDelete]);
+  ), [handleDelete, handlePress]);
 
   if (isLoading) {
     return <LoadingState />;
