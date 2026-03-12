@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.4.3](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.4.2...fodmap-lens-v1.4.3) (2026-03-12)
+
+
+### Bug Fixes
+
+* move useCallback above early returns in History screen ([a274301](https://github.com/M4n0x/fodmap-lens/commit/a2743012beec2999e36ea43f3ff6d16a62a3b294))
+
+
+### Performance Improvements
+
+* seed query cache from history to skip redundant API fetch ([3ceacca](https://github.com/M4n0x/fodmap-lens/commit/3ceacca0d34d934dd14b04dc5ed23422be06e462))
+
 ## [1.4.2](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.4.1...fodmap-lens-v1.4.2) (2026-03-12)
 
 
