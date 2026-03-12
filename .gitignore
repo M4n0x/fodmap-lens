@@ -44,3 +44,6 @@ keystore.properties
 # generated native folders
 /ios
 /android
+
+# fodmap pipeline
+scripts/fodmap-pipeline/data/progress.json

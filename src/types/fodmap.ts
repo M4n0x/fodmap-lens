@@ -56,6 +56,8 @@ export interface FodmapIngredient {
   notes: string | null;
   source: string;
   confidence: number;
+  safe_serving_g: number | null;
+  moderate_serving_g: number | null;
   updated_at: string;
 }
 

@@ -2,7 +2,7 @@ import type { SQLiteDatabase } from 'expo-sqlite';
 import { createTables } from './schema';
 import { seedFodmapData } from './fodmapData';
 
-const CURRENT_VERSION = 5;
+const CURRENT_VERSION = 7;
 
 export async function initializeDatabase(db: SQLiteDatabase): Promise<void> {
   await db.execAsync('PRAGMA journal_mode = WAL;');
@@ -43,6 +43,21 @@ export async function initializeDatabase(db: SQLiteDatabase): Promise<void> {
   if (version < 5) {
     await db.execAsync(`ALTER TABLE fodmap_ingredients ADD COLUMN notes_fr TEXT;`).catch(() => {});
     await db.execAsync(`ALTER TABLE fodmap_ingredients ADD COLUMN notes_de TEXT;`).catch(() => {});
+    await db.execAsync('DELETE FROM ingredient_synonyms;');
+    await db.execAsync('DELETE FROM fodmap_ingredients;');
+    await seedFodmapData(db);
+  }
+
+  // v6: add serving size columns
+  if (version < 6) {
+    await db.execAsync(`ALTER TABLE fodmap_ingredients ADD COLUMN safe_serving_g REAL;`).catch(() => {});
+    await db.execAsync(`ALTER TABLE fodmap_ingredients ADD COLUMN moderate_serving_g REAL;`).catch(() => {});
+  }
+
+  // v7: add source/confidence columns and re-seed with enriched KB data (277 ingredients)
+  if (version < 7) {
+    await db.execAsync(`ALTER TABLE fodmap_ingredients ADD COLUMN source TEXT DEFAULT 'literature';`).catch(() => {});
+    await db.execAsync(`ALTER TABLE fodmap_ingredients ADD COLUMN confidence REAL DEFAULT 1.0;`).catch(() => {});
     await db.execAsync('DELETE FROM ingredient_synonyms;');
     await db.execAsync('DELETE FROM fodmap_ingredients;');
     await seedFodmapData(db);
