@@ -55,9 +55,14 @@
     "zustand": "^5.0.11"
   },
   "devDependencies": {
+    "@anthropic-ai/sdk": "^0.78.0",
     "@types/react": "~19.2.2",
     "@types/react-native-vector-icons": "^6.4.18",
-    "typescript": "~5.9.2"
+    "ts-jest": "^29.4.6",
+    "tsx": "^4.21.0",
+    "typescript": "~5.9.2",
+    "zod": "^4.3.6",
+    "zod-to-json-schema": "^3.25.1"
   },
   "private": true
 }

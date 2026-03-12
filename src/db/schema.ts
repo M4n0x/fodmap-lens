@@ -12,6 +12,8 @@ CREATE TABLE IF NOT EXISTS fodmap_ingredients (
   sorbitol TEXT NOT NULL DEFAULT 'green',
   mannitol TEXT NOT NULL DEFAULT 'green',
   overall_rating TEXT NOT NULL DEFAULT 'green',
+  safe_serving_g REAL,
+  moderate_serving_g REAL,
   notes TEXT,
   notes_fr TEXT,
   notes_de TEXT,

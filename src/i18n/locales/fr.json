@@ -95,7 +95,8 @@
     "groupO": "Oligo",
     "groupD": "Disacch",
     "groupM": "Mono",
-    "groupP": "Polyols"
+    "groupP": "Polyols",
+    "confidence": "confiance"
   },
   "settings": {
     "title": "Réglages",
