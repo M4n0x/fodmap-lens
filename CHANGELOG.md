@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.4.0...fodmap-lens-v1.4.1) (2026-03-12)
+
+
+### Bug Fixes
+
+* correct FR/DE note consistency and missing French accents in FODMAP knowledge base ([576b320](https://github.com/M4n0x/fodmap-lens/commit/576b3200937aa957ddb329ea585209198ecb7a1e))
+
 ## [1.4.0](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.3.2...fodmap-lens-v1.4.0) (2026-03-12)
 
 
