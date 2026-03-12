@@ -51,5 +51,6 @@ export interface ScanHistoryItem {
   scanned_at: string;
   product_data: string | null;
   analysis_data: string | null;
+  image_url?: string | null;
 }
 

@@ -119,14 +119,13 @@ export async function matchIngredient(
 
 /**
  * Match all parsed ingredients against the FODMAP database.
+ * Pre-warms the Fuse index once, then matches all ingredients in parallel.
  */
 export async function matchAllIngredients(
   db: SQLiteDatabase,
   ingredients: ParsedIngredient[]
 ): Promise<MatchedIngredient[]> {
-  const results: MatchedIngredient[] = [];
-  for (const ingredient of ingredients) {
-    results.push(await matchIngredient(db, ingredient));
-  }
-  return results;
+  // Pre-warm Fuse index so parallel matchIngredient calls don't each trigger it
+  await getFuse(db);
+  return Promise.all(ingredients.map((ingredient) => matchIngredient(db, ingredient)));
 }
