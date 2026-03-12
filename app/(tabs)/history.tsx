@@ -97,6 +97,19 @@ export default function HistoryScreen() {
     return counts;
   }, [history]);
 
+  const renderItem = useCallback(({ item }: { item: ScanHistoryItem }) => (
+    <HistoryCard
+      item={item}
+      onPress={() =>
+        router.push({
+          pathname: '/product/[barcode]' as any,
+          params: { barcode: item.barcode, source: 'history' },
+        })
+      }
+      onLongPress={() => handleDelete(item)}
+    />
+  ), [handleDelete]);
+
   if (isLoading) {
     return <LoadingState />;
   }
@@ -112,19 +125,6 @@ export default function HistoryScreen() {
       </View>
     );
   }
-
-  const renderItem = useCallback(({ item }: { item: ScanHistoryItem }) => (
-    <HistoryCard
-      item={item}
-      onPress={() =>
-        router.push({
-          pathname: '/product/[barcode]' as any,
-          params: { barcode: item.barcode, source: 'history' },
-        })
-      }
-      onLongPress={() => handleDelete(item)}
-    />
-  ), [handleDelete]);
 
   return (
     <FlatList
