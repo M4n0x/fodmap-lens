@@ -9,7 +9,6 @@ export function useScanHistory() {
   const [isLoading, setIsLoading] = useState(true);
 
   const refresh = useCallback(async () => {
-    setIsLoading(true);
     try {
       const items = await getScanHistory(db);
       setHistory(items);
