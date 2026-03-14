@@ -13,7 +13,6 @@ import { colors, ratingColors, paletteForRating, typography, spacing, radius, sh
 
 type SearchResult = FodmapIngredient & { matched_synonym: string };
 
-const quickTerms = ['garlic', 'lactose', 'honey', 'cashew', 'mushroom', 'apple'];
 
 const SearchResultCard = memo(function SearchResultCard({ item }: { item: SearchResult }) {
   const { t } = useTranslation();
@@ -187,28 +186,19 @@ export default function SearchScreen() {
             <>
               <Text style={styles.sectionLabel}>{t('revamp.search.quickStarts')}</Text>
               <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.quickTermRow}>
-                {quickTerms.map((term) => (
+                {(t('revamp.search.quickTerms', { returnObjects: true }) as string[]).map((term) => (
                   <Pressable key={term} style={styles.quickTerm} onPress={() => void handleSearch(term)}>
                     <Text style={styles.quickTermText}>{term}</Text>
                   </Pressable>
                 ))}
               </ScrollView>
 
-              <View style={styles.helperRow}>
-                <View style={[styles.helperCard, styles.helperCardCoral]}>
-                  <View style={styles.helperIconWrap}>
-                    <MaterialCommunityIcons name="traffic-light-outline" size={18} color={colors.coral} />
-                  </View>
-                  <Text style={styles.helperTitle}>{t('revamp.search.helperTriggerTitle')}</Text>
-                  <Text style={styles.helperText}>{t('revamp.search.helperTriggerText')}</Text>
+              <View style={styles.prompt}>
+                <View style={styles.promptIconCircle}>
+                  <MaterialCommunityIcons name="magnify" size={32} color={colors.sage} />
                 </View>
-                <View style={[styles.helperCard, styles.helperCardSage]}>
-                  <View style={styles.helperIconWrap}>
-                    <MaterialCommunityIcons name="scale-balance" size={18} color={colors.sage} />
-                  </View>
-                  <Text style={styles.helperTitle}>{t('revamp.search.helperServingTitle')}</Text>
-                  <Text style={styles.helperText}>{t('revamp.search.helperServingText')}</Text>
-                </View>
+                <Text style={styles.promptTitle}>{t('revamp.search.emptyTitle')}</Text>
+                <Text style={styles.promptMessage}>{t('revamp.search.emptyMessage')}</Text>
               </View>
             </>
           )}
@@ -303,6 +293,33 @@ const styles = StyleSheet.create({
   groupChipTextActive: {
     color: colors.cardBg,
   },
+  prompt: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: spacing.xl,
+    backgroundColor: colors.cardBg,
+    borderRadius: 22,
+    marginTop: spacing.sm,
+  },
+  promptIconCircle: {
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    backgroundColor: colors.sageMuted,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: spacing.md,
+  },
+  promptTitle: {
+    ...typography.titleMedium,
+    color: colors.textPrimary,
+    marginBottom: spacing.xs,
+  },
+  promptMessage: {
+    ...typography.bodyMedium,
+    color: colors.textSecondary,
+    textAlign: 'center',
+  },
   quickTermRow: {
     gap: spacing.sm,
     paddingBottom: spacing.sm,
@@ -320,43 +337,6 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
     fontWeight: '500',
     textTransform: 'capitalize',
-  },
-  helperRow: {
-    gap: spacing.sm,
-    marginTop: spacing.sm,
-    marginBottom: spacing.lg,
-  },
-  helperCard: {
-    backgroundColor: Platform.OS === 'android' ? colors.cardBg : 'rgba(255,253,252,0.92)',
-    borderRadius: 22,
-    padding: spacing.lg,
-    ...shadows.sm,
-  },
-  helperCardCoral: {
-    borderTopWidth: 3,
-    borderTopColor: colors.coralLight,
-  },
-  helperCardSage: {
-    borderTopWidth: 3,
-    borderTopColor: colors.sageLight,
-  },
-  helperIconWrap: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    backgroundColor: colors.warmWhite,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  helperTitle: {
-    ...typography.titleMedium,
-    color: colors.textPrimary,
-    marginTop: spacing.sm,
-    marginBottom: spacing.xs,
-  },
-  helperText: {
-    ...typography.bodyMedium,
-    color: colors.textSecondary,
   },
   resultsHeader: {
     marginTop: spacing.sm,
