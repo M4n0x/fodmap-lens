@@ -3,9 +3,10 @@ import Fuse from 'fuse.js';
 import type { FodmapIngredient, MatchedIngredient } from '@/src/types/fodmap';
 import type { ParsedIngredient } from './ingredientParser';
 import { getSearchKeyFromOffId } from './ingredientParser';
-import { decomposeCompound } from '@/src/utils/normalize';
+import { decomposeCompound, normalizeText } from '@/src/utils/normalize';
 import {
   findIngredientBySynonym,
+  findIngredientByCanonicalKey,
   findIngredientByPartialMatch,
   getAllSynonyms,
 } from '@/src/db/queries';
@@ -128,4 +129,46 @@ export async function matchAllIngredients(
   // Pre-warm Fuse index so parallel matchIngredient calls don't each trigger it
   await getFuse(db);
   return Promise.all(ingredients.map((ingredient) => matchIngredient(db, ingredient)));
+}
+
+export interface IngredientSuggestion {
+  synonym: string;
+  fodmapIngredient: FodmapIngredient;
+}
+
+const SUGGESTION_SCORE_THRESHOLD = 0.5;
+
+export async function getSuggestions(
+  text: string,
+  db: SQLiteDatabase,
+  limit: number = 3
+): Promise<IngredientSuggestion[]> {
+  if (!text || !db) return [];
+
+  const fuse = await getFuse(db);
+  const searchKey = normalizeText(text);
+  if (!searchKey) return [];
+
+  const fuseResults = fuse.search(searchKey, { limit: 10 });
+
+  const suggestions: IngredientSuggestion[] = [];
+  const seenIngredientIds = new Set<number>();
+
+  for (const result of fuseResults) {
+    if (result.score === undefined || result.score > SUGGESTION_SCORE_THRESHOLD)
+      continue;
+
+    const entry = result.item as SynonymEntry;
+    if (seenIngredientIds.has(entry.fodmap_ingredient_id)) continue;
+
+    const fodmapIngredient = await findIngredientByCanonicalKey(db, entry.canonical_key);
+    if (!fodmapIngredient) continue;
+
+    seenIngredientIds.add(entry.fodmap_ingredient_id);
+    suggestions.push({ synonym: entry.synonym, fodmapIngredient });
+
+    if (suggestions.length >= limit) break;
+  }
+
+  return suggestions;
 }
