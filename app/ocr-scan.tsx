@@ -61,9 +61,9 @@ export default function OcrScanScreen() {
       try {
         const photo = await cameraRef.current.takePictureAsync();
         if (photo?.uri) {
-          // Normalize EXIF orientation into pixels so the image isn't rotated
-          const normalized = await ImageManipulator.manipulateAsync(photo.uri, []);
-          handleImageCaptured(normalized.uri, normalized.width, normalized.height);
+          // Get image dimensions
+          const size = await ImageManipulator.manipulateAsync(photo.uri, []);
+          handleImageCaptured(photo.uri, size.width, size.height);
           return;
         }
       } catch (err) {
@@ -79,9 +79,7 @@ export default function OcrScanScreen() {
       });
       if (!result.canceled && result.assets?.[0]) {
         const asset = result.assets[0];
-        // Normalize EXIF orientation into pixels
-        const normalized = await ImageManipulator.manipulateAsync(asset.uri, []);
-        handleImageCaptured(normalized.uri, normalized.width, normalized.height);
+        handleImageCaptured(asset.uri, asset.width, asset.height);
         return;
       }
     } catch (err) {
@@ -100,9 +98,7 @@ export default function OcrScanScreen() {
       });
       if (!result.canceled && result.assets?.[0]) {
         const asset = result.assets[0];
-        // Normalize EXIF orientation into pixels
-        const normalized = await ImageManipulator.manipulateAsync(asset.uri, []);
-        handleImageCaptured(normalized.uri, normalized.width, normalized.height);
+        handleImageCaptured(asset.uri, asset.width, asset.height);
         return;
       }
     } catch (err) {
