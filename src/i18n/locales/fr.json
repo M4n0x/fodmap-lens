@@ -137,7 +137,18 @@
     "adjustCrop": "Ajuster la zone",
     "done": "Terminer",
     "noTextFound": "Aucun texte trouvé",
-    "noTextMessage": "Impossible de lire le texte de l'image. Réessayez avec un meilleur éclairage et assurez-vous que la liste d'ingrédients est bien visible."
+    "noTextMessage": "Impossible de lire le texte de l'image. Réessayez avec un meilleur éclairage et assurez-vous que la liste d'ingrédients est bien visible.",
+    "confirmTitle": "Confirmer les ingrédients",
+    "confirmFound": "{{count}} trouvés",
+    "confirmBtn": "Confirmer",
+    "rescanBtn": "Rescanner",
+    "deleteIngredient": "Supprimer",
+    "keepAsIs": "Garder tel quel",
+    "precheckFailed": "Cela ne ressemble pas à une liste d'ingrédients. Essayez de scanner la section des ingrédients de l'étiquette.",
+    "useAnyway": "Utiliser quand même",
+    "allUnknown": "Nous n'avons reconnu aucun de ces ingrédients. Essayez de rescanner ou de les saisir manuellement.",
+    "unknownCount_one": "{{count}} ingrédient absent de notre base",
+    "unknownCount_other": "{{count}} ingrédients absents de notre base"
   },
   "onboarding": {
     "welcome": "Bienvenue sur FODMAP Scanner",

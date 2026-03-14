@@ -137,7 +137,18 @@
     "adjustCrop": "Adjust area",
     "done": "Done",
     "noTextFound": "No text found",
-    "noTextMessage": "Could not read any text from the image. Try again with better lighting and make sure the ingredient list is clearly visible."
+    "noTextMessage": "Could not read any text from the image. Try again with better lighting and make sure the ingredient list is clearly visible.",
+    "confirmTitle": "Confirm Ingredients",
+    "confirmFound": "{{count}} found",
+    "confirmBtn": "Confirm",
+    "rescanBtn": "Rescan",
+    "deleteIngredient": "Delete",
+    "keepAsIs": "Keep as-is",
+    "precheckFailed": "This doesn't look like an ingredient list. Try scanning the ingredients section of the label.",
+    "useAnyway": "Use anyway",
+    "allUnknown": "We couldn't recognize any of these ingredients. Try rescanning or entering them manually.",
+    "unknownCount_one": "{{count}} ingredient not in our database",
+    "unknownCount_other": "{{count}} ingredients not in our database"
   },
   "onboarding": {
     "welcome": "Welcome to FODMAP Scanner",
