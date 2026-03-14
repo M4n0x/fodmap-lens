@@ -18,11 +18,27 @@ import { IngredientConfirmSheet } from '@/src/components/product/IngredientConfi
 import { colors, typography, spacing, radius } from '@/src/theme/design';
 
 type Phase = 'camera' | 'crop' | 'processing' | 'confirm';
+type CapturedSource = 'camera' | 'systemCamera' | 'library';
 
 interface CapturedImage {
   uri: string;
   width: number;
   height: number;
+}
+
+function getExifRotation(exif?: Record<string, any> | null) {
+  const orientation = exif?.Orientation ?? exif?.orientation;
+
+  switch (orientation) {
+    case 3:
+      return 180;
+    case 6:
+      return 90;
+    case 8:
+      return 270;
+    default:
+      return 0;
+  }
 }
 
 export default function OcrScanScreen() {
@@ -52,6 +68,34 @@ export default function OcrScanScreen() {
     busyRef.current = false;
   }, []);
 
+  const prepareCapturedImage = useCallback(async (
+    uri: string,
+    fallbackWidth: number,
+    fallbackHeight: number,
+    exif?: Record<string, any> | null,
+    source: CapturedSource = 'camera'
+  ) => {
+    try {
+      const rotationFromExif = getExifRotation(exif);
+      const shouldForcePortrait = rotationFromExif === 0
+        && source !== 'library'
+        && fallbackWidth > fallbackHeight;
+      const rotate = rotationFromExif || (shouldForcePortrait ? 90 : 0);
+      const actions = rotate ? [{ rotate }] : [];
+
+      const normalized = await ImageManipulator.manipulateAsync(
+        uri,
+        actions,
+        { compress: 0.9, format: ImageManipulator.SaveFormat.JPEG }
+      );
+
+      handleImageCaptured(normalized.uri, normalized.width, normalized.height);
+    } catch (err) {
+      console.warn('Image normalization failed, using original image:', err);
+      handleImageCaptured(uri, fallbackWidth, fallbackHeight);
+    }
+  }, [handleImageCaptured]);
+
   const handleCapture = useCallback(async () => {
     if (busyRef.current) return;
     busyRef.current = true;
@@ -59,11 +103,9 @@ export default function OcrScanScreen() {
     // Try CameraView capture first
     if (cameraReady && cameraRef.current) {
       try {
-        const photo = await cameraRef.current.takePictureAsync();
+        const photo = await cameraRef.current.takePictureAsync({ exif: true });
         if (photo?.uri) {
-          // Get image dimensions
-          const size = await ImageManipulator.manipulateAsync(photo.uri, []);
-          handleImageCaptured(photo.uri, size.width, size.height);
+          await prepareCapturedImage(photo.uri, photo.width, photo.height, photo.exif, 'camera');
           return;
         }
       } catch (err) {
@@ -75,18 +117,19 @@ export default function OcrScanScreen() {
     try {
       const result = await ImagePicker.launchCameraAsync({
         mediaTypes: ['images'],
+        exif: true,
         quality: 0.8,
       });
       if (!result.canceled && result.assets?.[0]) {
         const asset = result.assets[0];
-        handleImageCaptured(asset.uri, asset.width, asset.height);
+        await prepareCapturedImage(asset.uri, asset.width, asset.height, asset.exif, 'systemCamera');
         return;
       }
     } catch (err) {
       console.warn('ImagePicker fallback failed:', err);
     }
     busyRef.current = false;
-  }, [cameraReady, handleImageCaptured]);
+  }, [cameraReady, prepareCapturedImage]);
 
   const handlePickImage = useCallback(async () => {
     if (busyRef.current) return;
@@ -94,18 +137,19 @@ export default function OcrScanScreen() {
     try {
       const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ['images'],
+        exif: true,
         quality: 0.8,
       });
       if (!result.canceled && result.assets?.[0]) {
         const asset = result.assets[0];
-        handleImageCaptured(asset.uri, asset.width, asset.height);
+        await prepareCapturedImage(asset.uri, asset.width, asset.height, asset.exif, 'library');
         return;
       }
     } catch (err) {
       console.warn('Gallery pick failed:', err);
     }
     busyRef.current = false;
-  }, [handleImageCaptured]);
+  }, [prepareCapturedImage]);
 
   const handleCropConfirm = useCallback(async (cropRegion: {
     originX: number;
