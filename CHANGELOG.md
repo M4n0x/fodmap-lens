@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.5.0](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.4.3...fodmap-lens-v1.5.0) (2026-03-14)
+
+
+### Features
+
+* add getSuggestions for fuzzy ingredient lookup ([f609027](https://github.com/M4n0x/fodmap-lens/commit/f609027ae43a1b0dda401f5d657629a5675f116e))
+* add i18n keys for OCR ingredient confirmation (EN/FR/DE) ([afab4c9](https://github.com/M4n0x/fodmap-lens/commit/afab4c94a37956ad88ea836d68c689291eb7eab0))
+* add ingredient confirmation for manual input and unknown count indicator ([dd2a482](https://github.com/M4n0x/fodmap-lens/commit/dd2a48273265498952d22b22bb8bff53469994f1))
+* add IngredientConfirmSheet component for OCR confirmation ([af5694c](https://github.com/M4n0x/fodmap-lens/commit/af5694c716d704e87073529d5c7a81b74aa43da8))
+* add OCR pre-check validator for ingredient text ([087e792](https://github.com/M4n0x/fodmap-lens/commit/087e7926a194670db5dcd393146af23fc835c371))
+* integrate pre-check gate and confirmation sheet into OCR flow ([1661701](https://github.com/M4n0x/fodmap-lens/commit/166170123381c19ea69b91e921c8ff6c4c728764))
+
+
+### Bug Fixes
+
+* bump migration to v8 so FR/DE note corrections from 576b320 apply to existing users ([65a31cb](https://github.com/M4n0x/fodmap-lens/commit/65a31cb6e5e1af7af93ca49a91de6ddce525a9bf))
+* preserve History scroll position when navigating back from product detail ([427fd72](https://github.com/M4n0x/fodmap-lens/commit/427fd72cdc048acfa7de2b4132455b5b89158500))
+
 ## [1.4.3](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.4.2...fodmap-lens-v1.4.3) (2026-03-12)
 
 
