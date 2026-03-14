@@ -3,7 +3,7 @@
  * Handles multi-language labels (EN, FR, DE, IT, ES, NL).
  */
 
-const INGREDIENT_KEYWORDS = [
+export const INGREDIENT_KEYWORDS = [
   'ingredients',
   'ingredient',
   'zutaten',
