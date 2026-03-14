@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { ScrollView, StyleSheet, View, Pressable, Image, TextInput, ActivityIndicator, KeyboardAvoidingView, Platform, Alert } from 'react-native';
-import { Text } from 'react-native-paper';
+import { Text, Icon } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useLocalSearchParams, router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
@@ -15,9 +15,10 @@ import { FodmapBreakdown } from '@/src/components/product/FodmapBreakdown';
 import { IngredientList } from '@/src/components/product/IngredientList';
 import { NutrientLevels } from '@/src/components/product/NutrientLevels';
 import { ReintroductionGroups } from '@/src/components/product/ReintroductionGroups';
+import { IngredientConfirmSheet } from '@/src/components/product/IngredientConfirmSheet';
 import { LoadingState } from '@/src/components/common/LoadingState';
 import { ErrorState } from '@/src/components/common/ErrorState';
-import type { FodmapAnalysis, FodmapRating } from '@/src/types/fodmap';
+import type { FodmapAnalysis, FodmapRating, MatchedIngredient } from '@/src/types/fodmap';
 import { colors, ratingColors, paletteForRating, typography, spacing, radius, shadows } from '@/src/theme/design';
 
 function summaryForAnalysis(t: (key: string) => string, rating: FodmapRating) {
@@ -136,7 +137,13 @@ export default function ProductScreen() {
   const activeAnalysis = ocrAnalysis ?? analysis;
   const [showManualInput, setShowManualInput] = useState(false);
   const [manualText, setManualText] = useState('');
-  const { analyze: analyzeText, isAnalyzing: isManualAnalyzing } = useOcrAnalysis();
+  const {
+    pendingIngredients,
+    isParsing: isManualAnalyzing,
+    parseOnly,
+    scoreConfirmed,
+  } = useOcrAnalysis();
+  const [showConfirmSheet, setShowConfirmSheet] = useState(false);
   const handleRescan = useCallback(() => {
     Alert.alert(
       t('product.rescanTitle'),
@@ -158,15 +165,28 @@ export default function ProductScreen() {
 
   const handleManualSubmit = useCallback(async () => {
     if (!manualText.trim() || !barcode) return;
-    const result = await analyzeText(manualText);
-    if (result) {
+    await parseOnly(manualText);
+    setShowConfirmSheet(true);
+  }, [manualText, barcode, parseOnly]);
+
+  const handleManualConfirm = useCallback(
+    (editedIngredients: MatchedIngredient[]) => {
+      if (!barcode) return;
+      const result = scoreConfirmed(editedIngredients);
       setOcrResult(barcode, result);
-      const analysisJson = JSON.stringify(result);
-      updateScanHistoryOcr(db, barcode, result.overallScore, result.overallRating, analysisJson).catch(() => {});
+      updateScanHistoryOcr(
+        db,
+        barcode,
+        result.overallScore,
+        result.overallRating,
+        JSON.stringify(result)
+      ).catch(() => {});
+      setShowConfirmSheet(false);
       setShowManualInput(false);
       setManualText('');
-    }
-  }, [manualText, barcode, analyzeText, setOcrResult, db]);
+    },
+    [barcode, db, scoreConfirmed, setOcrResult]
+  );
 
   // Restore persisted OCR/manual analysis when navigating from history
   useEffect(() => {
@@ -304,6 +324,19 @@ export default function ProductScreen() {
                 onRescan={handleRescan}
               />
               <FodmapBreakdown analysis={activeAnalysis} embedded />
+              {(() => {
+                const unknowns = activeAnalysis.matchedIngredients.filter(
+                  (m) => m.matchType === 'unknown'
+                ).length;
+                return unknowns > 0 ? (
+                  <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 4, paddingVertical: 8 }}>
+                    <Icon source="information-outline" size={14} color={colors.textMuted} />
+                    <Text variant="bodySmall" style={{ color: colors.textMuted }}>
+                      {t('ocr.unknownCount', { count: unknowns })}
+                    </Text>
+                  </View>
+                ) : null;
+              })()}
               <ReintroductionGroups analysis={activeAnalysis} embedded />
               <IngredientList ingredients={activeAnalysis.matchedIngredients} embedded />
               <NutrientLevels product={product} embedded />
@@ -316,6 +349,16 @@ export default function ProductScreen() {
         <MaterialCommunityIcons name="information-outline" size={16} color={colors.amberDark} />
         <Text style={styles.disclaimer}>{t('product.disclaimer')}</Text>
       </View>
+
+      {showConfirmSheet && pendingIngredients && (
+        <IngredientConfirmSheet
+          key={pendingIngredients.map(i => i.name).join(',')}
+          visible={showConfirmSheet}
+          ingredients={pendingIngredients}
+          onConfirm={handleManualConfirm}
+          onRescan={() => setShowConfirmSheet(false)}
+        />
+      )}
     </ScrollView>
   );
 }
