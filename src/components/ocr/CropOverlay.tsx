@@ -304,6 +304,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: spacing.sm,
     paddingVertical: spacing.sm + 4,
+    paddingHorizontal: spacing.md,
     borderRadius: radius.md,
     borderWidth: 1.5,
     borderColor: colors.sage,
@@ -311,6 +312,7 @@ const styles = StyleSheet.create({
   retakeBtnText: {
     ...typography.titleMedium,
     color: colors.sage,
+    flexShrink: 1,
   },
   scanBtn: {
     flex: 1,
@@ -319,11 +321,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: spacing.sm,
     paddingVertical: spacing.sm + 4,
+    paddingHorizontal: spacing.md,
     borderRadius: radius.md,
     backgroundColor: colors.sage,
   },
   scanBtnText: {
     ...typography.titleMedium,
     color: colors.textOnDark,
+    flexShrink: 1,
   },
 });
