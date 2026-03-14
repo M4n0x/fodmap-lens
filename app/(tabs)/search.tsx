@@ -56,10 +56,6 @@ const SearchResultCard = memo(function SearchResultCard({ item }: { item: Search
           <MaterialCommunityIcons name="shield-check-outline" size={16} color={item.confidence >= 0.8 ? colors.sage : item.confidence >= 0.6 ? colors.amber : colors.coral} />
           <Text style={styles.footerText}>{Math.round(item.confidence * 100)}% {t('search.confidence')}</Text>
         </View>
-        <View style={styles.footerItem}>
-          <MaterialCommunityIcons name="database-outline" size={16} color={colors.textMuted} />
-          <Text style={styles.footerText}>{item.source}</Text>
-        </View>
       </View>
     </View>
   );
