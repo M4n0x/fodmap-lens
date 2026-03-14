@@ -1,6 +1,6 @@
 import { useRef, useState, useCallback } from 'react';
-import { StyleSheet, View, Pressable, ScrollView, ActivityIndicator, Image as RNImage } from 'react-native';
-import { Text } from 'react-native-paper';
+import { StyleSheet, View, Pressable, ActivityIndicator } from 'react-native';
+import { Text, Button } from 'react-native-paper';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import * as ImageManipulator from 'expo-image-manipulator';
@@ -12,13 +12,12 @@ import { useSQLiteContext } from 'expo-sqlite';
 import { useOcrAnalysis } from '@/src/hooks/useOcrAnalysis';
 import { updateScanHistoryOcr } from '@/src/db/queries';
 import { useAppStore } from '@/src/store/appStore';
+import { validateOcrText } from '@/src/utils/ocrValidator';
 import { CropOverlay } from '@/src/components/ocr/CropOverlay';
-import { FodmapScore } from '@/src/components/product/FodmapScore';
-import { FodmapBreakdown } from '@/src/components/product/FodmapBreakdown';
-import { IngredientList } from '@/src/components/product/IngredientList';
+import { IngredientConfirmSheet } from '@/src/components/product/IngredientConfirmSheet';
 import { colors, typography, spacing, radius } from '@/src/theme/design';
 
-type Phase = 'camera' | 'crop' | 'processing' | 'results';
+type Phase = 'camera' | 'crop' | 'processing' | 'confirm';
 
 interface CapturedImage {
   uri: string;
@@ -37,7 +36,15 @@ export default function OcrScanScreen() {
   const [cameraReady, setCameraReady] = useState(false);
   const [capturedImage, setCapturedImage] = useState<CapturedImage | null>(null);
   const busyRef = useRef(false);
-  const { analysis, isAnalyzing, error, extractedText, analyze, reset } = useOcrAnalysis();
+  const {
+    pendingIngredients,
+    isParsing,
+    parseOnly,
+    scoreConfirmed,
+    reset,
+  } = useOcrAnalysis();
+  const [precheckFailed, setPrecheckFailed] = useState(false);
+  const rawOcrTextRef = useRef<string>('');
 
   const handleImageCaptured = useCallback((uri: string, width: number, height: number) => {
     setCapturedImage({ uri, width, height });
@@ -109,54 +116,45 @@ export default function OcrScanScreen() {
     if (!capturedImage) return;
     setPhase('processing');
     try {
-      // Crop the image
       const cropped = await ImageManipulator.manipulateAsync(
         capturedImage.uri,
         [{ crop: cropRegion }],
         { compress: 0.9, format: ImageManipulator.SaveFormat.JPEG }
       );
 
-      // Run OCR on cropped image
       const result = await TextRecognition.recognize(cropped.uri);
       const text = result.text?.trim() ?? '';
 
       if (!text) {
-        // No text found — go back to crop to try again
         setPhase('crop');
         return;
       }
 
-      await analyze(text);
-      setPhase('results');
+      // Store raw text for "Use anyway" button
+      rawOcrTextRef.current = text;
+
+      // Pre-check gate
+      const validation = validateOcrText(text);
+      if (!validation.valid) {
+        setPrecheckFailed(true);
+        setPhase('confirm');
+        return;
+      }
+
+      setPrecheckFailed(false);
+      await parseOnly(text);
+      setPhase('confirm');
     } catch (err: any) {
       console.warn('OCR error:', err);
       setPhase('crop');
     }
-  }, [capturedImage, analyze]);
-
-  const handleSaveAndGoBack = useCallback(async () => {
-    if (barcode && analysis) {
-      setOcrResult(barcode, analysis);
-      try {
-        const analysisJson = JSON.stringify(analysis);
-        await updateScanHistoryOcr(db, barcode, analysis.overallScore, analysis.overallRating, analysisJson);
-      } catch (err) {
-        console.error('Failed to update scan history:', err);
-      }
-    }
-    router.back();
-  }, [barcode, analysis, db, setOcrResult]);
+  }, [capturedImage, parseOnly]);
 
   const handleRetake = useCallback(() => {
     reset();
     setCapturedImage(null);
     setCameraReady(false);
     setPhase('camera');
-  }, [reset]);
-
-  const handleBackToCrop = useCallback(() => {
-    reset();
-    setPhase('crop');
   }, [reset]);
 
   // Permission
@@ -177,7 +175,7 @@ export default function OcrScanScreen() {
   }
 
   // Processing
-  if (phase === 'processing' || isAnalyzing) {
+  if (phase === 'processing' || isParsing) {
     return (
       <View style={styles.centered}>
         <ActivityIndicator size="large" color={colors.sage} />
@@ -201,62 +199,70 @@ export default function OcrScanScreen() {
     );
   }
 
-  // Results
-  if (phase === 'results' && analysis) {
-    return (
-      <ScrollView style={styles.container} contentContainerStyle={styles.resultsContent}>
-        <View style={styles.ocrHeader}>
-          <View style={styles.ocrIconCircle}>
-            <MaterialCommunityIcons name="text-recognition" size={28} color={colors.sage} />
+  // Confirm phase
+  if (phase === 'confirm') {
+    if (precheckFailed) {
+      return (
+        <View style={styles.centered}>
+          <View style={styles.errorIcon}>
+            <MaterialCommunityIcons name="text-box-remove-outline" size={36} color={colors.amber} />
           </View>
-          <Text style={styles.ocrTitle}>{t('ocr.resultsTitle')}</Text>
-          <Text style={styles.ocrSubtitle}>{t('ocr.resultsSubtitle')}</Text>
+          <Text style={styles.errorTitle}>{t('ocr.precheckFailed')}</Text>
+          <View style={[styles.buttonRow, { paddingHorizontal: spacing.xl }]}>
+            <Button
+              mode="outlined"
+              onPress={() => {
+                reset();
+                setPrecheckFailed(false);
+                setPhase('camera');
+              }}
+            >
+              {t('ocr.rescanBtn')}
+            </Button>
+            <Button
+              mode="contained"
+              onPress={async () => {
+                setPrecheckFailed(false);
+                setPhase('processing');
+                await parseOnly(rawOcrTextRef.current);
+                setPhase('confirm');
+              }}
+            >
+              {t('ocr.useAnyway')}
+            </Button>
+          </View>
         </View>
+      );
+    }
 
-        <FodmapScore score={analysis.overallScore} rating={analysis.overallRating} />
-        <FodmapBreakdown analysis={analysis} />
-        <IngredientList
-          ingredients={analysis.matchedIngredients}
+    if (pendingIngredients) {
+      return (
+        <IngredientConfirmSheet
+          visible={true}
+          ingredients={pendingIngredients}
+          onConfirm={(editedIngredients) => {
+            if (!barcode) return;
+            const result = scoreConfirmed(editedIngredients);
+            setOcrResult(barcode, result);
+            updateScanHistoryOcr(
+              db,
+              barcode,
+              result.overallScore,
+              result.overallRating,
+              JSON.stringify(result)
+            ).catch(() => {});
+            router.back();
+          }}
+          onRescan={() => {
+            reset();
+            setPrecheckFailed(false);
+            setPhase('camera');
+          }}
         />
+      );
+    }
 
-        {extractedText ? (
-          <View style={styles.textPreview}>
-            <Text style={styles.textPreviewLabel}>{t('ocr.recognizedText')}</Text>
-            <Text style={styles.textPreviewContent} numberOfLines={6}>
-              {extractedText}
-            </Text>
-          </View>
-        ) : null}
-
-        <View style={styles.buttonRow}>
-          <Pressable style={styles.retakeButton} onPress={handleBackToCrop}>
-            <MaterialCommunityIcons name="crop" size={20} color={colors.sage} />
-            <Text style={styles.retakeText}>{t('ocr.adjustCrop')}</Text>
-          </Pressable>
-          <Pressable style={styles.doneButton} onPress={handleSaveAndGoBack}>
-            <MaterialCommunityIcons name="check" size={20} color={colors.textOnDark} />
-            <Text style={styles.doneText}>{t('ocr.done')}</Text>
-          </Pressable>
-        </View>
-      </ScrollView>
-    );
-  }
-
-  // Error result
-  if (phase === 'results' && error) {
-    return (
-      <View style={styles.centered}>
-        <View style={styles.errorIcon}>
-          <MaterialCommunityIcons name="text-box-remove-outline" size={36} color={colors.amber} />
-        </View>
-        <Text style={styles.errorTitle}>{t('ocr.noTextFound')}</Text>
-        <Text style={styles.errorMessage}>{t('ocr.noTextMessage')}</Text>
-        <Pressable style={[styles.primaryBtn, { marginTop: spacing.lg }]} onPress={handleBackToCrop}>
-          <MaterialCommunityIcons name="crop" size={20} color={colors.textOnDark} />
-          <Text style={styles.primaryBtnText}>{t('ocr.adjustCrop')}</Text>
-        </Pressable>
-      </View>
-    );
+    return null;
   }
 
   // Camera
@@ -305,8 +311,6 @@ const CORNER_SIZE = 24;
 const CORNER_THICKNESS = 3;
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.cream },
-  resultsContent: { paddingBottom: 40 },
   centered: {
     flex: 1, alignItems: 'center', justifyContent: 'center',
     padding: spacing.xl, backgroundColor: colors.cream,
@@ -375,40 +379,14 @@ const styles = StyleSheet.create({
     borderRadius: radius.full, backgroundColor: 'rgba(255,255,255,0.15)',
   },
   galleryText: { ...typography.bodySmall, color: 'rgba(255,255,255,0.8)' },
-  // Results
-  ocrHeader: { alignItems: 'center', paddingVertical: spacing.lg, paddingHorizontal: spacing.md },
-  ocrIconCircle: {
-    width: 56, height: 56, borderRadius: 28, backgroundColor: colors.sageMuted,
-    alignItems: 'center', justifyContent: 'center', marginBottom: spacing.sm,
-  },
-  ocrTitle: { ...typography.titleLarge, color: colors.textPrimary, marginBottom: spacing.xs },
-  ocrSubtitle: { ...typography.bodyMedium, color: colors.textSecondary, textAlign: 'center' },
-  textPreview: {
-    marginHorizontal: spacing.md, marginVertical: spacing.md,
-    backgroundColor: colors.warmWhite, borderRadius: radius.md, padding: spacing.md,
-  },
-  textPreviewLabel: { ...typography.labelLarge, color: colors.textMuted, marginBottom: spacing.sm },
-  textPreviewContent: { ...typography.bodySmall, color: colors.textSecondary, lineHeight: 18 },
+  // Confirm
   buttonRow: {
     flexDirection: 'row', gap: spacing.md,
     paddingHorizontal: spacing.md, paddingVertical: spacing.lg,
   },
-  retakeButton: {
-    flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
-    gap: spacing.sm, paddingVertical: spacing.sm + 4, borderRadius: radius.md,
-    borderWidth: 1.5, borderColor: colors.sage,
-  },
-  retakeText: { ...typography.titleMedium, color: colors.sage },
-  doneButton: {
-    flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
-    gap: spacing.sm, paddingVertical: spacing.sm + 4, borderRadius: radius.md,
-    backgroundColor: colors.sage,
-  },
-  doneText: { ...typography.titleMedium, color: colors.textOnDark },
   errorIcon: {
     width: 72, height: 72, borderRadius: 36, backgroundColor: colors.amberMuted,
     alignItems: 'center', justifyContent: 'center', marginBottom: spacing.lg,
   },
   errorTitle: { ...typography.titleLarge, color: colors.textPrimary, marginBottom: spacing.sm },
-  errorMessage: { ...typography.bodyMedium, color: colors.textSecondary, textAlign: 'center' },
 });
