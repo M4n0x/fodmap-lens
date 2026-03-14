@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.5.1](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.5.0...fodmap-lens-v1.5.1) (2026-03-14)
+
+
+### Bug Fixes
+
+* add primary_name to search query return types ([791684f](https://github.com/M4n0x/fodmap-lens/commit/791684f51097ff65f4e0b704705ed4dd8774a280))
+* apply EXIF rotation before OCR cropping ([93c2f30](https://github.com/M4n0x/fodmap-lens/commit/93c2f30671cb72b9dc0e7c6502275011a55f0267))
+* normalize EXIF orientation on captured photos to prevent rotation ([69ea4a6](https://github.com/M4n0x/fodmap-lens/commit/69ea4a63ede75cef1611ad158fdcb2e5052c48ce))
+* prevent button text overflow in CropOverlay ([f553559](https://github.com/M4n0x/fodmap-lens/commit/f553559adbe917250dc314ab666f183158f9f5d4))
+* remove database source label from search result cards ([a3d7156](https://github.com/M4n0x/fodmap-lens/commit/a3d7156dfbd34c7fe26fe415264ac2d428c0354d))
+* translate search result subtitle and clear state on tab switch ([bbbb374](https://github.com/M4n0x/fodmap-lens/commit/bbbb37455cdf3957772993b9cf7b576c561a9efb))
+
 ## [1.5.0](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.4.3...fodmap-lens-v1.5.0) (2026-03-14)
 
 
