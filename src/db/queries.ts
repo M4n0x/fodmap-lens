@@ -86,9 +86,11 @@ export async function searchIngredients(
 
   if (language) {
     return db.getAllAsync(
-      `SELECT DISTINCT fi.*, ${notesExpr} as notes, s.synonym as matched_synonym
+      `SELECT DISTINCT fi.*, ${notesExpr} as notes, s.synonym as matched_synonym,
+         COALESCE(p.synonym, fi.canonical_key) as primary_name
        FROM ingredient_synonyms s
        JOIN fodmap_ingredients fi ON fi.id = s.fodmap_ingredient_id
+       LEFT JOIN ingredient_synonyms p ON p.fodmap_ingredient_id = fi.id AND p.language = ? AND p.is_primary = 1
        WHERE s.synonym LIKE ? AND s.language = ?
        ORDER BY
          CASE WHEN s.synonym = ? THEN 0
@@ -96,12 +98,13 @@ export async function searchIngredients(
               ELSE 2 END,
          fi.canonical_key
        LIMIT 50`,
-      [`%${normalizedQuery}%`, language, normalizedQuery, `${normalizedQuery}%`]
+      [language, `%${normalizedQuery}%`, language, normalizedQuery, `${normalizedQuery}%`]
     );
   }
 
   return db.getAllAsync(
-    `SELECT DISTINCT fi.*, s.synonym as matched_synonym
+    `SELECT DISTINCT fi.*, s.synonym as matched_synonym,
+       fi.canonical_key as primary_name
      FROM ingredient_synonyms s
      JOIN fodmap_ingredients fi ON fi.id = s.fodmap_ingredient_id
      WHERE s.synonym LIKE ?
@@ -135,7 +138,8 @@ export async function searchIngredientsByGroup(
   const params = language ? [language] : [];
 
   return db.getAllAsync(
-    `SELECT DISTINCT fi.*, ${notesExpr} as notes, s.synonym as matched_synonym
+    `SELECT DISTINCT fi.*, ${notesExpr} as notes, s.synonym as matched_synonym,
+       COALESCE(s.synonym, fi.canonical_key) as primary_name
      FROM ingredient_synonyms s
      JOIN fodmap_ingredients fi ON fi.id = s.fodmap_ingredient_id
      WHERE (${conditions}) ${langClause} AND s.is_primary = 1

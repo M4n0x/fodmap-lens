@@ -1,5 +1,6 @@
 import { useState, useCallback, useMemo, useRef, useEffect, memo } from 'react';
 import { StyleSheet, View, FlatList, Pressable, ScrollView, Platform, TextInput } from 'react-native';
+import { useFocusEffect } from 'expo-router';
 import { Text, Searchbar } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { useSQLiteContext } from 'expo-sqlite';
@@ -11,7 +12,7 @@ import { FODMAP_CATEGORIES, FODMAP_GROUPS } from '@/src/types/fodmap';
 import type { FodmapIngredient, FodmapGroupKey, FodmapRating } from '@/src/types/fodmap';
 import { colors, ratingColors, paletteForRating, typography, spacing, radius, shadows } from '@/src/theme/design';
 
-type SearchResult = FodmapIngredient & { matched_synonym: string };
+type SearchResult = FodmapIngredient & { matched_synonym: string; primary_name: string };
 
 
 const SearchResultCard = memo(function SearchResultCard({ item }: { item: SearchResult }) {
@@ -23,7 +24,7 @@ const SearchResultCard = memo(function SearchResultCard({ item }: { item: Search
       <View style={styles.headerRow}>
         <View style={styles.cardTitleWrap}>
           <Text style={styles.name}>{item.matched_synonym}</Text>
-          <Text style={styles.subtleLabel}>{item.canonical_key.replace(/_/g, ' ')}</Text>
+          <Text style={styles.subtleLabel}>{item.primary_name.replace(/_/g, ' ')}</Text>
         </View>
         <View style={[styles.scorePill, { backgroundColor: palette.bg }]}>
           <TrafficLight
@@ -75,6 +76,17 @@ export default function SearchScreen() {
       searchRef.current?.focus();
     });
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        setQuery('');
+        setResults([]);
+        setHasSearched(false);
+        setActiveGroup(null);
+      };
+    }, [])
+  );
 
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
