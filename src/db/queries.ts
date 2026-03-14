@@ -76,7 +76,7 @@ export async function searchIngredients(
   db: SQLiteDatabase,
   query: string,
   language?: string
-): Promise<(FodmapIngredient & { matched_synonym: string })[]> {
+): Promise<(FodmapIngredient & { matched_synonym: string; primary_name: string })[]> {
   const normalizedQuery = query.toLowerCase().trim();
   const notesExpr = language === 'fr'
     ? 'COALESCE(fi.notes_fr, fi.notes)'
@@ -122,7 +122,7 @@ export async function searchIngredientsByGroup(
   db: SQLiteDatabase,
   categories: FodmapCategory[],
   language?: string
-): Promise<(FodmapIngredient & { matched_synonym: string })[]> {
+): Promise<(FodmapIngredient & { matched_synonym: string; primary_name: string })[]> {
   const conditions = categories
     .filter((col) => FODMAP_CATEGORIES.includes(col))
     .map((col) => `fi.${col} != 'green'`)
