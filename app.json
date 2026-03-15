@@ -16,6 +16,11 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.fodmaplens.app",
       "deploymentTarget": "16.0",
+      "splash": {
+        "image": "./assets/images/splash-icon-ios.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#ffffff"
+      },
       "infoPlist": {
         "NSCameraUsageDescription": "Fodmap Lens uses the camera to scan food barcodes.",
         "ITSAppUsesNonExemptEncryption": false
