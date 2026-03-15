@@ -29,6 +29,7 @@ interface CropOverlayProps {
   onRetake: () => void;
   scanLabel: string;
   retakeLabel: string;
+  warningMessage?: string;
 }
 
 const HANDLE_SIZE = 28;
@@ -49,6 +50,7 @@ export function CropOverlay({
   onRetake,
   scanLabel,
   retakeLabel,
+  warningMessage,
 }: CropOverlayProps) {
   const [crop, setCrop] = useState<CropRect | null>(null);
   const cropRef = useRef<CropRect>({ x: 0, y: 0, w: 0, h: 0 });
@@ -244,6 +246,13 @@ export function CropOverlay({
         )}
       </View>
 
+      {warningMessage && (
+        <View style={styles.warningBanner}>
+          <MaterialCommunityIcons name="alert-circle-outline" size={18} color={colors.amber} />
+          <Text style={styles.warningText}>{warningMessage}</Text>
+        </View>
+      )}
+
       <View style={styles.buttonRow}>
         <Pressable style={styles.retakeBtn} onPress={onRetake}>
           <MaterialCommunityIcons name="camera-retake" size={20} color={colors.sage} />
@@ -289,6 +298,22 @@ const styles = StyleSheet.create({
     backgroundColor: colors.sage,
     borderWidth: 3,
     borderColor: '#fff',
+  },
+  warningBanner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    marginHorizontal: spacing.md,
+    marginTop: spacing.sm,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
+    borderRadius: radius.sm,
+    backgroundColor: 'rgba(255, 183, 77, 0.15)',
+  },
+  warningText: {
+    ...typography.bodySmall,
+    color: colors.amber,
+    flex: 1,
   },
   buttonRow: {
     flexDirection: 'row',

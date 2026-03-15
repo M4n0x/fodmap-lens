@@ -60,6 +60,7 @@ export default function OcrScanScreen() {
     reset,
   } = useOcrAnalysis();
   const [precheckFailed, setPrecheckFailed] = useState(false);
+  const [noTextDetected, setNoTextDetected] = useState(false);
   const rawOcrTextRef = useRef<string>('');
 
   const handleImageCaptured = useCallback((uri: string, width: number, height: number) => {
@@ -170,6 +171,7 @@ export default function OcrScanScreen() {
       const text = result.text?.trim() ?? '';
 
       if (!text) {
+        setNoTextDetected(true);
         setPhase('crop');
         return;
       }
@@ -198,6 +200,7 @@ export default function OcrScanScreen() {
     reset();
     setCapturedImage(null);
     setCameraReady(false);
+    setNoTextDetected(false);
     setPhase('camera');
   }, [reset]);
 
@@ -235,10 +238,14 @@ export default function OcrScanScreen() {
         imageUri={capturedImage.uri}
         imageWidth={capturedImage.width}
         imageHeight={capturedImage.height}
-        onConfirm={handleCropConfirm}
+        onConfirm={(crop) => {
+          setNoTextDetected(false);
+          handleCropConfirm(crop);
+        }}
         onRetake={handleRetake}
         scanLabel={t('ocr.scanArea')}
         retakeLabel={t('ocr.retake')}
+        warningMessage={noTextDetected ? t('ocr.noTextMessage') : undefined}
       />
     );
   }
