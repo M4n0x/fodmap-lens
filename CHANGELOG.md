@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.6.0](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.5.1...fodmap-lens-v1.6.0) (2026-03-15)
+
+
+### Features
+
+* show warning when OCR detects no text from cropped image ([9b73580](https://github.com/M4n0x/fodmap-lens/commit/9b7358007d6071be7f7c6f215f8142da94e9f228))
+
+
+### Bug Fixes
+
+* add iOS splash screen configuration ([3044a4e](https://github.com/M4n0x/fodmap-lens/commit/3044a4eb539090c76d1ce70d4122276627567bf7))
+
 ## [1.5.1](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.5.0...fodmap-lens-v1.5.1) (2026-03-14)
 
 
