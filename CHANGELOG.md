@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.1](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.6.0...fodmap-lens-v1.6.1) (2026-03-18)
+
+
+### Bug Fixes
+
+* disable iPad support to remove App Store iPad screenshot requirement ([d8a1e7d](https://github.com/M4n0x/fodmap-lens/commit/d8a1e7d4621bb907f422a466c3d4d24261eca499))
+
 ## [1.6.0](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.5.1...fodmap-lens-v1.6.0) (2026-03-15)
 
 
