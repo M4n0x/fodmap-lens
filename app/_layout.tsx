@@ -3,11 +3,12 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { PaperProvider, MD3LightTheme } from 'react-native-paper';
 import { QueryClientProvider } from '@tanstack/react-query';
-import { SQLiteProvider } from 'expo-sqlite';
+import { SQLiteProvider, useSQLiteContext } from 'expo-sqlite';
 import { initializeDatabase } from '@/src/db/migrations';
 import { queryClient } from '@/src/queryClient';
 import { colors } from '@/src/theme/design';
 import { useAppStore } from '@/src/store/appStore';
+import { warmFuseIndex } from '@/src/services/fodmapEngine';
 import '@/src/i18n';
 
 export { ErrorBoundary } from 'expo-router';
@@ -33,6 +34,12 @@ const theme = {
     onSurfaceVariant: colors.textSecondary,
   },
 };
+
+function FuseWarmup() {
+  const db = useSQLiteContext();
+  useEffect(() => { warmFuseIndex(db); }, [db]);
+  return null;
+}
 
 function AppContent() {
   return (
@@ -72,6 +79,7 @@ export default function RootLayout() {
     <SQLiteProvider databaseName="fodmap.db" onInit={initializeDatabase}>
       <QueryClientProvider client={queryClient}>
         <PaperProvider theme={theme}>
+          <FuseWarmup />
           <AppContent />
         </PaperProvider>
       </QueryClientProvider>
