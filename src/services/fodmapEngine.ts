@@ -48,6 +48,13 @@ export function invalidateFuseCache(): void {
 }
 
 /**
+ * Eagerly build the Fuse index so the first scan doesn't pay the cost.
+ */
+export async function warmFuseIndex(db: SQLiteDatabase): Promise<void> {
+  await getFuse(db);
+}
+
+/**
  * Multi-layer ingredient matching:
  * 1. OFF ID match
  * 2. Exact synonym match
