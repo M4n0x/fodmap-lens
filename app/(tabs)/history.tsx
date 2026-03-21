@@ -22,9 +22,9 @@ const HistoryCard = memo(function HistoryCard({
   onPress: () => void;
   onLongPress: () => void;
 }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const date = new Date(item.scanned_at);
-  const timeStr = date.toLocaleDateString(undefined, {
+  const timeStr = date.toLocaleDateString(i18n.language, {
     day: 'numeric',
     month: 'short',
     hour: '2-digit',

@@ -46,11 +46,6 @@ function TabItem({
 }) {
   const iconName = ICON_MAP[route] ?? 'circle';
   const scale = useSharedValue(1);
-  const iconScale = useSharedValue(isFocused ? 1.08 : 1);
-
-  useEffect(() => {
-    iconScale.value = withSpring(isFocused ? 1.08 : 1, SPRING_CONFIG);
-  }, [iconScale, isFocused]);
 
   const handlePressIn = () => {
     scale.value = withSpring(0.94, { damping: 15, stiffness: 360 });
@@ -64,10 +59,6 @@ function TabItem({
     transform: [{ scale: scale.value }],
   }));
 
-  const iconAnimStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: iconScale.value }],
-  }));
-
   return (
     <AnimatedPressable
       onPress={onPress}
@@ -79,13 +70,13 @@ function TabItem({
       accessibilityState={isFocused ? { selected: true } : {}}
       accessibilityLabel={accessibilityLabel}
     >
-      <Animated.View style={[styles.tabIconShell, iconAnimStyle]}>
+      <View style={styles.tabIconShell}>
         <MaterialCommunityIcons
           name={iconName}
           size={20}
           color={isFocused ? colors.sageDark : colors.textSecondary}
         />
-      </Animated.View>
+      </View>
       <Animated.Text
         style={[styles.tabLabel, { color: isFocused ? colors.sageDark : colors.textMuted }]}
         numberOfLines={1}
