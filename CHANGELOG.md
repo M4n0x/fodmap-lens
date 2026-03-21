@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.6.2](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.6.1...fodmap-lens-v1.6.2) (2026-03-21)
+
+
+### Bug Fixes
+
+* remove icon scale animation to prevent blurry icons during tab transitions ([a5684b6](https://github.com/M4n0x/fodmap-lens/commit/a5684b6ec2f15e86fd1ced1dfe737b8c5400d2dd))
+* use app language for history date formatting ([95d2879](https://github.com/M4n0x/fodmap-lens/commit/95d2879898a3412a20afcaaf02f714f1790b6349))
+* use app language for history date formatting instead of device locale ([ed9c1e0](https://github.com/M4n0x/fodmap-lens/commit/ed9c1e0183cf7e6885cb9cc47991f4c8c5b2e44a))
+
+
+### Performance Improvements
+
+* optimize scan pipeline with fetch timeout and eager Fuse index ([c25557a](https://github.com/M4n0x/fodmap-lens/commit/c25557afaed6006fcf03474f8b213d6541b5e02f))
+* optimize scan pipeline with fetch timeout and eager Fuse index ([4a38aac](https://github.com/M4n0x/fodmap-lens/commit/4a38aacb010579524656d767228c1bb8a57e716d))
+
 ## [1.6.1](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.6.0...fodmap-lens-v1.6.1) (2026-03-18)
 
 
