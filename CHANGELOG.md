@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.6.2...fodmap-lens-v1.7.0) (2026-03-23)
+
+
+### Features
+
+* add cassava/manioc as a new FODMAP ingredient ([21b8116](https://github.com/M4n0x/fodmap-lens/commit/21b81160ca8ceaccd0c9ce92c5199456f7a7eeec))
+
 ## [1.6.2](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.6.1...fodmap-lens-v1.6.2) (2026-03-21)
 
 
