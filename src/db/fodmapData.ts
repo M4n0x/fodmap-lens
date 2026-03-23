@@ -2438,9 +2438,9 @@ const SEED_DATA: SeedIngredient[] = [
     notes_fr: 'Faible en FODMAP. L\'amidon de tapioca est un amidon presque pur issu de la racine de manioc. Quasiment aucun FODMAP. Excellent épaississant et ingrédient de boulangerie pour les régimes pauvres en FODMAP.',
     notes_de: 'Niedriger FODMAP-Gehalt. Tapiokastärke ist nahezu reine Stärke aus der Maniokwurzel. Praktisch keine FODMAPs. Hervorragendes Verdickungsmittel und Backzutat für FODMAP-arme Ernährung.',
     synonyms: {
-      en: ['tapioca', 'tapioca starch', 'cassava starch', 'tapioca flour'],
-      fr: ['tapioca', 'amidon de tapioca', 'fécule de manioc', 'farine de tapioca'],
-      de: ['Tapioka', 'Tapiokastärke', 'Maniokstärke'],
+      en: ['tapioca', 'tapioca starch', 'cassava starch', 'tapioca flour', 'cassava flour'],
+      fr: ['tapioca', 'amidon de tapioca', 'fécule de manioc', 'farine de tapioca', 'amidon de manioc'],
+      de: ['Tapioka', 'Tapiokastärke', 'Maniokstärke', 'Tapiokamehl'],
     },
   },
   {
@@ -4372,6 +4372,23 @@ const SEED_DATA: SeedIngredient[] = [
       en: ['carrot', 'carrots', 'baby carrots'],
       fr: ['carotte', 'carottes'],
       de: ['Karotte', 'Karotten', 'Moehre', 'Moehren', 'Rueebli'],
+    },
+  },
+  {
+    canonical_key: 'cassava',
+    category: 'vegetables',
+    fructans: 'green', gos: 'green', lactose: 'green', excess_fructose: 'green', sorbitol: 'green', mannitol: 'green',
+    overall_rating: 'green',
+    safe_serving_g: 75, moderate_serving_g: null,
+    source: 'usda,llm_inference',
+    confidence: 0.8,
+    notes: 'Low FODMAP. Cassava root (manioc) is a starchy tuber, primarily composed of carbohydrates with minimal FODMAP content. Widely used in tropical cuisines. Tapioca is the extracted starch form.',
+    notes_fr: 'Faible en FODMAP. La racine de manioc est un tubercule féculent, principalement composé de glucides avec un contenu minimal en FODMAP. Très utilisé dans les cuisines tropicales. Le tapioca est la forme d\'amidon extraite.',
+    notes_de: 'Niedriger FODMAP-Gehalt. Maniokwurzel (Kassava) ist eine staerkehaltige Knolle, hauptsaechlich aus Kohlenhydraten mit minimalem FODMAP-Gehalt. Weit verbreitet in tropischen Kuechen. Tapioka ist die extrahierte Staerkeform.',
+    synonyms: {
+      en: ['cassava', 'manioc', 'yuca', 'cassava root'],
+      fr: ['manioc', 'cassave', 'yuca'],
+      de: ['Maniok', 'Kassava', 'Yuca'],
     },
   },
   {
