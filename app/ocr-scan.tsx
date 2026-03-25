@@ -289,7 +289,6 @@ export default function OcrScanScreen() {
     if (pendingIngredients) {
       return (
         <IngredientConfirmSheet
-          visible={true}
           ingredients={pendingIngredients}
           onConfirm={(editedIngredients) => {
             if (!barcode) return;

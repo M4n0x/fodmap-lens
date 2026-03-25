@@ -6,7 +6,7 @@ import {
   Pressable,
   ActivityIndicator,
 } from 'react-native';
-import { Modal, Portal, Text } from 'react-native-paper';
+import { Text } from 'react-native-paper';
 import { useSQLiteContext } from 'expo-sqlite';
 import { useTranslation } from 'react-i18next';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -25,14 +25,12 @@ import {
 } from '@/src/theme/design';
 
 interface IngredientConfirmSheetProps {
-  visible: boolean;
   ingredients: MatchedIngredient[];
   onConfirm: (editedIngredients: MatchedIngredient[]) => void;
   onRescan: () => void;
 }
 
 export function IngredientConfirmSheet({
-  visible,
   ingredients: initialIngredients,
   onConfirm,
   onRescan,
@@ -123,12 +121,8 @@ export function IngredientConfirmSheet({
   }, []);
 
   return (
-    <Portal>
-      <Modal
-        visible={visible}
-        dismissable={false}
-        contentContainerStyle={styles.modal}
-      >
+    <View style={styles.container}>
+      <View style={styles.sheet}>
         {/* Handle bar */}
         <View style={styles.handleBar} />
 
@@ -388,17 +382,19 @@ export function IngredientConfirmSheet({
             </Text>
           </Pressable>
         </View>
-      </Modal>
-    </Portal>
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  modal: {
+  container: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: 'flex-end',
+    backgroundColor: 'rgba(0,0,0,0.3)',
+  },
+  sheet: {
     backgroundColor: colors.cardBg,
-    marginHorizontal: 0,
-    marginBottom: 0,
-    marginTop: 'auto',
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     maxHeight: '70%',

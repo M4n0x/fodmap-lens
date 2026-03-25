@@ -253,6 +253,7 @@ export default function ProductScreen() {
   }
 
   return (
+    <View style={{ flex: 1 }}>
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
       {noIngredients && !ocrAnalysis ? (
         <>
@@ -350,16 +351,17 @@ export default function ProductScreen() {
         <Text style={styles.disclaimer}>{t('product.disclaimer')}</Text>
       </View>
 
+    </ScrollView>
+
       {showConfirmSheet && pendingIngredients && (
         <IngredientConfirmSheet
           key={pendingIngredients.map(i => i.name).join(',')}
-          visible={showConfirmSheet}
           ingredients={pendingIngredients}
           onConfirm={handleManualConfirm}
           onRescan={() => setShowConfirmSheet(false)}
         />
       )}
-    </ScrollView>
+    </View>
   );
 }
 
