@@ -50,6 +50,7 @@ body.lang-de h1[data-lang="de"], body.lang-de h2[data-lang="de"], body.lang-de p
 .feature-card span[data-lang],
 .footer-disclaimer span[data-lang],
 .cta span[data-lang],
+.cta-buttons span[data-lang],
 .hero-tag span[data-lang],
 .section-label span[data-lang],
 .hero-buttons span[data-lang],
@@ -60,6 +61,7 @@ body.lang-de h1[data-lang="de"], body.lang-de h2[data-lang="de"], body.lang-de p
 .feature-card span[data-lang="en"],
 .footer-disclaimer span[data-lang="en"],
 .cta span[data-lang="en"],
+.cta-buttons span[data-lang="en"],
 .hero-tag span[data-lang="en"],
 .section-label span[data-lang="en"],
 .hero-buttons span[data-lang="en"],
@@ -70,6 +72,8 @@ body.lang-de h1[data-lang="de"], body.lang-de h2[data-lang="de"], body.lang-de p
 body.lang-fr .feature-card span[data-lang],
 body.lang-fr .footer-disclaimer span[data-lang],
 body.lang-fr .cta span[data-lang],
+body.lang-fr .cta-buttons span[data-lang],
+.cta-buttons span[data-lang],
 body.lang-fr .hero-tag span[data-lang],
 body.lang-fr .section-label span[data-lang],
 body.lang-fr .hero-buttons span[data-lang],
@@ -80,6 +84,7 @@ body.lang-fr .acronym-label span[data-lang] {
 body.lang-fr .feature-card span[data-lang="fr"],
 body.lang-fr .footer-disclaimer span[data-lang="fr"],
 body.lang-fr .cta span[data-lang="fr"],
+body.lang-fr .cta-buttons span[data-lang="fr"],
 body.lang-fr .hero-tag span[data-lang="fr"],
 body.lang-fr .section-label span[data-lang="fr"],
 body.lang-fr .hero-buttons span[data-lang="fr"],
@@ -90,6 +95,8 @@ body.lang-fr .acronym-label span[data-lang="fr"] {
 body.lang-de .feature-card span[data-lang],
 body.lang-de .footer-disclaimer span[data-lang],
 body.lang-de .cta span[data-lang],
+body.lang-de .cta-buttons span[data-lang],
+.cta-buttons span[data-lang],
 body.lang-de .hero-tag span[data-lang],
 body.lang-de .section-label span[data-lang],
 body.lang-de .hero-buttons span[data-lang],
@@ -100,6 +107,7 @@ body.lang-de .acronym-label span[data-lang] {
 body.lang-de .feature-card span[data-lang="de"],
 body.lang-de .footer-disclaimer span[data-lang="de"],
 body.lang-de .cta span[data-lang="de"],
+body.lang-de .cta-buttons span[data-lang="de"],
 body.lang-de .hero-tag span[data-lang="de"],
 body.lang-de .section-label span[data-lang="de"],
 body.lang-de .hero-buttons span[data-lang="de"],
@@ -576,6 +584,13 @@ body.lang-de .acronym-label span[data-lang="de"] {
   color: var(--text-soft);
   margin-bottom: 36px;
   font-size: 16px;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .cta .btn-primary {
