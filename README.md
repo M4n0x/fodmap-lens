@@ -15,7 +15,7 @@
   <a href="https://github.com/M4n0x/fodmap-lens/releases/latest">
     <img src="https://img.shields.io/github/v/release/M4n0x/fodmap-lens" alt="Latest Release" />
   </a>
-  <img src="https://img.shields.io/badge/platform-Android-brightgreen" alt="Platform" />
+  <img src="https://img.shields.io/badge/platform-Android%20%7C%20iOS-brightgreen" alt="Platform" />
   <img src="https://img.shields.io/badge/license-MIT-blue" alt="License" />
 </p>
 
@@ -78,7 +78,7 @@ The FODMAP database is shipped locally with the app — no external FODMAP API i
 ### Prerequisites
 
 - Node.js 18+
-- Android SDK (for building APK)
+- Android SDK (for building APK) or Xcode (for iOS)
 
 ### Install and run
 
@@ -95,6 +95,9 @@ npx expo start
 
 # Run on Android
 npx expo run:android
+
+# Run on iOS
+npx expo run:ios
 ```
 
 ### Run tests
@@ -115,7 +118,14 @@ The APK will be at `android/app/build/outputs/apk/release/app-release.apk`.
 
 ## Download
 
-Grab the latest APK from the [Releases](https://github.com/M4n0x/fodmap-lens/releases/latest) page.
+<p>
+  <a href="https://apps.apple.com/pk/app/fodmap-lens/id6760368816">
+    <img src="https://img.shields.io/badge/App_Store-0D96F6?style=for-the-badge&logo=app-store&logoColor=white" alt="Download on the App Store" />
+  </a>
+  <a href="https://github.com/M4n0x/fodmap-lens/releases/latest">
+    <img src="https://img.shields.io/badge/Android_APK-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Download APK" />
+  </a>
+</p>
 
 ## Disclaimer
 
