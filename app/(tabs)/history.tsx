@@ -1,4 +1,4 @@
-import { useCallback, useMemo, memo } from 'react';
+import { useCallback, useMemo, memo, useState } from 'react';
 import { StyleSheet, View, FlatList, Pressable, Image, Alert } from 'react-native';
 import { Text } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
@@ -64,6 +64,16 @@ export default function HistoryScreen() {
   const { t } = useTranslation();
   const db = useSQLiteContext();
   const { history, isLoading, refresh } = useScanHistory();
+  const [activeFilter, setActiveFilter] = useState<'all' | 'green' | 'red'>('all');
+
+  const toggleFilter = useCallback((filter: 'all' | 'green' | 'red') => {
+    setActiveFilter((prev) => (prev === filter ? 'all' : filter));
+  }, []);
+
+  const filteredHistory = useMemo(() => {
+    if (activeFilter === 'all') return history;
+    return history.filter((item) => item.overall_rating === activeFilter);
+  }, [history, activeFilter]);
 
   const handleDelete = useCallback((item: ScanHistoryItem) => {
     Alert.alert(
@@ -140,7 +150,7 @@ export default function HistoryScreen() {
 
   return (
     <FlatList
-      data={history}
+      data={filteredHistory}
       keyExtractor={(item) => item.id.toString()}
       renderItem={renderItem}
       contentContainerStyle={styles.list}
@@ -148,7 +158,10 @@ export default function HistoryScreen() {
       ListHeaderComponent={
         <>
           <View style={styles.summaryRow}>
-            <View style={styles.summaryCard}>
+            <Pressable
+              style={({ pressed }) => [styles.summaryCard, activeFilter === 'all' && styles.summaryCardActive, pressed && styles.summaryCardPressed]}
+              onPress={() => toggleFilter('all')}
+            >
               <View style={styles.summaryCardTop}>
                 <View style={[styles.summaryIcon, { backgroundColor: colors.warmWhite }]}>
                   <MaterialCommunityIcons name="barcode-scan" size={16} color={colors.textSecondary} />
@@ -156,8 +169,11 @@ export default function HistoryScreen() {
                 <Text style={styles.summaryValue}>{history.length}</Text>
               </View>
               <Text style={styles.summaryLabel}>{t('revamp.history.totalScans')}</Text>
-            </View>
-            <View style={styles.summaryCard}>
+            </Pressable>
+            <Pressable
+              style={({ pressed }) => [styles.summaryCard, activeFilter === 'green' && styles.summaryCardActiveGreen, pressed && styles.summaryCardPressed]}
+              onPress={() => toggleFilter('green')}
+            >
               <View style={styles.summaryCardTop}>
                 <View style={[styles.summaryIcon, { backgroundColor: 'rgba(91,138,114,0.15)' }]}>
                   <MaterialCommunityIcons name="check-circle-outline" size={16} color={colors.sage} />
@@ -165,8 +181,11 @@ export default function HistoryScreen() {
                 <Text style={[styles.summaryValue, { color: colors.sageDark }]}>{summary.green}</Text>
               </View>
               <Text style={styles.summaryLabel}>{t('revamp.history.lowFodmap')}</Text>
-            </View>
-            <View style={styles.summaryCard}>
+            </Pressable>
+            <Pressable
+              style={({ pressed }) => [styles.summaryCard, activeFilter === 'red' && styles.summaryCardActiveRed, pressed && styles.summaryCardPressed]}
+              onPress={() => toggleFilter('red')}
+            >
               <View style={styles.summaryCardTop}>
                 <View style={[styles.summaryIcon, { backgroundColor: 'rgba(199,91,74,0.12)' }]}>
                   <MaterialCommunityIcons name="alert-outline" size={16} color={colors.coral} />
@@ -174,7 +193,7 @@ export default function HistoryScreen() {
                 <Text style={[styles.summaryValue, { color: colors.coralDark }]}>{summary.red}</Text>
               </View>
               <Text style={styles.summaryLabel}>{t('revamp.history.highFodmap')}</Text>
-            </View>
+            </Pressable>
           </View>
 
           <Text style={styles.sectionLabel}>{t('revamp.history.recentProducts')}</Text>
@@ -232,7 +251,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.md,
     paddingTop: spacing.sm + 2,
     paddingBottom: spacing.md,
+    borderWidth: 2,
+    borderColor: 'transparent',
     ...shadows.sm,
+  },
+  summaryCardActive: {
+    borderColor: colors.textSecondary,
+  },
+  summaryCardActiveGreen: {
+    borderColor: colors.sage,
+  },
+  summaryCardActiveRed: {
+    borderColor: colors.coral,
+  },
+  summaryCardPressed: {
+    opacity: 0.7,
   },
   summaryCardTop: {
     flexDirection: 'row',
