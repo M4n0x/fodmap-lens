@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.7.0...fodmap-lens-v1.8.0) (2026-03-28)
+
+
+### Features
+
+* make history summary cards act as filters ([#31](https://github.com/M4n0x/fodmap-lens/issues/31)) ([fdd05b2](https://github.com/M4n0x/fodmap-lens/commit/fdd05b249c41b60b43448b0c27c8bf550cf3c56b))
+
 ## [1.7.0](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.6.2...fodmap-lens-v1.7.0) (2026-03-25)
 
 
