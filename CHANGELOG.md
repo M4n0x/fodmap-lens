@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.8.0](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.7.0...fodmap-lens-v1.8.0) (2026-04-12)
+
+
+### Features
+
+* make history summary cards act as filters ([#31](https://github.com/M4n0x/fodmap-lens/issues/31)) ([fdd05b2](https://github.com/M4n0x/fodmap-lens/commit/fdd05b249c41b60b43448b0c27c8bf550cf3c56b))
+
+
+### Bug Fixes
+
+* localize navigation back button title for iOS ([a374af5](https://github.com/M4n0x/fodmap-lens/commit/a374af5c1e4a5f4d937e43cde5cbb548894cd0bd))
+
 ## [1.7.0](https://github.com/M4n0x/fodmap-lens/compare/fodmap-lens-v1.6.2...fodmap-lens-v1.7.0) (2026-03-25)
 
 
