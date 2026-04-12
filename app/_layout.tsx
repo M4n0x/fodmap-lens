@@ -4,6 +4,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { PaperProvider, MD3LightTheme } from 'react-native-paper';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { SQLiteProvider, useSQLiteContext } from 'expo-sqlite';
+import { useTranslation } from 'react-i18next';
 import { initializeDatabase } from '@/src/db/migrations';
 import { queryClient } from '@/src/queryClient';
 import { colors } from '@/src/theme/design';
@@ -42,6 +43,7 @@ function FuseWarmup() {
 }
 
 function AppContent() {
+  const { t } = useTranslation();
   return (
     <Stack
       screenOptions={{
@@ -54,11 +56,11 @@ function AppContent() {
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen
         name="product/[barcode]"
-        options={{ title: '', headerBackTitle: 'Back' }}
+        options={{ title: '', headerBackTitle: t('revamp.common.back') }}
       />
       <Stack.Screen
         name="ocr-scan"
-        options={{ title: '', headerBackTitle: 'Back', presentation: 'modal' }}
+        options={{ title: '', headerBackTitle: t('revamp.common.back'), presentation: 'modal' }}
       />
       <Stack.Screen
         name="onboarding"
